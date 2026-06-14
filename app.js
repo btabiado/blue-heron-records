@@ -7,6 +7,14 @@
   var BUSINESS_EMAIL = "joeleduc@msn.com";
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- Respect reduced-motion for autoplay video (show poster instead) ---- */
+  if (reduceMotion) {
+    document.querySelectorAll("video[autoplay]").forEach(function (v) {
+      v.removeAttribute("autoplay");
+      try { v.pause(); } catch (e) {}
+    });
+  }
+
   /* ---- Year in footer ---- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

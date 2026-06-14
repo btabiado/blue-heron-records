@@ -144,7 +144,7 @@ strong { color: var(--cream); font-weight: 600; }
 .split.reverse .split-grid { grid-template-columns: 1fr 1.05fr; }
 .split.reverse .split-media { order: 2; }
 .split-media { position: relative; }
-.split-media img { border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; object-fit: cover; border: 1px solid var(--line); }
+.split-media img, .split-media video { border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; display: block; object-fit: cover; border: 1px solid var(--line); }
 .split-media::after { content: ""; position: absolute; inset: auto auto -18px -18px; width: 55%; height: 55%; border-radius: var(--radius); background: linear-gradient(135deg, var(--heron-deep), var(--taupe)); z-index: -1; opacity: .55; }
 .split-text h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); }
 .split-text p { color: var(--soft); }
