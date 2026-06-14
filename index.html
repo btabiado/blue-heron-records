@@ -29,7 +29,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="images/logo-hero.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/hero-anim-poster.jpg" fetchpriority="high" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -92,7 +92,12 @@
     <section class="hero" id="hero">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-content">
-        <img class="hero-logo reveal" src="images/logo-hero.png" alt="Blue Heron Records — a blue heron in flight over a vinyl record at sunset" width="500" height="500" />
+        <div class="hero-disc reveal">
+          <video autoplay muted loop playsinline poster="images/hero-anim-poster.jpg" aria-label="Blue Heron Records — animated logo: a blue heron in flight over a spinning record at sunset">
+            <source src="images/hero-anim.mp4" type="video/mp4" />
+            <img src="images/logo-hero.png" alt="Blue Heron Records — a blue heron in flight over a vinyl record at sunset" />
+          </video>
+        </div>
         <h1>Blue Heron Records</h1>
         <p class="eyebrow reveal">Oak Lawn, Illinois &middot; Est. 2023</p>
         <p class="hero-sub reveal">A home-grown record label promoting local recording artists. Hear the music, follow the artists, catch a live show &mdash; and book our acts for your stage.</p>
@@ -374,9 +379,9 @@
             <p class="listen-label">Featured &middot; Willie Smith</p>
             <h3>A new original, fresh from the studio</h3>
             <p>Press play for the demo &mdash; full streaming links land here as each release drops. More from Carol Jenkins and the BHR family soon.</p>
-            <audio class="listen-player" controls preload="none" aria-label="Willie Smith demo (coming soon)">
-              <!-- TODO: drop Willie's MP3 here, e.g. <source src="audio/willie-demo.mp3" type="audio/mpeg"> -->
-            </audio>
+            <!-- TODO: when Willie's demo MP3 is added (e.g. audio/willie-demo.mp3), replace this notice with:
+                 <audio class="listen-player" controls preload="none"><source src="audio/willie-demo.mp3" type="audio/mpeg"></audio> -->
+            <p class="listen-soon" role="note"><span aria-hidden="true">&#9834;</span> Demo coming soon &mdash; the first single will play right here.</p>
             <div class="listen-links">
               <a class="chip" href="#" aria-label="Spotify — coming soon">Spotify</a>
               <a class="chip" href="#" aria-label="Apple Music — coming soon">Apple Music</a>
@@ -544,7 +549,11 @@
           <h2>Book, listen, or join the family</h2>
           <p class="contact-lead">Booking an artist or the house band, looking to join the BHR family, or want to schedule a meeting? Tell us what you have in mind and we&rsquo;ll get right back to you.</p>
           <div class="contact-actions">
-            <a class="btn btn-primary btn-lg btn-block" href="tel:+16309260446">
+            <a class="btn btn-primary btn-lg btn-block" href="sms:+16309260446?&body=Hi%20Blue%20Heron%20Records%2C%20">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12Z" fill="currentColor"/></svg>
+              Text Us &mdash; (630) 926-0446
+            </a>
+            <a class="btn btn-outline btn-lg btn-block" href="tel:+16309260446">
               <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1Z" fill="currentColor"/></svg>
               Call (630) 926-0446
             </a>
@@ -613,7 +622,8 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <a href="tel:+16309260446">(630) 926-0446</a>
+        <a href="sms:+16309260446?&body=Hi%20Blue%20Heron%20Records%2C%20">Text us &middot; (630) 926-0446</a>
+        <a href="tel:+16309260446">Call (630) 926-0446</a>
         <a href="mailto:joeleduc@msn.com">joeleduc@msn.com</a>
         <span>Oak Lawn, Illinois</span>
       </div>
