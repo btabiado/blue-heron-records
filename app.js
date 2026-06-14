@@ -172,6 +172,31 @@
       .catch(function () {});
   }
 
+  /* ---- Blog / Posts (data source: posts.json) ---- */
+  var postsGrid = document.getElementById("postsGrid");
+  var postsNote = document.getElementById("postsNote");
+  if (postsGrid) {
+    fetch("posts.json", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : { posts: [] }; })
+      .then(function (data) {
+        var posts = (data.posts || []).slice();
+        if (!posts.length) return; // keep the static fallback cards
+        posts.sort(function (a, b) { return (b.date ? new Date(b.date) : 0) - (a.date ? new Date(a.date) : 0); });
+        postsGrid.innerHTML = posts.map(function (p) {
+          var u = p.url;
+          var okUrl = u && (/^https:\/\//i.test(u) || !/:/.test(u)); // same-site relative or https only
+          var open = okUrl ? '<a class="post-card" href="' + esc(u) + '">' : '<article class="post-card">';
+          var close = okUrl ? "</a>" : "</article>";
+          var tag = p.tag ? '<span class="post-tag">' + esc(p.tag) + "</span>" : "";
+          var date = p.date ? '<span class="post-date">' + esc(new Date(p.date + "T00:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" })) + "</span>" : "";
+          var more = okUrl ? '<span class="post-more">' + esc(p.linkText || "Read more") + " &rarr;</span>" : "";
+          return open + tag + '<h3>' + esc(p.title || "") + "</h3>" + date + "<p>" + esc(p.body || "") + "</p>" + more + close;
+        }).join("");
+        if (postsNote) postsNote.hidden = true;
+      })
+      .catch(function () {});
+  }
+
   /* ---- Contact form -> pre-filled email ---- */
   var form = document.getElementById("contactForm");
   var formStatus = document.getElementById("formStatus");

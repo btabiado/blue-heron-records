@@ -1,0 +1,21 @@
+{
+  "posts": [
+    {
+      "tag": "Studio",
+      "title": "Our first recording session",
+      "body": "We closed out 2024 by officially becoming a record company — tracking our first two original songs at the brand-new Picture-Minded Studio.",
+      "url": "sessions/first-session.html",
+      "linkText": "See the photo story"
+    },
+    {
+      "tag": "Live",
+      "title": "An all-day music festival",
+      "body": "A full day of South Chicago locals taking the stage — one of our proudest early moments."
+    },
+    {
+      "tag": "Events",
+      "title": "Release parties & a video Christmas special",
+      "body": "From a video Christmas special to record-release parties at the home studio — we love any reason to celebrate music."
+    }
+  ]
+}

@@ -339,6 +339,9 @@ strong { color: var(--cream); font-weight: 600; }
 .post-tag { display: inline-block; font-family: "Inter", sans-serif; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--heron-light); background: rgba(111,147,176,.14); border: 1px solid rgba(111,147,176,.3); padding: .25em .7em; border-radius: 999px; margin-bottom: 14px; }
 .post-card h3 { font-size: 1.24rem; margin-bottom: .3em; }
 .post-card p { color: var(--muted); margin: 0; font-size: .96rem; }
+.post-date { display: block; font-size: .8rem; color: var(--muted-2); margin: 0 0 .5rem; font-family: "Inter", sans-serif; }
+.post-more { display: inline-block; margin-top: 12px; color: var(--heron-light); font-weight: 600; font-family: "Inter", sans-serif; font-size: .9rem; }
+a.post-card:hover .post-more { color: var(--moon); }
 .posts-note { text-align: center; color: var(--muted-2); margin: 34px 0 0; font-style: italic; }
 
 /* ---------- Special Thanks ---------- */

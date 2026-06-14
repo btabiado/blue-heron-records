@@ -34,3 +34,25 @@ collections:
               - { name: venue, label: "Venue", widget: string, required: false }
               - { name: city, label: "City, ST", widget: string, required: false }
               - { name: ticketUrl, label: "Ticket link (https://…)", widget: string, required: false }
+
+  - name: blog
+    label: "Blog / Posts"
+    description: "Write studio updates — they show in the homepage 'From the studio' section."
+    files:
+      - name: posts
+        label: "Posts"
+        file: posts.json
+        format: json
+        fields:
+          - name: posts
+            label: "Posts"
+            label_singular: "Post"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: date, label: "Date", widget: date, format: "YYYY-MM-DD", required: false }
+              - { name: tag, label: "Tag (Studio / Live / Events…)", widget: string, required: false }
+              - { name: title, label: "Title", widget: string }
+              - { name: body, label: "Body", widget: text }
+              - { name: url, label: "Link (optional, e.g. sessions/first-session.html or https://…)", widget: string, required: false }
+              - { name: linkText, label: "Link text", widget: string, required: false }
