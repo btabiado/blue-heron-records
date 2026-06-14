@@ -143,34 +143,139 @@
     });
   }
 
-  /* ---- Shows / events calendar (data source: events.json) ---- */
-  var showsList = document.getElementById("showsList");
-  var showsEmpty = document.getElementById("showsEmpty");
-  if (showsList) {
-    fetch("events.json", { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : { events: [] }; })
-      .then(function (data) {
-        var today = new Date(); today.setHours(0, 0, 0, 0);
-        var events = (data.events || [])
-          .filter(function (e) { return e && e.date && new Date(e.date + "T23:59:59") >= today; })
-          .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
-        if (!events.length) return;
-        showsList.innerHTML = events.map(function (e) {
-          var dt = new Date(e.date + "T00:00:00");
-          var mo = isNaN(dt) ? "" : dt.toLocaleString("en-US", { month: "short" }).toUpperCase();
-          var day = isNaN(dt) ? "" : dt.getDate();
-          var meta = [e.venue, e.city, e.time].filter(Boolean).map(esc).join(" &middot; ");
-          var safe = e.ticketUrl && /^https?:\/\//i.test(e.ticketUrl) ? e.ticketUrl : "";
-          var ticket = safe ? '<a class="show-ticket" href="' + esc(safe) + '" target="_blank" rel="noopener">Tickets</a>' : "";
-          return '<div class="show-row"><div class="show-date">' + day + '<span>' + mo + '</span></div>'
-            + '<div class="show-info"><h4>' + esc(e.title || "Live show") + '</h4>'
-            + (meta ? '<p>' + meta + '</p>' : '') + '</div>' + ticket + '</div>';
-        }).join("");
-        showsList.hidden = false;
-        if (showsEmpty) showsEmpty.hidden = true;
-      })
-      .catch(function () {});
-  }
+  /* ---- Shows: add (Supabase) -> on the site + notify Joe; the corner heron opens an add/remove panel ---- */
+  (function () {
+    /* === CONFIG: paste your Supabase values here (see SETUP-shows.md). Blank = fall back to events.json + text Joe. === */
+    var SUPABASE_URL = "";   // e.g. https://abcdwxyz.supabase.co
+    var SUPABASE_KEY = "";   // Supabase anon public key
+    var WEB3_KEY = "27123b13-8671-41c1-bab4-2f08aee37de1"; // notify on new submissions
+    var NOTIFY_CC = "joeleduc@msn.com";                    // Joe gets a copy
+
+    var listEl = document.getElementById("showsList");
+    var emptyEl = document.getElementById("showsEmpty");
+    if (!listEl) return;
+    var ready = !!(SUPABASE_URL && SUPABASE_KEY);
+    var REST = ready ? SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/shows" : null;
+    var lastRows = [];
+
+    function sb(qs, opts) {
+      opts = opts || {}; var h = opts.headers || {};
+      h.apikey = SUPABASE_KEY; h.Authorization = "Bearer " + SUPABASE_KEY;
+      opts.headers = h; return fetch(REST + (qs || ""), opts);
+    }
+    function upcoming(rows) {
+      var t = new Date(); t.setHours(0, 0, 0, 0);
+      return (rows || []).filter(function (e) { return e && e.date && new Date(e.date + "T23:59:59") >= t; })
+                         .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+    }
+    function render(rows) {
+      lastRows = rows || [];
+      var events = upcoming(lastRows);
+      if (!events.length) { listEl.hidden = true; listEl.innerHTML = ""; if (emptyEl) emptyEl.hidden = false; renderManage(); return; }
+      listEl.innerHTML = events.map(function (e) {
+        var dt = new Date(e.date + "T00:00:00");
+        var mo = isNaN(dt) ? "" : dt.toLocaleString("en-US", { month: "short" }).toUpperCase();
+        var day = isNaN(dt) ? "" : dt.getDate();
+        var safe = e.ticketUrl && /^https?:\/\//i.test(e.ticketUrl) ? e.ticketUrl : "";
+        var ticket = safe ? '<a class="show-ticket" href="' + esc(safe) + '" target="_blank" rel="noopener">Tickets</a>' : "";
+        var meta = [e.venue, e.city, e.time].filter(Boolean).map(esc).join(" &middot; ");
+        return '<div class="show-row"><div class="show-date">' + day + '<span>' + mo + '</span></div>'
+          + '<div class="show-info"><h4>' + esc(e.description || e.title || "Live show") + "</h4>"
+          + (meta ? "<p>" + meta + "</p>" : "") + "</div>" + ticket + "</div>";
+      }).join("");
+      listEl.hidden = false;
+      if (emptyEl) emptyEl.hidden = true;
+      renderManage();
+    }
+    function fileFallback() {
+      fetch("events.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : { events: [] }; })
+        .then(function (d) { render(d.events || []); }).catch(function () {});
+    }
+    function load() {
+      if (!ready) { fileFallback(); return; }
+      sb("?select=*").then(function (r) { return r.json(); }).then(function (rows) { render(rows || []); }).catch(fileFallback);
+    }
+
+    /* --- Modal: add form + (heron) manage/remove list --- */
+    var modal = document.getElementById("showModal");
+    var openBtn = document.getElementById("submitShowBtn");
+    var heron = document.getElementById("editToggle");
+    var closeBtn = document.getElementById("showModalClose");
+    var form = document.getElementById("showForm");
+    var note = document.getElementById("showFormNote");
+    var titleEl = document.getElementById("showModalTitle");
+    var manageWrap = document.getElementById("manageList");
+    var manageItems = document.getElementById("manageItems");
+
+    function renderManage() {
+      if (!manageItems) return;
+      var rows = upcoming(lastRows).filter(function (e) { return e.id != null; });
+      if (!rows.length) { manageItems.innerHTML = '<p class="manage-empty">Nothing to remove yet.</p>'; return; }
+      manageItems.innerHTML = rows.map(function (e) {
+        var dt = new Date(e.date + "T00:00:00");
+        var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        return '<div class="manage-row"><span><strong>' + when + "</strong> &middot; " + esc(e.description || e.title || "Live show") + "</span>"
+          + '<button type="button" class="show-del" data-id="' + esc(String(e.id)) + '" aria-label="Remove this show">&times;</button></div>';
+      }).join("");
+    }
+    function openModal(manage) {
+      if (!modal) return;
+      if (manageWrap) manageWrap.hidden = !manage;
+      if (titleEl) titleEl.textContent = manage ? "Manage shows" : "Add a show";
+      if (manage) renderManage();
+      modal.hidden = false; document.body.style.overflow = "hidden";
+      var i = modal.querySelector("input,textarea"); if (i) i.focus();
+    }
+    function closeModal() { if (!modal) return; modal.hidden = true; document.body.style.overflow = ""; if (note) note.textContent = ""; }
+
+    if (openBtn) openBtn.addEventListener("click", function () { openModal(false); });
+    if (heron) heron.addEventListener("click", function () { openModal(true); });
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (modal) modal.addEventListener("click", function (e) { if (e.target.hasAttribute("data-close")) closeModal(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && modal && !modal.hidden) closeModal(); });
+
+    function notifyJoe(row) {
+      try {
+        var fd = new FormData();
+        fd.append("access_key", WEB3_KEY);
+        fd.append("cc", NOTIFY_CC);
+        fd.append("subject", "New show added to blueheronrecords.com");
+        fd.append("from_name", "Blue Heron Records site");
+        fd.append("name", "Website show submission");
+        fd.append("email", "noreply@blueheronrecords.com");
+        fd.append("message", "Someone just added a show to the site:\n\nDate: " + (row.date || "") + "\nTime: " + (row.time || "") + "\n" + (row.description || ""));
+        fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body: fd });
+      } catch (e) {}
+    }
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        var row = { date: form.date.value, time: (form.time.value || "").trim(), description: (form.description.value || "").trim() };
+        if (!ready) { // backend not set up yet -> text Joe the details
+          window.location.href = "sms:+16309260446?&body=" + encodeURIComponent("New show for Blue Heron Records:\nDate: " + row.date + "\nTime: " + row.time + "\n" + row.description);
+          return;
+        }
+        if (note) note.textContent = "Adding…";
+        sb("", { method: "POST", headers: { "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(row) })
+          .then(function (r) { if (!r.ok) throw new Error("insert failed"); return r.json(); })
+          .then(function () { notifyJoe(row); form.reset(); if (note) note.textContent = "Added! ✓"; load(); setTimeout(closeModal, 900); })
+          .catch(function () { if (note) note.innerHTML = "Couldn&rsquo;t add it &mdash; text the details to <a href='tel:+16309260446'>(630) 926-0446</a>."; });
+      });
+    }
+    if (manageItems) {
+      manageItems.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest(".show-del") : null;
+        if (!b || !ready) return;
+        if (!window.confirm("Remove this show from the site?")) return;
+        b.disabled = true;
+        sb("?id=eq." + encodeURIComponent(b.getAttribute("data-id")), { method: "DELETE", headers: { Prefer: "return=minimal" } })
+          .then(function () { load(); }).catch(function () { b.disabled = false; });
+      });
+    }
+
+    load();
+  })();
 
   /* ---- Blog / Posts (data source: posts.json) ---- */
   var postsGrid = document.getElementById("postsGrid");

@@ -25,11 +25,15 @@ python3 -m http.server 8000   # open http://localhost:8000
 Push to `main`; GitHub Pages rebuilds. Custom domain (`blueheronrecords.com`) and `CNAME` are
 already in place, with canonical/OG/sitemap URLs pointing at the domain and HTTPS enforced.
 
-## Adding shows (events.json)
-The Shows section is driven by `events.json` — edit that one file (e.g. on GitHub) to manage the calendar.
-Add an object to the `events` array; upcoming events render automatically (past ones drop off), and an
-empty list shows the "no shows yet" state. Visitors can't edit — they can only **Submit a show** (which
-texts the details to Joe to approve and add).
+## Shows (add / remove from the site)
+Once a free **Supabase** database is connected (see **`SETUP-shows.md`**), the Shows section is self-serve:
+- **Submit a show** opens a small form (Date, Time, Description) → it appears on the site instantly, and
+  Joe (+ btab1130@gmail.com) gets an email via Web3Forms.
+- The discreet **blue-heron handle** in the bottom-left corner opens an add/remove panel — tap × to delete.
+- Removal is intentionally ungated (anyone with the heron can remove). Tighten Supabase policies if needed.
+
+Until Supabase is connected, the form gracefully **texts Joe** the details, and the list falls back to the
+static `events.json` file below (edit it on GitHub to manage the calendar by hand; past events drop off):
 
 ```json
 {
