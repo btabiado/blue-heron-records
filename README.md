@@ -47,9 +47,10 @@ texts the details to Joe to approve and add).
 ```
 
 ## Form backend + newsletter (two keys to plug in)
-- **Contact/Booking form → Web3Forms.** Get a free access key at https://web3forms.com (enter Joe's email; the
-  key is emailed). In `index.html`, replace `YOUR_WEB3FORMS_ACCESS_KEY` (hidden input in the contact form).
-  Until it's set, the form gracefully falls back to opening a pre-filled email.
+- **Contact/Booking form → Web3Forms.** Get a free access key at https://web3forms.com (enter **btab1130@gmail.com**;
+  the key is emailed there). In `index.html`, replace `YOUR_WEB3FORMS_ACCESS_KEY` (hidden input in the contact form).
+  Submissions go to that inbox; a hidden `cc` also copies **joeleduc@msn.com**. Until the key is set, the form
+  gracefully falls back to opening a pre-filled email.
 - **Newsletter → Buttondown.** Create a free account at https://buttondown.com, then in `index.html` replace
   `BUTTONDOWN_USERNAME` in the newsletter form's `action` URL with Joe's Buttondown username.
 

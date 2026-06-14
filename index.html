@@ -606,8 +606,10 @@
             </select>
           </div>
           <div class="field"><label for="message">Tell us a bit more <span class="req" aria-hidden="true">*</span></label><textarea id="message" name="message" rows="4" required></textarea></div>
-          <!-- Web3Forms: paste Joe's access key from https://web3forms.com (free) to capture submissions; until then it falls back to email. -->
+          <!-- Web3Forms: get a free key at https://web3forms.com using btab1130@gmail.com, then paste it below.
+               Submissions arrive in that inbox; the cc sends a copy to Joe too. Falls back to email until the key is set. -->
           <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="hidden" name="cc" value="joeleduc@msn.com" />
           <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px" />
           <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
           <p class="form-note">Opens a pre-filled email to our team &mdash; we reply quickly.</p>
