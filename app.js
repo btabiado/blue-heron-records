@@ -247,20 +247,31 @@
         fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body: fd });
       } catch (e) {}
     }
+    // Real phone-to-phone SMS to Joe (works on Verizon — this is a normal text, not the dead email-gateway).
+    // Opens the sender's Messages pre-filled to Joe's number; programmatic anchor click is the most reliable trigger.
+    function textJoe(row) {
+      var body = "New show added to Blue Heron Records:\nDate: " + (row.date || "") + "\nTime: " + (row.time || "") + "\n" + (row.description || "");
+      var a = document.createElement("a");
+      a.href = "sms:+16309260446?&body=" + encodeURIComponent(body);
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 0);
+    }
     if (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
         var row = { date: form.date.value, time: (form.time.value || "").trim(), description: (form.description.value || "").trim() };
-        if (!ready) { // backend not set up yet -> text Joe the details
-          window.location.href = "sms:+16309260446?&body=" + encodeURIComponent("New show for Blue Heron Records:\nDate: " + row.date + "\nTime: " + row.time + "\n" + row.description);
-          return;
-        }
+        if (!ready) { textJoe(row); return; } // no database yet -> just text Joe (old behavior)
+        // Process 1: save to the site + email notify
         if (note) note.textContent = "Adding…";
         sb("", { method: "POST", headers: { "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(row) })
           .then(function (r) { if (!r.ok) throw new Error("insert failed"); return r.json(); })
-          .then(function () { notifyJoe(row); form.reset(); if (note) note.textContent = "Added! ✓"; load(); setTimeout(closeModal, 900); })
+          .then(function () { notifyJoe(row); form.reset(); if (note) note.textContent = "Added! ✓ — sending Joe a text…"; load(); setTimeout(closeModal, 1600); })
           .catch(function () { if (note) note.innerHTML = "Couldn&rsquo;t add it &mdash; text the details to <a href='tel:+16309260446'>(630) 926-0446</a>."; });
+        // Process 2: fire the real SMS to Joe (within the click gesture)
+        textJoe(row);
       });
     }
     if (manageItems) {
