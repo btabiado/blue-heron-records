@@ -107,8 +107,9 @@
     }
     .home-link{
       font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
-      color:var(--moon-soft); text-decoration:none; font-weight:600;
-      padding:.45rem .7rem; border:1px solid var(--line); border-radius:999px;
+      color:var(--moon); text-decoration:none; font-weight:600;
+      display:inline-flex; align-items:center; min-height:44px;
+      padding:.45rem .9rem; border:1px solid var(--line); border-radius:999px;
       white-space:nowrap; transition:border-color .25s, color .25s, background .25s;
     }
     .home-link:hover{ color:var(--moon); border-color:var(--card-line); background:var(--card); }
@@ -136,7 +137,7 @@
       --bg-btn:var(--violet);
       display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
       font-family:'Manrope',sans-serif; font-weight:700; font-size:.95rem;
-      letter-spacing:.02em; text-decoration:none;
+      letter-spacing:.02em; text-decoration:none; min-height:44px;
       padding:.85rem 1.5rem; border-radius:999px; border:1px solid transparent;
       transition:transform .2s ease, box-shadow .25s ease, background .25s, color .25s;
       cursor:pointer;
@@ -201,7 +202,7 @@
       display:inline-flex; align-items:center; gap:.55rem;
       text-decoration:none; font-weight:700; font-size:.92rem;
       color:var(--moon); background:var(--bg-2);
-      border:1px solid var(--card-line); border-radius:999px;
+      border:1px solid var(--card-line); border-radius:999px; min-height:44px;
       padding:.7rem 1.2rem; transition:transform .2s, background .25s, border-color .25s;
     }
     .stream-btn:hover{ transform:translateY(-2px); background:rgba(124,92,255,.16); border-color:var(--halo); }
@@ -236,7 +237,8 @@
       display:inline-flex; align-items:center; gap:.5rem;
       text-decoration:none; font-weight:600; color:var(--moon);
       background:var(--bg-2); border:1px solid var(--card-line);
-      border-radius:12px; padding:.65rem 1rem; transition:transform .2s, background .25s;
+      border-radius:12px; min-height:44px;
+      padding:.65rem 1rem; transition:transform .2s, background .25s;
     }
     .social-btn:hover{ transform:translateY(-2px); background:rgba(124,92,255,.16); }
     @media (prefers-reduced-motion: reduce){ .social-btn:hover{ transform:none; } }

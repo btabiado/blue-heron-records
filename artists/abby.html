@@ -15,6 +15,7 @@
     /* Abby — soft dusk rose + warm cream + muted plum */
     --rose: #d98a99;
     --rose-deep: #c06b7e;
+    --rose-label: #a14d65; /* darker rose for small label text — meets WCAG AA on cream */
     --plum: #5a3a52;
     --plum-deep: #3e2739;
     --cream: #fbf3ec;
@@ -53,6 +54,11 @@
     outline: 3px solid var(--focus);
     outline-offset: 3px;
     border-radius: 6px;
+  }
+  /* On the dark booking panel a plum outline is invisible — use a light one. */
+  .booking a:focus-visible,
+  .booking button:focus-visible {
+    outline-color: var(--cream);
   }
 
   .skip-link {
@@ -114,11 +120,14 @@
     letter-spacing: 0.2px;
   }
   .home-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 0.82rem;
     text-decoration: none;
     color: var(--muted);
     border: 1px solid var(--line);
-    padding: 8px 14px;
+    padding: 8px 16px;
     border-radius: 999px;
     font-weight: 600;
     white-space: nowrap;
@@ -139,7 +148,7 @@
     letter-spacing: 0.28em;
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--rose-deep);
+    color: var(--rose-label);
     margin-bottom: 18px;
   }
   .hero h1 {
@@ -219,7 +228,7 @@
     letter-spacing: 0.24em;
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--rose-deep);
+    color: var(--rose-label);
     margin-bottom: 12px;
   }
   .section-title {
@@ -252,6 +261,7 @@
   .stream-btn {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 9px;
     padding: 12px 20px;
     border-radius: 12px;
@@ -290,6 +300,7 @@
   .social-btn {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 8px;
     padding: 11px 18px;
     border-radius: 999px;

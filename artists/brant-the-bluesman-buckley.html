@@ -88,6 +88,7 @@
   }
   .brand .name b{color:var(--amber);font-weight:700;}
   .home-link{
+    display:inline-flex;align-items:center;min-height:44px;
     text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:600;
     letter-spacing:.04em;border:1px solid var(--line);
     padding:.5rem .8rem;border-radius:999px;white-space:nowrap;
@@ -133,7 +134,7 @@
   }
   .cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem;}
   .btn{
-    display:inline-flex;align-items:center;gap:.5rem;
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;
     font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:.05em;
     text-transform:uppercase;font-size:.92rem;text-decoration:none;
     padding:.85rem 1.5rem;border-radius:999px;cursor:pointer;border:1px solid transparent;
@@ -201,7 +202,7 @@
   /* ===== Listen ===== */
   .stream-row{display:flex;flex-wrap:wrap;gap:.8rem;margin:0 0 1.6rem;}
   .stream{
-    display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;
+    display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;min-height:44px;
     padding:.8rem 1.2rem;border-radius:12px;font-weight:600;font-size:.95rem;
     border:1px solid var(--line);background:var(--smoke-2);color:var(--ink);
     transition:transform .15s, border-color .2s, background .2s;
@@ -259,7 +260,11 @@
   }
   .book-h em{color:var(--amber);font-style:normal;}
   .booking-actions{display:flex;flex-direction:column;gap:.8rem;}
-  .contact-line{display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:.95rem;}
+  .contact-line{
+    display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;
+    color:var(--muted);font-size:.95rem;margin:.4rem 0 0;
+    padding-top:1rem;border-top:1px solid var(--line);
+  }
   .contact-line a{color:var(--ink);text-decoration:none;font-weight:600;}
   .contact-line a:hover,.contact-line a:focus-visible{color:var(--amber-soft);text-decoration:underline;}
 
@@ -374,7 +379,7 @@
       <!-- Audio player placeholder. Demo MP3 will be added later via the src attribute. -->
       <div class="player">
         <p>Demo track coming soon — the player below will be enabled once the first single is ready.</p>
-        <!-- TODO: add <p class="nodemo" role="note">&#9834; Demo coming soon &mdash; a track will play here once it&rsquo;s released.</p>
+        <!-- TODO: add a nodemo note <p> with role="note" once a track is released. -->
       </div>
     </div>
   </section>

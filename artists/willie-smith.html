@@ -78,11 +78,11 @@
         transparent 8px, transparent 19px);
     }
 
-    /* Accessibility: visible focus */
+    /* Accessibility: visible focus — ring follows each element's own shape */
     a:focus-visible, button:focus-visible, audio:focus-visible{
-      outline:none;
+      outline:2px solid var(--bourbon-bright);
+      outline-offset:3px;
       box-shadow:var(--ring);
-      border-radius:8px;
     }
     .skip-link{
       position:absolute; left:-999px; top:0; z-index:200;
@@ -123,10 +123,11 @@
     .bar .who .sub{ font-size:.72rem; color:var(--cream-dim); letter-spacing:.14em; text-transform:uppercase; }
     .bar .home{
       margin-left:auto;
+      display:inline-flex; align-items:center; min-height:44px;
       font-family:"Oswald",sans-serif; font-weight:600; letter-spacing:.05em;
       text-transform:uppercase; font-size:.78rem;
-      color:var(--cream-dim); text-decoration:none;
-      padding:.55rem .8rem; border-radius:999px;
+      color:var(--cream); text-decoration:none;
+      padding:.55rem 1rem; border-radius:999px;
       border:1px solid var(--line);
       transition:color .2s ease, border-color .2s ease, background .2s ease;
       white-space:nowrap;
@@ -144,8 +145,9 @@
     .hero h1{
       font-family:"Oswald",sans-serif; font-weight:700;
       text-transform:uppercase; letter-spacing:.01em;
-      font-size:clamp(2.9rem, 11vw, 5.6rem); line-height:.92;
+      font-size:clamp(2.6rem, 11vw, 5.6rem); line-height:.92;
       margin:0; color:var(--cream);
+      overflow-wrap:break-word;
       text-shadow:0 2px 0 rgba(0,0,0,.4);
     }
     .hero h1 .hi{ color:var(--bourbon-bright); }

@@ -112,8 +112,9 @@
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
     .home-link{
+      display:inline-flex;align-items:center;min-height:44px;
       font-size:.84rem;font-weight:600;white-space:nowrap;
-      padding:.5rem .8rem;border:1px solid var(--line);border-radius:999px;
+      padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;
       color:var(--heron-light);transition:background .2s,border-color .2s;
     }
     .home-link:hover{background:rgba(168,196,216,.10);border-color:var(--heron);color:var(--cream)}
@@ -286,7 +287,7 @@
     .lb-close:hover{background:var(--heron);color:var(--navy)}
     .lb-btn:focus-visible,.lb-close:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
     @media (max-width:560px){
-      .lb-btn{width:42px;height:42px}
+      .lb-btn{width:44px;height:44px}
       .lb-btn.prev{left:2px}
       .lb-btn.next{right:2px}
     }

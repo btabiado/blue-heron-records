@@ -35,7 +35,7 @@
     --leather-deep: #281708;
     --bourbon:      #c4862c;   /* bourbon gold */
     --bourbon-lt:   #e2ad53;
-    --bourbon-deep: #9c6515;
+    --bourbon-deep: #8a5910;
     --rust:         #8a4b25;   /* rustic sepia accent */
     --cream:        #f7efe0;
     --line:         rgba(58,36,21,.22);
@@ -139,7 +139,8 @@
     font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
     color:var(--paper-2); text-decoration:none;
     border:1px solid var(--line-gold); border-radius:999px;
-    padding:.4rem .85rem; white-space:nowrap;
+    padding:.4rem .95rem; white-space:nowrap;
+    display:inline-flex; align-items:center; min-height:44px;
     transition:background .2s ease, color .2s ease, border-color .2s ease;
   }
   .home-link:hover{ background:var(--bourbon); color:var(--leather-deep); border-color:var(--bourbon); }
@@ -359,6 +360,17 @@
     margin:0 0 .8rem;
   }
   .player audio{ width:100%; }
+  .player .nodemo{
+    display:flex; align-items:center; gap:.6rem;
+    margin:0;
+    font-family:"Oswald",sans-serif; font-weight:500;
+    letter-spacing:.03em; font-size:1rem;
+    color:var(--leather);
+    background:rgba(196,134,44,.12);
+    border:1px dashed var(--bourbon-deep);
+    border-radius:12px;
+    padding:.9rem 1.1rem;
+  }
   .player .demo-note{ margin:.8rem 0 0; font-style:italic; color:var(--ink-soft); font-size:.98rem; }
 
   /* ---- Shows ---- */
