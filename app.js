@@ -146,8 +146,8 @@
   /* ---- Shows: add (Supabase) -> on the site + notify Joe; the corner heron opens an add/remove panel ---- */
   (function () {
     /* === CONFIG: paste your Supabase values here (see SETUP-shows.md). Blank = fall back to events.json + text Joe. === */
-    var SUPABASE_URL = "";   // e.g. https://abcdwxyz.supabase.co
-    var SUPABASE_KEY = "";   // Supabase anon public key
+    var SUPABASE_URL = "https://ofolxqldojhifnqmmsws.supabase.co";
+    var SUPABASE_KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
     var WEB3_KEY = "27123b13-8671-41c1-bab4-2f08aee37de1"; // notify on new submissions
     var NOTIFY_CC = "joeleduc@msn.com";                    // Joe gets a copy
 
