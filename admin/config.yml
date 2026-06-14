@@ -1,0 +1,36 @@
+# Decap CMS config — manages the Shows calendar (events.json)
+# IMPORTANT: replace base_url below with your Cloudflare OAuth worker URL (see admin/SETUP.md)
+backend:
+  name: github
+  repo: btabiado/blue-heron-records
+  branch: main
+  base_url: https://REPLACE-WITH-YOUR-WORKER.workers.dev   # <-- set after deploying the worker
+  auth_endpoint: auth
+
+site_url: https://blueheronrecords.com
+display_url: https://blueheronrecords.com
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: calendar
+    label: "Events Calendar"
+    description: "Add or edit upcoming shows. They appear on the site within about a minute of saving."
+    files:
+      - name: events
+        label: "Shows"
+        file: events.json
+        format: json
+        fields:
+          - name: events
+            label: "Shows"
+            label_singular: "Show"
+            widget: list
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { name: date, label: "Date", widget: date, format: "YYYY-MM-DD" }
+              - { name: time, label: "Time (e.g. 8:00 PM)", widget: string, required: false }
+              - { name: title, label: "Act / show title", widget: string }
+              - { name: venue, label: "Venue", widget: string, required: false }
+              - { name: city, label: "City, ST", widget: string, required: false }
+              - { name: ticketUrl, label: "Ticket link (https://…)", widget: string, required: false }
