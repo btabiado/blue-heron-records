@@ -255,6 +255,10 @@ strong { color: var(--cream); font-weight: 600; }
 .listen-card { max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 150px 1fr; gap: clamp(20px, 3vw, 40px); align-items: center; background: linear-gradient(135deg, var(--bg-3), var(--bg-2)); border: 1px solid var(--line-2); border-radius: var(--radius-lg); padding: clamp(24px, 3.5vw, 40px); }
 .listen-art { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
 .listen-art img { width: 100%; height: 100%; object-fit: cover; }
+.listen-record { border-radius: 50%; border-color: var(--line-2); background: radial-gradient(circle at 50% 50%, #17263f 0%, #0a1326 58%, #060a16 100%); position: relative; }
+.listen-record img { object-fit: contain; padding: 5%; animation: bhrspin 16s linear infinite; }
+.listen-record::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9%; height: 9%; transform: translate(-50%, -50%); border-radius: 50%; background: #0a1326; border: 1px solid var(--line-2); }
+@keyframes bhrspin { to { transform: rotate(360deg); } }
 .listen-label { color: var(--sand); font-size: .76rem; text-transform: uppercase; letter-spacing: .18em; font-weight: 600; margin-bottom: .5rem; }
 .listen-body h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: .3em; }
 .listen-body p { color: var(--muted); }
