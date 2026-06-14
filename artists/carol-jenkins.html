@@ -3,717 +3,295 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Carol Jenkins | Blue Heron Records</title>
-  <meta name="description" content="Carol Jenkins — vocalist on Blue Heron Records. Listen, follow, catch upcoming shows, and book Carol Jenkins for your venue or event." />
-  <meta name="theme-color" content="#0c2b2b" />
+  <title>Carol Jenkins — Composer &amp; Singer-Songwriter | Blue Heron Records</title>
+  <meta name="description" content="Carol Jenkins is a composer, singer-songwriter, musician, and member of The Carol's on Blue Heron Records. Genre-fluid, soulful music — you'll always feel the heart and soul. Listen, follow, and book the act." />
+  <meta name="theme-color" content="#160f0c" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- Open Graph / social -->
   <meta property="og:type" content="profile" />
   <meta property="og:site_name" content="Blue Heron Records" />
-  <meta property="og:title" content="Carol Jenkins — Blue Heron Records" />
-  <meta property="og:description" content="Vocalist on Blue Heron Records. Listen, follow, and book Carol Jenkins." />
-  <meta property="og:image" content="../images/og.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="Carol Jenkins — Composer &amp; Singer-Songwriter" />
+  <meta property="og:description" content="Genre-fluid, soulful music on Blue Heron Records. You'll always feel the heart and soul." />
+  <meta property="og:image" content="../images/artist-carol-web.jpg" />
 
-  <link rel="icon" href="../favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png" />
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      /* THEME: elegant teal + champagne + deep emerald */
-      --teal:        #1f6f6f;
-      --teal-bright: #3aa6a0;
-      --emerald:     #0c3b34;
-      --emerald-deep:#072a25;
-      --bg:          #0a2422;
-      --bg-2:        #0c2b2b;
-      --panel:       #103734;
-      --panel-soft:  #13433f;
-      --champagne:   #ecd9b0;
-      --champagne-2: #f6ecd2;
-      --gold:        #d7be8c;
-      --ink:         #f3efe4;
-      --muted:       #b9c9c3;
-      --line:        rgba(236, 217, 176, 0.18);
-      --line-strong: rgba(236, 217, 176, 0.34);
-      --focus:       #f6ecd2;
-      --radius:      18px;
-      --radius-sm:   12px;
-      --maxw:        1080px;
-      --shadow:      0 18px 50px rgba(0,0,0,0.45);
-      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --sans:  "Jost", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    :root{
+      /* Warm, soulful, vintage-film theme (drawn from Carol's photo) */
+      --bg:        #160f0c;
+      --bg-2:      #1f1510;
+      --panel:     #2a1c15;
+      --panel-2:   #34221a;
+      --line:      #4a3325;
+      --char:      #100b07;
+      --amber:     #e0a96a;
+      --amber-bright:#f3c98a;
+      --glow:      #ffd9a0;
+      --rose:      #cf9a8e;
+      --plum:      #a8707a;
+      --cream:     #f6ebdd;
+      --cream-dim: #d4bfa9;
+      --ink:       #1a0f06;
+      --radius:    18px;
+      --radius-sm: 11px;
+      --maxw:      1080px;
+      --shadow:    0 20px 50px rgba(0,0,0,.55);
+      --ring:      0 0 0 3px rgba(243,201,138,.6);
     }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: var(--sans);
-      color: var(--ink);
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *,*::before,*::after{ animation:none !important; transition:none !important; } }
+    body{
+      margin:0; font-family:"Inter", system-ui, sans-serif; color:var(--cream);
       background:
-        radial-gradient(1100px 620px at 78% -8%, rgba(58,166,160,0.20), transparent 60%),
-        radial-gradient(900px 540px at 6% 4%, rgba(215,190,140,0.10), transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, var(--emerald-deep) 100%);
-      background-attachment: fixed;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      min-height: 100vh;
+        radial-gradient(1100px 700px at 82% -8%, rgba(224,169,106,.16), transparent 60%),
+        radial-gradient(900px 600px at -8% 25%, rgba(168,112,122,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 58%, var(--char) 100%);
+      background-attachment:fixed; line-height:1.7; -webkit-font-smoothing:antialiased;
     }
+    img{ max-width:100%; display:block; }
+    a{ color:var(--amber-bright); }
+    body::before{
+      content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.05;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    a:focus-visible, button:focus-visible, audio:focus-visible{ outline:none; box-shadow:var(--ring); border-radius:8px; }
+    .skip-link{ position:absolute; left:-999px; top:0; z-index:200; background:var(--amber); color:var(--ink); padding:.7rem 1.1rem; border-radius:0 0 10px 0; font-weight:700; }
+    .skip-link:focus{ left:0; }
+    .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:20px; }
 
-    a { color: var(--champagne); text-decoration: none; }
-    a:hover { color: var(--champagne-2); }
+    /* HEADER */
+    header.site{ position:sticky; top:0; z-index:100; background:rgba(22,15,12,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+    .bar{ display:flex; align-items:center; gap:14px; padding-block:12px; min-height:64px; }
+    .badge{ width:42px; height:42px; flex:0 0 auto; border-radius:50%; background:radial-gradient(circle at 50% 35%, #2c1d14, #0f0a06); border:1.5px solid var(--amber); box-shadow:0 0 0 4px rgba(224,169,106,.12); display:grid; place-items:center; overflow:hidden; }
+    .badge img{ width:80%; height:80%; object-fit:contain; }
+    .who{ display:flex; flex-direction:column; line-height:1.05; }
+    .who .name{ font-family:"Fraunces",serif; font-weight:600; font-size:1.12rem; color:var(--cream); }
+    .who .sub{ font-size:.7rem; color:var(--cream-dim); letter-spacing:.16em; text-transform:uppercase; margin-top:.15em; }
+    .home{ margin-left:auto; font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-size:.74rem; color:var(--cream-dim); text-decoration:none; padding:.55rem .85rem; border-radius:999px; border:1px solid var(--line); transition:.2s; white-space:nowrap; }
+    .home:hover{ color:var(--ink); background:var(--amber); border-color:var(--amber); }
 
-    img { max-width: 100%; display: block; }
+    /* HERO */
+    .hero{ padding:44px 0 36px; }
+    .hero-grid{ display:grid; gap:30px; grid-template-columns:1fr; align-items:center; }
+    .eyebrow{ font-weight:600; text-transform:uppercase; letter-spacing:.26em; font-size:.72rem; color:var(--amber); margin:0 0 .7rem; }
+    .hero h1{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(2.9rem,10vw,5.2rem); line-height:.98; margin:0; color:var(--cream); letter-spacing:-.01em; }
+    .hero h1 .hi{ color:var(--amber-bright); font-style:italic; font-weight:500; }
+    .tagline{ font-family:"Fraunces",serif; font-style:italic; font-size:clamp(1.1rem,3vw,1.42rem); color:var(--rose); margin:1rem 0 0; max-width:30ch; }
+    .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:1.8rem; }
+    .btn{ font-weight:600; text-transform:uppercase; letter-spacing:.08em; font-size:.86rem; padding:.95rem 1.6rem; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; gap:.55rem; border:1.5px solid transparent; transition:transform .15s, box-shadow .2s, background .2s, color .2s; cursor:pointer; }
+    .btn-primary{ background:linear-gradient(180deg, var(--amber-bright), var(--amber)); color:var(--ink); box-shadow:0 10px 26px rgba(224,169,106,.3); }
+    .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(224,169,106,.45); }
+    .btn-ghost{ background:transparent; color:var(--cream); border-color:var(--line); }
+    .btn-ghost:hover{ border-color:var(--amber); color:var(--amber-bright); transform:translateY(-2px); }
+    .hero-visual{ position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); aspect-ratio:3/4; }
+    .hero-visual img{ width:100%; height:100%; object-fit:cover; }
+    .hero-visual::after{ content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, transparent 55%, rgba(16,11,7,.5) 100%); }
+    @media (min-width:780px){ .hero{ padding:64px 0 52px; } .hero-grid{ grid-template-columns:1.15fr .85fr; gap:48px; } .hero-visual{ max-width:380px; margin-left:auto; } }
 
-    /* Accessibility: visible focus */
-    :focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-      border-radius: 6px;
-    }
+    /* SECTIONS */
+    section{ padding:46px 0; border-top:1px solid rgba(74,51,37,.5); }
+    .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 1.4rem; flex-wrap:wrap; }
+    .sec-head h2{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.8rem,5vw,2.5rem); margin:0; color:var(--cream); }
+    .sec-head h2 .dot{ color:var(--amber); }
+    .sec-head .kick{ font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--amber); align-self:center; font-weight:600; }
+    .panel{ background:linear-gradient(180deg, var(--panel), rgba(31,21,16,.7)); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:0 12px 30px rgba(0,0,0,.35); }
 
-    .skip-link {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-      background: var(--champagne);
-      color: var(--emerald-deep);
-      padding: 12px 18px;
-      border-radius: 0 0 10px 0;
-      font-weight: 600;
-      z-index: 100;
-    }
-    .skip-link:focus {
-      left: 0;
-    }
+    /* ABOUT */
+    .about-grid{ display:grid; gap:24px; grid-template-columns:1fr; align-items:start; }
+    @media (min-width:680px){ .about-grid{ grid-template-columns:200px 1fr; } }
+    .about-photo{ border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); }
+    .about-photo img{ width:100%; height:100%; object-fit:cover; aspect-ratio:1; }
+    .about p{ font-size:1.08rem; max-width:62ch; margin:0 0 1rem; }
+    blockquote.pull{ margin:1.3rem 0 0; padding:.2rem 0 .2rem 1.1rem; border-left:3px solid var(--amber); font-family:"Fraunces",serif; font-style:italic; font-size:1.18rem; color:var(--glow); max-width:60ch; }
+    .facts{ display:flex; flex-wrap:wrap; gap:10px; margin:1.4rem 0 0; list-style:none; padding:0; }
+    .facts li{ font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--cream); background:rgba(224,169,106,.12); border:1px solid var(--line); padding:.5rem .85rem; border-radius:999px; }
+    .facts li strong{ color:var(--amber-bright); }
 
-    .wrap {
-      width: min(100% - 2.4rem, var(--maxw));
-      margin-inline: auto;
-    }
+    /* LISTEN */
+    .stream-row{ display:grid; gap:12px; grid-template-columns:1fr; }
+    @media (min-width:560px){ .stream-row{ grid-template-columns:repeat(3,1fr); } }
+    .stream{ display:flex; align-items:center; justify-content:center; gap:.6rem; padding:1rem 1.1rem; border-radius:12px; text-decoration:none; font-weight:600; letter-spacing:.05em; text-transform:uppercase; font-size:.86rem; background:var(--char); color:var(--cream); border:1px solid var(--line); transition:.18s; }
+    .stream:hover{ border-color:var(--amber); color:var(--amber-bright); transform:translateY(-2px); background:#1b120c; }
+    .stream svg{ width:20px; height:20px; flex:0 0 auto; }
+    .coming{ display:inline-block; margin-left:.45rem; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); background:var(--amber); padding:.12rem .4rem; border-radius:6px; vertical-align:middle; font-weight:700; }
+    .player{ margin-top:18px; }
+    .player figcaption{ color:var(--cream-dim); font-size:.9rem; margin-bottom:.6rem; font-style:italic; }
+    audio{ width:100%; filter:sepia(.3) saturate(1.1); }
+    .player .nodemo{ margin-top:.7rem; font-size:.8rem; color:var(--cream-dim); letter-spacing:.04em; text-transform:uppercase; }
 
-    /* ---------- Header ---------- */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(7,42,37,0.92), rgba(7,42,37,0.74));
-      border-bottom: 1px solid var(--line);
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      padding: 0.7rem 0;
-    }
-    .brand-badge {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 auto;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1.5px solid var(--line-strong);
-      background: #06201d;
-      box-shadow: 0 0 0 4px rgba(58,166,160,0.10);
-    }
-    .brand-badge img { width: 100%; height: 100%; object-fit: cover; }
+    /* SHOWS */
+    .shows .empty{ display:flex; flex-direction:column; align-items:flex-start; gap:.5rem; }
+    .shows .empty .big{ font-family:"Fraunces",serif; font-weight:600; font-size:1.2rem; color:var(--cream); }
+    .shows .empty .invite{ color:var(--cream-dim); max-width:52ch; }
+    .shows .empty .invite a{ font-weight:700; }
 
-    .header-name {
-      font-family: var(--serif);
-      font-size: 1.32rem;
-      letter-spacing: 0.04em;
-      font-weight: 600;
-      line-height: 1;
-      margin: 0;
-      color: var(--ink);
-    }
-    .header-name span {
-      display: block;
-      font-family: var(--sans);
-      font-size: 0.62rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--teal-bright);
-      margin-top: 4px;
-      font-weight: 500;
-    }
-    .header-home {
-      margin-left: auto;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--line);
-      padding: 0.5rem 0.85rem;
-      border-radius: 999px;
-      transition: border-color .2s ease, color .2s ease, background .2s ease;
-      white-space: nowrap;
-    }
-    .header-home:hover {
-      color: var(--emerald-deep);
-      background: var(--champagne);
-      border-color: var(--champagne);
-    }
+    /* CONNECT */
+    .socials{ display:flex; flex-wrap:wrap; gap:12px; }
+    .social{ width:52px; height:52px; border-radius:14px; display:grid; place-items:center; background:var(--char); border:1px solid var(--line); color:var(--cream); transition:.18s; }
+    .social:hover{ border-color:var(--amber); color:var(--amber-bright); transform:translateY(-3px); background:#1b120c; }
+    .social svg{ width:24px; height:24px; }
+    .connect .note{ color:var(--cream-dim); font-size:.86rem; margin-top:1rem; font-style:italic; }
 
-    /* ---------- Hero ---------- */
-    .hero {
-      padding: clamp(2.6rem, 7vw, 5.5rem) 0 clamp(2.2rem, 5vw, 4rem);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(1.6rem, 4vw, 3rem);
-      align-items: center;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--teal-bright);
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 1px;
-      background: var(--gold);
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: clamp(3.4rem, 13vw, 6.6rem);
-      line-height: 0.94;
-      margin: 0 0 0.5rem;
-      letter-spacing: 0.01em;
-      background: linear-gradient(96deg, var(--champagne-2) 12%, var(--teal-bright) 96%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .tagline {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: clamp(1.25rem, 3.4vw, 1.8rem);
-      color: var(--champagne);
-      margin: 0 0 1.6rem;
-      font-weight: 500;
-    }
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
+    /* BOOKING */
+    .booking-card{ background:radial-gradient(120% 130% at 100% 0%, rgba(255,217,160,.16), transparent 55%), linear-gradient(160deg, var(--panel-2), var(--char)); border:1px solid var(--amber); border-radius:var(--radius); padding:34px 26px; box-shadow:var(--shadow); }
+    .booking-card h2{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.9rem,6vw,2.6rem); margin:0 0 .5rem; color:var(--cream); }
+    .booking-card h2 .hi{ color:var(--amber-bright); font-style:italic; }
+    .booking-card p{ color:var(--cream-dim); max-width:54ch; margin:0 0 1.4rem; font-size:1.05rem; }
+    .booking-row{ display:flex; flex-wrap:wrap; gap:14px; }
+    .booking-row.meta{ margin-top:1.4rem; font-size:.88rem; color:var(--cream-dim); }
+    .booking-row.meta a{ color:var(--amber-bright); text-decoration:none; }
+    .booking-row.meta a:hover{ text-decoration:underline; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 0.92rem;
-      letter-spacing: 0.06em;
-      padding: 0.92rem 1.6rem;
-      border-radius: 999px;
-      border: 1.5px solid transparent;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(100deg, var(--teal-bright), var(--teal));
-      color: #042421;
-      box-shadow: 0 12px 28px rgba(31,111,111,0.42);
-    }
-    .btn-primary:hover { transform: translateY(-2px); color: #042421; box-shadow: 0 16px 34px rgba(31,111,111,0.55); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--champagne);
-      border-color: var(--line-strong);
-    }
-    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--champagne); color: var(--champagne-2); }
-
-    /* Hero visual: themed gradient panel with heron mark (NO fake photo) */
-    .hero-visual {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--line-strong);
-      background:
-        radial-gradient(120% 90% at 70% 10%, rgba(58,166,160,0.30), transparent 62%),
-        linear-gradient(160deg, var(--emerald) 0%, var(--emerald-deep) 100%);
-      box-shadow: var(--shadow);
-      aspect-ratio: 4 / 3;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-    }
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(60% 50% at 50% 38%, rgba(246,236,210,0.10), transparent 70%);
-      pointer-events: none;
-    }
-    .hero-visual img {
-      width: clamp(150px, 52%, 280px);
-      height: auto;
-      border-radius: 14px;
-      filter: drop-shadow(0 14px 30px rgba(0,0,0,0.5));
-      opacity: 0.96;
-    }
-    .hero-visual figcaption {
-      position: absolute;
-      bottom: 0.85rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    @media (min-width: 860px) {
-      .hero-grid {
-        grid-template-columns: 1.05fr 0.95fr;
-      }
-    }
-
-    /* ---------- Sections ---------- */
-    section { padding: clamp(2.4rem, 6vw, 4.4rem) 0; }
-    .section-divider { border-top: 1px solid var(--line); }
-
-    .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--teal-bright);
-      font-weight: 500;
-      margin: 0 0 0.7rem;
-    }
-    .section-title {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: clamp(2rem, 5.5vw, 3rem);
-      line-height: 1.05;
-      margin: 0 0 1.4rem;
-      color: var(--ink);
-    }
-
-    .lead {
-      font-size: clamp(1.05rem, 2.4vw, 1.2rem);
-      color: var(--muted);
-      max-width: 60ch;
-    }
-
-    .panel {
-      background: linear-gradient(165deg, var(--panel) 0%, var(--panel-soft) 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: clamp(1.4rem, 3.5vw, 2.2rem);
-    }
-
-    .note {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ---------- Listen ---------- */
-    .stream-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.6rem;
-    }
-    .stream-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.85rem 1.3rem;
-      border-radius: 12px;
-      border: 1px solid var(--line-strong);
-      background: rgba(7,42,37,0.4);
-      color: var(--ink);
-      font-weight: 500;
-      font-size: 0.92rem;
-      letter-spacing: 0.02em;
-      transition: transform .18s ease, border-color .2s ease, background .2s ease;
-    }
-    .stream-btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--teal-bright);
-      background: rgba(58,166,160,0.12);
-      color: var(--champagne-2);
-    }
-    .stream-btn .ico { width: 20px; height: 20px; flex: 0 0 auto; }
-    .stream-btn .ico svg { width: 100%; height: 100%; display: block; }
-    .stream-btn .soon {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--line);
-      padding: 2px 7px;
-      border-radius: 999px;
-    }
-
-    .player {
-      margin-top: 0.5rem;
-    }
-    .player-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-    audio {
-      width: 100%;
-      border-radius: 10px;
-      filter: saturate(0.9);
-    }
-    .player-empty {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.95rem 1.1rem;
-      border: 1px dashed var(--line-strong);
-      border-radius: 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      background: rgba(7,42,37,0.35);
-    }
-    .player-empty .dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: var(--gold);
-      flex: 0 0 auto;
-      box-shadow: 0 0 0 4px rgba(215,190,140,0.18);
-    }
-
-    /* ---------- Shows ---------- */
-    .shows-empty {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-    .shows-empty .big {
-      font-family: var(--serif);
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      color: var(--champagne);
-      font-style: italic;
-    }
-
-    /* ---------- Connect ---------- */
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-    }
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.75rem 1.15rem;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      color: var(--ink);
-      font-size: 0.88rem;
-      font-weight: 500;
-      transition: transform .18s ease, border-color .2s ease, background .2s ease, color .2s ease;
-    }
-    .social-btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--teal-bright);
-      background: rgba(58,166,160,0.12);
-      color: var(--champagne-2);
-    }
-    .social-btn .ico { width: 18px; height: 18px; flex: 0 0 auto; }
-    .social-btn .ico svg { width: 100%; height: 100%; display: block; }
-
-    /* ---------- Booking ---------- */
-    .booking {
-      text-align: center;
-      background:
-        radial-gradient(80% 120% at 50% -10%, rgba(58,166,160,0.22), transparent 60%),
-        linear-gradient(165deg, var(--emerald) 0%, var(--emerald-deep) 100%);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius);
-      padding: clamp(2.2rem, 6vw, 3.6rem) clamp(1.2rem, 4vw, 2.4rem);
-    }
-    .booking .section-title { margin-bottom: 0.6rem; }
-    .booking p { color: var(--muted); max-width: 52ch; margin: 0 auto 1.8rem; }
-    .booking-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: center;
-    }
-
-    /* ---------- Footer ---------- */
-    .site-footer {
-      border-top: 1px solid var(--line);
-      padding: 2.4rem 0 3rem;
-      margin-top: 1rem;
-    }
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1rem;
-    }
-    .footer-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      letter-spacing: 0.03em;
-    }
-    .footer-brand:hover { color: var(--champagne-2); }
-    .footer-mark {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1px solid var(--line-strong);
-      background: #06201d;
-      flex: 0 0 auto;
-    }
-    .footer-mark img { width: 100%; height: 100%; object-fit: cover; }
-    .copyright {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* ---------- Motion ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.in { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
-      .btn:hover, .stream-btn:hover, .social-btn:hover { transform: none; }
-    }
+    /* FOOTER */
+    footer.site{ border-top:1px solid var(--line); background:var(--char); padding:34px 0 44px; margin-top:8px; }
+    .foot{ display:flex; flex-direction:column; gap:14px; align-items:center; text-align:center; }
+    .foot a.family{ display:inline-flex; align-items:center; gap:12px; text-decoration:none; color:var(--cream); letter-spacing:.06em; text-transform:uppercase; font-size:.8rem; }
+    .foot a.family:hover .ftxt{ color:var(--amber-bright); }
+    .foot .fmark{ width:38px; height:38px; border-radius:50%; background:radial-gradient(circle at 50% 35%, #2c1d14, #0f0a06); border:1.5px solid var(--amber); display:grid; place-items:center; overflow:hidden; }
+    .foot .fmark img{ width:80%; height:80%; object-fit:contain; }
+    .foot .copy{ color:var(--cream-dim); font-size:.78rem; }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- (a) Header -->
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <span class="brand-badge">
-        <img src="../images/heron-mark.png" alt="Blue Heron Records heron mark" width="42" height="42" />
+  <header class="site">
+    <div class="wrap bar">
+      <span class="badge" aria-hidden="true"><img src="../images/heron-mark.png" alt="" /></span>
+      <span class="who">
+        <span class="name">Carol Jenkins</span>
+        <span class="sub">Composer &middot; Singer-Songwriter</span>
       </span>
-      <p class="header-name">Carol Jenkins<span>Blue Heron Records</span></p>
-      <a class="header-home" href="../index.html">Blue Heron Records</a>
+      <a class="home" href="../index.html">Blue Heron Records</a>
     </div>
   </header>
 
   <main id="main">
-    <!-- (b) Hero -->
     <section class="hero" aria-labelledby="artist-name">
       <div class="wrap hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Blue Heron Records · Vocalist</p>
-          <h1 id="artist-name">Carol Jenkins</h1>
-          <p class="tagline">A refined, classic vocalist.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#listen">
-              <span aria-hidden="true">&#9654;</span> Listen
-            </a>
+        <div>
+          <p class="eyebrow">Blue Heron Records &mdash; Artist</p>
+          <h1 id="artist-name">Carol <span class="hi">Jenkins</span></h1>
+          <p class="tagline">You won&rsquo;t always hear the same genre &mdash; but you&rsquo;ll always feel the heart and soul.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#listen">Listen</a>
             <a class="btn btn-ghost" href="#booking">Book / Contact</a>
           </div>
         </div>
-
-        <!-- Themed gradient panel with heron mark (no fabricated photo) -->
-        <figure class="hero-visual reveal" aria-label="Blue Heron Records brand panel — artist photo coming soon">
-          <img src="../images/heron-mark.png" alt="Blue Heron Records emblem: a great blue heron standing in water before a full moon" width="280" height="245" />
-          <figcaption>Artist photo coming soon</figcaption>
-        </figure>
+        <div class="hero-visual">
+          <img src="../images/artist-carol-web.jpg" alt="A warm, film-toned portrait of Carol Jenkins" width="1000" height="1862" />
+        </div>
       </div>
     </section>
 
-    <!-- (c) About -->
-    <section id="about" class="section-divider" aria-labelledby="about-title">
-      <div class="wrap reveal">
-        <p class="section-label">About</p>
-        <h2 class="section-title" id="about-title">About Carol Jenkins</h2>
-        <p class="lead">
-          Carol Jenkins is a vocalist with Blue Heron Records. A full bio is coming soon &mdash;
-          check back for the story behind the voice.
-        </p>
-      </div>
-    </section>
-
-    <!-- (d) Listen -->
-    <section id="listen" class="section-divider" aria-labelledby="listen-title">
-      <div class="wrap reveal">
-        <p class="section-label">Music</p>
-        <h2 class="section-title" id="listen-title">Listen</h2>
+    <section id="about" class="about" aria-labelledby="about-h">
+      <div class="wrap">
+        <div class="sec-head"><span class="kick">01</span><h2 id="about-h">About<span class="dot">.</span></h2></div>
         <div class="panel">
-          <div class="stream-row">
-            <a class="stream-btn" href="#" aria-label="Listen to Carol Jenkins on Spotify — coming soon">
-              <span class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.43a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.22c3.81-.87 7.08-.5 9.71 1.11.3.18.39.57.22.86Zm1.23-2.74a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.37.23.49.71.25 1.07Zm.11-2.85c-3.23-1.92-8.56-2.1-11.64-1.16a.94.94 0 1 1-.54-1.8c3.54-1.07 9.43-.87 13.15 1.34a.94.94 0 0 1-.97 1.62Z"/></svg>
-              </span>
-              Spotify <span class="soon">Coming&nbsp;soon</span>
-            </a>
-            <a class="stream-btn" href="#" aria-label="Listen to Carol Jenkins on Apple Music — coming soon">
-              <span class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3.5c-.9.05-1.96.6-2.58 1.33-.56.66-1.05 1.64-.86 2.59.97.03 1.97-.55 2.57-1.28.6-.73 1.02-1.7.87-2.64ZM18.7 14.4c-.03-3.1 2.53-4.58 2.65-4.66-1.45-2.12-3.7-2.41-4.5-2.44-1.92-.2-3.74 1.13-4.71 1.13-.97 0-2.47-1.1-4.06-1.07-2.09.03-4.02 1.21-5.1 3.08-2.17 3.77-.56 9.35 1.56 12.41 1.04 1.5 2.27 3.18 3.89 3.12 1.56-.06 2.15-1.01 4.04-1.01 1.88 0 2.41 1.01 4.06.98 1.68-.03 2.74-1.53 3.76-3.03 1.19-1.74 1.68-3.42 1.71-3.51-.04-.02-3.27-1.26-3.3-4.99Z"/></svg>
-              </span>
-              Apple&nbsp;Music <span class="soon">Coming&nbsp;soon</span>
-            </a>
-            <a class="stream-btn" href="#" aria-label="Watch Carol Jenkins on YouTube — coming soon">
-              <span class="ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.13C19.5 3.85 12 3.85 12 3.85s-7.5 0-9.4.52A3 3 0 0 0 .5 6.5C0 8.4 0 12 0 12s0 3.6.5 5.5a3 3 0 0 0 2.1 2.13c1.9.52 9.4.52 9.4.52s7.5 0 9.4-.52a3 3 0 0 0 2.1-2.13c.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
-              </span>
-              YouTube <span class="soon">Coming&nbsp;soon</span>
-            </a>
-          </div>
-
-          <!-- Audio player: demo MP3 will be added later. No src yet; clearly labeled empty state. -->
-          <div class="player">
-            <p class="player-label" id="player-label">Demo track</p>
-            <!--
-              TODO: When Carol Jenkins's demo is ready, add the file and replace the
-              empty-state block below with:
-              <audio controls preload="none" aria-labelledby="player-label" src="../audio/caroline-demo.mp3"></audio>
-            -->
-            <div class="player-empty" role="note" aria-live="polite">
-              <span class="dot" aria-hidden="true"></span>
-              Demo track coming soon &mdash; the player will appear here once Carol Jenkins&rsquo;s first recording is ready.
+          <div class="about-grid">
+            <div class="about-photo"><img src="../images/artist-carol.jpg" alt="Carol Jenkins, smiling" width="414" height="418" /></div>
+            <div>
+              <p>Carol Jenkins is a composer, singer-songwriter, musician, and member of the band <strong>The Carol&rsquo;s</strong>. Born and raised around people who value music and art, she was always immersed in some form of artistic expression.</p>
+              <p>The daughter of a pastor, Carol found the stage at a very young age in church &mdash; singing, dancing, and public speaking &mdash; and in school took part in music recitals, musicals, and performing groups. While completing her bachelor&rsquo;s in Architecture and Construction Science, she began songwriting, got her first guitar, and has never looked back.</p>
+              <blockquote class="pull">&ldquo;With love felt for so many styles of music &mdash; you won&rsquo;t always hear the same genre, but you&rsquo;ll always feel the heart and soul.&rdquo;</blockquote>
+              <ul class="facts">
+                <li>Composer</li>
+                <li>Singer-Songwriter</li>
+                <li>Member of <strong>The Carol&rsquo;s</strong></li>
+                <li>Genre-fluid &middot; Soulful</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- (e) Shows -->
-    <section id="shows" class="section-divider" aria-labelledby="shows-title">
-      <div class="wrap reveal">
-        <p class="section-label">Live</p>
-        <h2 class="section-title" id="shows-title">Upcoming Shows</h2>
-        <div class="panel shows-empty">
+    <section id="listen" aria-labelledby="listen-h">
+      <div class="wrap">
+        <div class="sec-head"><span class="kick">02</span><h2 id="listen-h">Listen<span class="dot">.</span></h2></div>
+        <div class="stream-row">
+          <a class="stream" href="#" aria-label="Listen to Carol Jenkins on Spotify — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.43a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.22c3.81-.87 7.09-.5 9.72 1.11.3.18.39.57.21.86Zm1.23-2.74a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.64-1.1 8.16-.56 11.24 1.33.37.23.49.71.25 1.07Zm.11-2.85C14.82 8.98 9.5 8.8 6.43 9.73a.93.93 0 1 1-.54-1.79c3.52-1.07 9.4-.86 13.11 1.34a.94.94 0 0 1-.96 1.61Z"/></svg>
+            Spotify <span class="coming">soon</span>
+          </a>
+          <a class="stream" href="#" aria-label="Listen to Carol Jenkins on Apple Music — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3.2 8.9 4.8c-.7.15-1.1.7-1.1 1.4v8.05c-.4-.18-.85-.27-1.35-.27-1.6 0-2.9 1.05-2.9 2.5s1.3 2.5 2.9 2.5 2.9-1.05 2.9-2.5V9.2l6.1-1.28v4.62c-.4-.18-.85-.27-1.35-.27-1.6 0-2.9 1.05-2.9 2.5s1.3 2.5 2.9 2.5 2.9-1.05 2.9-2.5V4.6c0-.95-.78-1.6-1.6-1.4Z"/></svg>
+            Apple Music <span class="coming">soon</span>
+          </a>
+          <a class="stream" href="#" aria-label="Watch Carol Jenkins on YouTube — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 4.9 12 4.9 12 4.9s-7.1 0-8.9.5A3 3 0 0 0 1 7.5 31.3 31.3 0 0 0 .5 12 31.3 31.3 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1 31.3 31.3 0 0 0 .5-4.5 31.3 31.3 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg>
+            YouTube <span class="coming">soon</span>
+          </a>
+        </div>
+        <figure class="player panel">
+          <figcaption>Demo track</figcaption>
+          <!-- A demo MP3 will be added here later, e.g. <audio src="../audio/carol-jenkins-demo.mp3"> -->
+          <audio controls preload="none" aria-label="Carol Jenkins demo player — audio coming soon">Your browser does not support the audio element.</audio>
+          <p class="nodemo">No demo loaded yet &mdash; a track will be added soon.</p>
+        </figure>
+      </div>
+    </section>
+
+    <section id="shows" class="shows" aria-labelledby="shows-h">
+      <div class="wrap">
+        <div class="sec-head"><span class="kick">03</span><h2 id="shows-h">Upcoming Shows<span class="dot">.</span></h2></div>
+        <div class="panel empty">
           <span class="big">No shows announced yet &mdash; check back soon.</span>
-          <p class="note" style="font-style:normal;">
-            Venues &amp; booking agents: want Carol Jenkins on your stage?
-            <a href="#booking">Get in touch below.</a>
-          </p>
+          <span class="invite">Venues &amp; booking agents: want Carol on your stage? <a href="#booking">Get in touch</a> and let&rsquo;s set a date.</span>
         </div>
       </div>
     </section>
 
-    <!-- (f) Connect -->
-    <section id="connect" class="section-divider" aria-labelledby="connect-title">
-      <div class="wrap reveal">
-        <p class="section-label">Follow</p>
-        <h2 class="section-title" id="connect-title">Connect</h2>
-        <p class="lead" style="margin-bottom:1.4rem;">Follow Carol Jenkins for new music, photos, and show announcements. Links go live soon.</p>
-        <div class="social-row">
-          <a class="social-btn" href="#" aria-label="Follow Carol Jenkins on Instagram — coming soon">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </span>
-            Instagram
-          </a>
-          <a class="social-btn" href="#" aria-label="Follow Carol Jenkins on Facebook — coming soon">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
-            </span>
-            Facebook
-          </a>
-          <a class="social-btn" href="#" aria-label="Follow Carol Jenkins on TikTok — coming soon">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.2-3.6-.8v6.3c0 3.2-2.6 5.6-5.7 5.4a5.4 5.4 0 0 1 .7-10.8v2.8a2.7 2.7 0 1 0 2 2.6V3h3.1Z"/></svg>
-            </span>
-            TikTok
-          </a>
-          <a class="social-btn" href="#" aria-label="Subscribe to Carol Jenkins on YouTube — coming soon">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.13C19.5 3.85 12 3.85 12 3.85s-7.5 0-9.4.52A3 3 0 0 0 .5 6.5C0 8.4 0 12 0 12s0 3.6.5 5.5a3 3 0 0 0 2.1 2.13c1.9.52 9.4.52 9.4.52s7.5 0 9.4-.52a3 3 0 0 0 2.1-2.13c.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
-            </span>
-            YouTube
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- (g) Booking -->
-    <section id="booking" aria-labelledby="booking-title">
-      <div class="wrap reveal">
-        <div class="booking">
-          <p class="section-label">Booking</p>
-          <h2 class="section-title" id="booking-title">Book Carol Jenkins</h2>
-          <p>
-            Bringing Carol Jenkins to your venue, private event, or festival? Reach out to
-            Blue Heron Records and we&rsquo;ll take it from there.
-          </p>
-          <div class="booking-cta">
-            <a class="btn btn-primary" href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Carol Jenkins">
-              <span aria-hidden="true">&#9993;</span> Email to Book
-            </a>
-            <a class="btn btn-ghost" href="tel:+16309260446">
-              <span aria-hidden="true">&#9742;</span> (630) 926-0446
-            </a>
+    <section id="connect" class="connect" aria-labelledby="connect-h">
+      <div class="wrap">
+        <div class="sec-head"><span class="kick">04</span><h2 id="connect-h">Connect<span class="dot">.</span></h2></div>
+        <div class="panel">
+          <div class="socials">
+            <a class="social" href="#" aria-label="Carol Jenkins on Instagram — link coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+            <a class="social" href="#" aria-label="Carol Jenkins on Facebook — link coming soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V7c0-.8.2-1.2 1.3-1.2H17V3h-2.7C11.6 3 11 4.6 11 6.8v1.7H9V11h2v10h3V11h2.3l.3-2.5H14Z"/></svg></a>
+            <a class="social" href="#" aria-label="Carol Jenkins on TikTok — link coming soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.8c-1.3.1-2.5-.3-3.5-1v5.7c0 3.3-2.5 5.6-5.6 5.6A5.4 5.4 0 0 1 5.5 14c0-3 2.6-5.4 5.8-5.1v2.9c-.3-.1-.7-.2-1-.2-1.3 0-2.3 1-2.3 2.4 0 1.3 1 2.4 2.4 2.4 1.4 0 2.4-1 2.4-2.6V3h3.7Z"/></svg></a>
+            <a class="social" href="#" aria-label="Carol Jenkins on YouTube — link coming soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 4.9 12 4.9 12 4.9s-7.1 0-8.9.5A3 3 0 0 0 1 7.5 31.3 31.3 0 0 0 .5 12 31.3 31.3 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1 31.3 31.3 0 0 0 .5-4.5 31.3 31.3 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg></a>
           </div>
+          <p class="note">Social links are on the way &mdash; follow along once they go live.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="booking" aria-labelledby="booking-h">
+      <div class="wrap">
+        <div class="booking-card">
+          <h2 id="booking-h">Book <span class="hi">Carol Jenkins</span></h2>
+          <p>Booking a venue, festival, or private event? Reach out to Blue Heron Records and we&rsquo;ll get Carol on your calendar.</p>
+          <div class="booking-row">
+            <a class="btn btn-primary" href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Carol%20Jenkins">Email to Book</a>
+            <a class="btn btn-ghost" href="tel:+16309260446">Call (630) 926-0446</a>
+          </div>
+          <p class="booking-row meta">
+            Blue Heron Records &mdash; Oak Lawn, Illinois<br/>
+            <a href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Carol%20Jenkins">joeleduc@msn.com</a>
+            &nbsp;&middot;&nbsp;
+            <a href="tel:+16309260446">(630) 926-0446</a>
+          </p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- (h) Footer -->
-  <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <a class="footer-brand" href="../index.html">
-        <span class="footer-mark">
-          <img src="../images/heron-mark.png" alt="Blue Heron Records heron mark" width="38" height="38" />
-        </span>
-        Part of the Blue Heron Records family
+  <footer class="site">
+    <div class="wrap foot">
+      <a class="family" href="../index.html">
+        <span class="fmark" aria-hidden="true"><img src="../images/heron-mark.png" alt="" /></span>
+        <span class="ftxt">Part of the Blue Heron Records family</span>
       </a>
-      <p class="copyright">&copy; 2026 Blue Heron Records · Oak Lawn, Illinois</p>
+      <p class="copy">&copy; 2026 Blue Heron Records. All rights reserved.</p>
     </div>
   </footer>
-
-  <script>
-    // Gentle scroll reveal (respects prefers-reduced-motion)
-    (function () {
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var els = document.querySelectorAll('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        els.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(function (el) { io.observe(el); });
-    })();
-  </script>
 </body>
 </html>
