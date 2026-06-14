@@ -1,38 +1,34 @@
 # Blue Heron Records
 
-Marketing website for **Blue Heron Records** — a home-based record label and recording studio in Oak Lawn, Illinois. Producer · Recording · Promotion.
+Website for **Blue Heron Records** — a home-grown record label & recording studio in Oak Lawn, Illinois, founded by **Joe LeDuc** (producer · promoter · audio engineer). Producer · Recording · Promotion.
 
-Single-page static site — no build step.
+**Live:** https://blueheronrecords.com (GitHub Pages, custom domain, HTTPS enforced).
 
-## Files
-- `index.html` — all content/sections
-- `styles.css` — design system (dark "analog-soul" theme, Fraunces + Inter, heron + brass accents)
+Static site — no build step.
+
+## Structure
+- `index.html` — the main one-page site (hero, founder spotlight, get-to-know-us, our home, story, services, artists, house band, shows, studio tour, gear, listen, partners, **Our Musical Family**, education, community, posts, special thanks, contact)
+- `artists/` — themed one-page sites: `willie-smith`, `carol-jenkins`, `abby`, `mary`, `brant-the-bluesman-buckley`, `whiskey-and-harmony`, `southside-chicago-blues-band`, `bhr-house-band`
+- `sessions/first-session.html` — "Our First Recording Session" photo story (Picture-Minded, 2024)
+- `styles.css` — main-site design system (dark navy "analog-soul" theme, Fraunces + Inter)
 - `app.js` — header, mobile nav, scroll reveal, lightbox, contact form (pre-filled email)
-- `images/` — web-optimized studio & freelancer photos
-- `favicon.svg`, `404.html`, `robots.txt`, `sitemap.xml`
-
-## Sections
-Hero · At-a-glance · Our Home · Our Story · Services · Recording Artists · Studio Tour · Gear (Studio Resources) · Listen · Team · Education · Community · Posts · Special Thanks · Contact
+- `images/` — web-optimized photos, the real logos, favicons
+- `favicon` / `404.html` / `robots.txt` / `sitemap.xml` / `CNAME`
 
 ## Local preview
-Serve the folder over HTTP (so relative paths and the SVG sprite resolve):
-
 ```
 cd blue-heron-records
-python3 -m http.server 8000
-# open http://localhost:8000
+python3 -m http.server 8000   # open http://localhost:8000
 ```
 
-## Deploy (GitHub Pages)
-Push to `main`; enable Pages on the repo root. The site is built for the project URL
-`https://btabiado.github.io/blue-heron-records/`. When `blueheronrecords.com` is registered,
-switch the canonical/OG/sitemap URLs and add a `CNAME` file.
+## Deploy
+Push to `main`; GitHub Pages rebuilds. Custom domain (`blueheronrecords.com`) and `CNAME` are
+already in place, with canonical/OG/sitemap URLs pointing at the domain and HTTPS enforced.
 
 ## Content status / placeholders
-- **Contact email** is currently `joeleduc@msn.com` — swap to a branded address when ready.
-- **Listen** and **Posts** are tasteful placeholders pending real streaming embeds / blog content.
-- **Artist photos** (Willie Smith, Carol Jenkins) and **owner/some freelancer photos** use a heron
-  monogram placeholder until real images are provided.
-- Equipment list is sourced from the BHR Studio Guide.
+- **Willie Smith** and **Carol Jenkins** have full real bios + photos. Abby, Mary, Brant "The Bluesman"
+  Buckley, and the Southside Chicago Blues Band are roster names with "coming soon" placeholders.
+- **Demo MP3s**, real **streaming/social links**, and **show dates** are placeholders awaiting content.
+- Contact is **Text/Call (630) 926-0446** and **joeleduc@msn.com** (SMS/tel/mailto — no server backend).
 
 © Blue Heron Records.
