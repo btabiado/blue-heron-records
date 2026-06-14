@@ -220,20 +220,41 @@
       var body = encodeURIComponent(lines.join("\n"));
       var mail = "mailto:" + BUSINESS_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + body;
 
-      if (formStatus) {
-        formStatus.hidden = false;
-        formStatus.innerHTML = "Opening your email app with your message ready to send…";
-      }
-      window.location.href = mail;
-
-      setTimeout(function () {
+      function mailtoFallback(prefix) {
         if (formStatus) {
-          formStatus.innerHTML =
-            "<strong>Almost there.</strong> If your email app didn’t open, write to " +
-            '<a href="' + esc(mail) + '">' + BUSINESS_EMAIL + "</a> or call " +
+          formStatus.hidden = false;
+          formStatus.innerHTML = (prefix ? prefix + " " : "") +
+            'Write to <a href="' + esc(mail) + '">' + BUSINESS_EMAIL + "</a> or call " +
             '<a href="tel:+16309260446">(630) 926-0446</a>.';
         }
-      }, 1400);
+        window.location.href = mail;
+      }
+
+      var keyEl = form.querySelector('input[name="access_key"]');
+      var key = keyEl ? keyEl.value : "";
+      if (!key || key.indexOf("YOUR_") === 0) { mailtoFallback(""); return; } // backend key not set yet
+
+      d.set("subject", subject);
+      if (formStatus) { formStatus.hidden = false; formStatus.textContent = "Sending…"; }
+      fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body: d })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j || !j.success) throw new Error("send failed");
+          form.reset();
+          if (formStatus) formStatus.innerHTML = "<strong>Thanks &mdash; your message is on its way!</strong> We&rsquo;ll be in touch soon.";
+        })
+        .catch(function () { mailtoFallback("<strong>Couldn&rsquo;t send automatically.</strong>"); });
+    });
+  }
+
+  /* ---- Newsletter (Buttondown) ---- */
+  var nlForm = document.getElementById("newsletterForm");
+  var nlMsg = document.getElementById("newsletterMsg");
+  if (nlForm) {
+    nlForm.addEventListener("submit", function () {
+      // Native POST goes to the hidden iframe; show an optimistic confirmation.
+      if (nlMsg) { nlMsg.hidden = false; nlMsg.textContent = "Thanks for subscribing! Check your inbox to confirm."; }
+      setTimeout(function () { try { nlForm.reset(); } catch (e) {} }, 400);
     });
   }
 })();

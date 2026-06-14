@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://blueheronrecords.com/images/og.jpg" />
 
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; base-uri 'none'; form-action 'self' mailto: tel:; frame-ancestors 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com; base-uri 'none'; form-action 'self' mailto: tel: https://buttondown.com; frame-src https://buttondown.com; frame-ancestors 'none'" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
@@ -606,10 +606,30 @@
             </select>
           </div>
           <div class="field"><label for="message">Tell us a bit more <span class="req" aria-hidden="true">*</span></label><textarea id="message" name="message" rows="4" required></textarea></div>
+          <!-- Web3Forms: paste Joe's access key from https://web3forms.com (free) to capture submissions; until then it falls back to email. -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px" />
           <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
           <p class="form-note">Opens a pre-filled email to our team &mdash; we reply quickly.</p>
           <div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
         </form>
+      </div>
+    </section>
+    <!-- ===== Newsletter ===== -->
+    <section class="section newsletter" id="newsletter" aria-label="Newsletter signup">
+      <div class="container newsletter-inner reveal">
+        <div class="newsletter-text">
+          <p class="eyebrow">Stay in the loop</p>
+          <h2>New music &amp; show dates</h2>
+          <p>Join the Blue Heron Records list &mdash; an occasional note when there&rsquo;s a new release or a live date. No spam, ever.</p>
+        </div>
+        <!-- Buttondown: replace BUTTONDOWN_USERNAME in the action URL with Joe's Buttondown username. -->
+        <form class="newsletter-form" id="newsletterForm" action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" target="bd-frame">
+          <input type="email" name="email" required placeholder="you@email.com" autocomplete="email" aria-label="Your email address" />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <iframe name="bd-frame" title="Newsletter subscription" tabindex="-1" aria-hidden="true" style="display:none"></iframe>
+        <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
       </div>
     </section>
   </main>

@@ -46,6 +46,13 @@ texts the details to Joe to approve and add).
 }
 ```
 
+## Form backend + newsletter (two keys to plug in)
+- **Contact/Booking form → Web3Forms.** Get a free access key at https://web3forms.com (enter Joe's email; the
+  key is emailed). In `index.html`, replace `YOUR_WEB3FORMS_ACCESS_KEY` (hidden input in the contact form).
+  Until it's set, the form gracefully falls back to opening a pre-filled email.
+- **Newsletter → Buttondown.** Create a free account at https://buttondown.com, then in `index.html` replace
+  `BUTTONDOWN_USERNAME` in the newsletter form's `action` URL with Joe's Buttondown username.
+
 ## Content status / placeholders
 - **Willie Smith** and **Carol Jenkins** have full real bios + photos. Abby, Mary, Brant "The Bluesman"
   Buckley, and the Southside Chicago Blues Band are roster names with "coming soon" placeholders.

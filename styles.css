@@ -378,6 +378,18 @@ a.post-card:hover .post-more { color: var(--moon); }
 .form-status a { color: var(--heron-light); font-weight: 600; text-decoration: underline; }
 .form-status strong { color: var(--cream); }
 
+/* ---------- Newsletter ---------- */
+.newsletter { background: var(--bg-3); border-top: 1px solid var(--line); }
+.newsletter-inner { max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 22px 44px; align-items: center; }
+.newsletter-text h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin-bottom: .3em; }
+.newsletter-text p { color: var(--muted); margin: 0; max-width: 46ch; }
+.newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.newsletter-form input { padding: .85em 1.05em; border: 1.5px solid var(--line-2); border-radius: 999px; background: var(--bg-2); color: var(--cream); font: inherit; min-width: 240px; }
+.newsletter-form input::placeholder { color: var(--muted-2); }
+.newsletter-form input:focus { outline: none; border-color: var(--heron); box-shadow: 0 0 0 3px rgba(111,147,176,.22); }
+.newsletter-msg { grid-column: 1 / -1; margin: 0; color: var(--heron-light); font-weight: 600; }
+@media (max-width: 760px) { .newsletter-inner { grid-template-columns: 1fr; } .newsletter-form { width: 100%; } .newsletter-form input { flex: 1; min-width: 0; } }
+
 /* ---------- Footer ---------- */
 .site-footer { background: #050813; color: var(--muted); padding: 58px 0 26px; border-top: 1px solid var(--line); position: relative; z-index: 2; }
 .footer-inner { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
