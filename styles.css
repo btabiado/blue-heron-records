@@ -232,6 +232,10 @@ strong { color: var(--cream); font-weight: 600; }
 .show-info h4 { margin: 0 0 .15em; font-size: 1.05rem; }
 .show-info p { margin: 0; color: var(--muted); font-size: .92rem; }
 .shows-empty { text-align: center; color: var(--muted); padding: 24px; border: 1px dashed var(--line-2); border-radius: var(--radius); }
+.shows-list { display: grid; gap: 12px; margin-bottom: 22px; }
+.shows-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 18px; }
+.show-ticket { align-self: center; flex: none; font-family: "Inter", sans-serif; font-weight: 600; font-size: .85rem; color: var(--heron-light); border: 1px solid var(--line-2); padding: .6em 1.1em; border-radius: 999px; white-space: nowrap; text-decoration: none; }
+.show-ticket:hover { border-color: var(--heron); color: var(--moon); }
 
 /* ---------- Studio Tour ---------- */
 .studio { background: var(--bg); }

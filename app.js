@@ -143,6 +143,35 @@
     });
   }
 
+  /* ---- Shows / events calendar (data source: events.json) ---- */
+  var showsList = document.getElementById("showsList");
+  var showsEmpty = document.getElementById("showsEmpty");
+  if (showsList) {
+    fetch("events.json", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : { events: [] }; })
+      .then(function (data) {
+        var today = new Date(); today.setHours(0, 0, 0, 0);
+        var events = (data.events || [])
+          .filter(function (e) { return e && e.date && new Date(e.date + "T23:59:59") >= today; })
+          .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+        if (!events.length) return;
+        showsList.innerHTML = events.map(function (e) {
+          var dt = new Date(e.date + "T00:00:00");
+          var mo = isNaN(dt) ? "" : dt.toLocaleString("en-US", { month: "short" }).toUpperCase();
+          var day = isNaN(dt) ? "" : dt.getDate();
+          var meta = [e.venue, e.city, e.time].filter(Boolean).map(esc).join(" &middot; ");
+          var safe = e.ticketUrl && /^https?:\/\//i.test(e.ticketUrl) ? e.ticketUrl : "";
+          var ticket = safe ? '<a class="show-ticket" href="' + esc(safe) + '" target="_blank" rel="noopener">Tickets</a>' : "";
+          return '<div class="show-row"><div class="show-date">' + day + '<span>' + mo + '</span></div>'
+            + '<div class="show-info"><h4>' + esc(e.title || "Live show") + '</h4>'
+            + (meta ? '<p>' + meta + '</p>' : '') + '</div>' + ticket + '</div>';
+        }).join("");
+        showsList.hidden = false;
+        if (showsEmpty) showsEmpty.hidden = true;
+      })
+      .catch(function () {});
+  }
+
   /* ---- Contact form -> pre-filled email ---- */
   var form = document.getElementById("contactForm");
   var formStatus = document.getElementById("formStatus");

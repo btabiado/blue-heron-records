@@ -25,6 +25,27 @@ python3 -m http.server 8000   # open http://localhost:8000
 Push to `main`; GitHub Pages rebuilds. Custom domain (`blueheronrecords.com`) and `CNAME` are
 already in place, with canonical/OG/sitemap URLs pointing at the domain and HTTPS enforced.
 
+## Adding shows (events.json)
+The Shows section is driven by `events.json` — edit that one file (e.g. on GitHub) to manage the calendar.
+Add an object to the `events` array; upcoming events render automatically (past ones drop off), and an
+empty list shows the "no shows yet" state. Visitors can't edit — they can only **Submit a show** (which
+texts the details to Joe to approve and add).
+
+```json
+{
+  "events": [
+    {
+      "date": "2026-08-22",        // required, YYYY-MM-DD
+      "time": "8:00 PM",            // optional
+      "title": "Willie Smith — Live", // act / show name
+      "venue": "FitzGerald's",
+      "city": "Berwyn, IL",
+      "ticketUrl": "https://..."    // optional; must start with http(s)
+    }
+  ]
+}
+```
+
 ## Content status / placeholders
 - **Willie Smith** and **Carol Jenkins** have full real bios + photos. Abby, Mary, Brant "The Bluesman"
   Buckley, and the Southside Chicago Blues Band are roster names with "coming soon" placeholders.
