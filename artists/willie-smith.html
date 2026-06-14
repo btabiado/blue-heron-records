@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Willie Smith — Country / Southern Soul | Blue Heron Records</title>
+  <meta name="description" content="Willie Smith is a country and Southern-soul singer-songwriter on Blue Heron Records — grit and heart in the spirit of Jelly Roll. Listen, follow, and book the act." />
+  <meta name="theme-color" content="#2a1a0e" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Blue Heron Records" />
+  <meta property="og:title" content="Willie Smith — Country / Southern Soul" />
+  <meta property="og:description" content="Singer-songwriter on Blue Heron Records. Country and Southern soul with grit and heart." />
+  <meta property="og:image" content="../images/og.jpg" />
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      /* Warm whiskey-amber + dark walnut wood theme */
+      --walnut-deep:   #1c1209;   /* near-black walnut */
+      --walnut:        #2a1a0e;   /* dark walnut wood */
+      --walnut-soft:   #3a2614;   /* card / panel */
+      --line:          #50381f;   /* warm walnut hairline */
+      --char:          #161310;   /* charcoal */
+      --bourbon:       #d99a3c;   /* bourbon gold */
+      --bourbon-bright:#f0b85a;   /* brighter amber */
+      --amber-glow:    #ffcf7a;
+      --cream:         #f7ecd8;   /* warm paper text */
+      --cream-dim:     #cdb89a;   /* muted warm text */
+      --ink:           #120b04;   /* text on gold */
+      --radius:        16px;
+      --radius-sm:     10px;
+      --maxw:          1080px;
+      --shadow:        0 18px 48px rgba(0,0,0,.55);
+      --ring:          0 0 0 3px rgba(240,184,90,.65);
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *,*::before,*::after{ animation:none !important; transition:none !important; }
+    }
+    body{
+      margin:0;
+      font-family:"Bitter", Georgia, "Times New Roman", serif;
+      color:var(--cream);
+      background:
+        radial-gradient(1200px 700px at 80% -10%, rgba(217,154,60,.12), transparent 60%),
+        radial-gradient(900px 600px at -10% 20%, rgba(217,154,60,.08), transparent 55%),
+        linear-gradient(180deg, var(--walnut) 0%, var(--walnut-deep) 60%, var(--char) 100%);
+      background-attachment:fixed;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    img{ max-width:100%; display:block; }
+    a{ color:var(--bourbon-bright); }
+
+    /* Wood-grain texture overlay */
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      opacity:.06;
+      background-image:repeating-linear-gradient(
+        92deg,
+        rgba(0,0,0,.6) 0px, rgba(0,0,0,.6) 1px,
+        transparent 1px, transparent 7px,
+        rgba(255,255,255,.18) 7px, rgba(255,255,255,.18) 8px,
+        transparent 8px, transparent 19px);
+    }
+
+    /* Accessibility: visible focus */
+    a:focus-visible, button:focus-visible, audio:focus-visible{
+      outline:none;
+      box-shadow:var(--ring);
+      border-radius:8px;
+    }
+    .skip-link{
+      position:absolute; left:-999px; top:0; z-index:200;
+      background:var(--bourbon); color:var(--ink);
+      padding:.7rem 1.1rem; border-radius:0 0 10px 0; font-weight:700;
+      font-family:"Oswald",sans-serif; letter-spacing:.04em;
+    }
+    .skip-link:focus{ left:0; }
+
+    .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:20px; }
+
+    /* ============ HEADER ============ */
+    header.site{
+      position:sticky; top:0; z-index:100;
+      background:rgba(28,18,9,.86);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .bar{
+      display:flex; align-items:center; gap:14px;
+      padding-block:12px; min-height:64px;
+    }
+    .badge{
+      width:42px; height:42px; flex:0 0 auto;
+      border-radius:50%;
+      background:radial-gradient(circle at 50% 35%, #34230f, #120b04);
+      border:1.5px solid var(--bourbon);
+      box-shadow:0 0 0 4px rgba(217,154,60,.12);
+      display:grid; place-items:center; overflow:hidden;
+    }
+    .badge img{ width:78%; height:78%; object-fit:contain; }
+    .bar .who{ display:flex; flex-direction:column; line-height:1.05; }
+    .bar .who .name{
+      font-family:"Oswald",sans-serif; font-weight:700;
+      letter-spacing:.06em; text-transform:uppercase; font-size:1.02rem;
+      color:var(--cream);
+    }
+    .bar .who .sub{ font-size:.72rem; color:var(--cream-dim); letter-spacing:.14em; text-transform:uppercase; }
+    .bar .home{
+      margin-left:auto;
+      font-family:"Oswald",sans-serif; font-weight:600; letter-spacing:.05em;
+      text-transform:uppercase; font-size:.78rem;
+      color:var(--cream-dim); text-decoration:none;
+      padding:.55rem .8rem; border-radius:999px;
+      border:1px solid var(--line);
+      transition:color .2s ease, border-color .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+    .bar .home:hover{ color:var(--ink); background:var(--bourbon); border-color:var(--bourbon); }
+
+    /* ============ HERO ============ */
+    .hero{ padding:48px 0 40px; }
+    .hero-grid{ display:grid; gap:28px; grid-template-columns:1fr; align-items:center; }
+    .eyebrow{
+      font-family:"Oswald",sans-serif; text-transform:uppercase;
+      letter-spacing:.28em; font-size:.74rem; font-weight:600;
+      color:var(--bourbon); margin:0 0 .6rem;
+    }
+    .hero h1{
+      font-family:"Oswald",sans-serif; font-weight:700;
+      text-transform:uppercase; letter-spacing:.01em;
+      font-size:clamp(2.9rem, 11vw, 5.6rem); line-height:.92;
+      margin:0; color:var(--cream);
+      text-shadow:0 2px 0 rgba(0,0,0,.4);
+    }
+    .hero h1 .hi{ color:var(--bourbon-bright); }
+    .tagline{
+      font-style:italic; font-size:clamp(1.05rem,3vw,1.35rem);
+      color:var(--cream-dim); margin:.9rem 0 0; max-width:30ch;
+    }
+    .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:1.8rem; }
+    .btn{
+      font-family:"Oswald",sans-serif; font-weight:600;
+      text-transform:uppercase; letter-spacing:.08em; font-size:.92rem;
+      padding:.95rem 1.6rem; border-radius:999px; text-decoration:none;
+      display:inline-flex; align-items:center; gap:.55rem; border:1.5px solid transparent;
+      transition:transform .15s ease, background .2s ease, box-shadow .2s ease, color .2s ease;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(180deg, var(--bourbon-bright), var(--bourbon));
+      color:var(--ink);
+      box-shadow:0 10px 24px rgba(217,154,60,.28);
+    }
+    .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(217,154,60,.42); }
+    .btn-ghost{
+      background:transparent; color:var(--cream); border-color:var(--line);
+    }
+    .btn-ghost:hover{ border-color:var(--bourbon); color:var(--bourbon-bright); transform:translateY(-2px); }
+
+    /* Themed visual panel (no real photo yet) */
+    .hero-visual{
+      position:relative; aspect-ratio:4/5; width:100%;
+      border-radius:var(--radius); overflow:hidden;
+      border:1px solid var(--line); box-shadow:var(--shadow);
+      background:
+        radial-gradient(120% 90% at 50% 0%, rgba(255,207,122,.22), transparent 55%),
+        linear-gradient(160deg, #3a2614 0%, #241608 55%, #120b04 100%);
+      display:grid; place-items:center;
+    }
+    .hero-visual::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:repeating-linear-gradient(45deg, rgba(0,0,0,.18) 0 2px, transparent 2px 9px);
+      opacity:.4;
+    }
+    .hero-visual .mark{
+      width:58%; max-width:280px; opacity:.92; position:relative; z-index:1;
+      filter:drop-shadow(0 8px 22px rgba(0,0,0,.5));
+    }
+    .hero-visual .placeholder-note{
+      position:absolute; bottom:14px; left:0; right:0; text-align:center; z-index:1;
+      font-family:"Oswald",sans-serif; font-size:.66rem; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--cream-dim);
+    }
+
+    @media (min-width:760px){
+      .hero-grid{ grid-template-columns:1.25fr .9fr; gap:48px; }
+      .hero{ padding:72px 0 56px; }
+    }
+
+    /* ============ SECTIONS ============ */
+    section{ padding:46px 0; border-top:1px solid rgba(80,56,31,.45); }
+    .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 1.4rem; flex-wrap:wrap; }
+    .sec-head h2{
+      font-family:"Oswald",sans-serif; font-weight:700; text-transform:uppercase;
+      letter-spacing:.04em; font-size:clamp(1.7rem,5vw,2.4rem); margin:0; color:var(--cream);
+    }
+    .sec-head h2 .dot{ color:var(--bourbon); }
+    .sec-head .kick{
+      font-family:"Oswald",sans-serif; font-size:.72rem; letter-spacing:.24em;
+      text-transform:uppercase; color:var(--bourbon); align-self:center;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, var(--walnut-soft), rgba(36,22,8,.7));
+      border:1px solid var(--line); border-radius:var(--radius);
+      padding:24px; box-shadow:0 10px 28px rgba(0,0,0,.35);
+    }
+
+    /* About */
+    .about p{ font-size:1.08rem; max-width:60ch; margin:.4rem 0 1rem; }
+    .facts{ display:flex; flex-wrap:wrap; gap:10px; margin-top:.4rem; list-style:none; padding:0; }
+    .facts li{
+      font-family:"Oswald",sans-serif; font-size:.76rem; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--cream);
+      background:rgba(217,154,60,.12); border:1px solid var(--line);
+      padding:.5rem .85rem; border-radius:999px;
+    }
+    .facts li strong{ color:var(--bourbon-bright); font-weight:700; }
+
+    /* Listen */
+    .stream-row{ display:grid; gap:12px; grid-template-columns:1fr; }
+    @media (min-width:560px){ .stream-row{ grid-template-columns:repeat(3,1fr); } }
+    .stream{
+      display:flex; align-items:center; justify-content:center; gap:.6rem;
+      padding:1rem 1.1rem; border-radius:12px; text-decoration:none;
+      font-family:"Oswald",sans-serif; font-weight:600; letter-spacing:.06em;
+      text-transform:uppercase; font-size:.9rem;
+      background:var(--char); color:var(--cream);
+      border:1px solid var(--line);
+      transition:transform .15s ease, border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .stream:hover{ border-color:var(--bourbon); color:var(--bourbon-bright); transform:translateY(-2px); background:#1d150c; }
+    .stream svg{ width:20px; height:20px; flex:0 0 auto; }
+    .coming{
+      display:inline-block; margin-left:.45rem; font-family:"Oswald",sans-serif;
+      font-size:.6rem; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ink); background:var(--bourbon); padding:.12rem .4rem; border-radius:6px;
+      vertical-align:middle;
+    }
+    .player{ margin-top:18px; }
+    .player figcaption{ color:var(--cream-dim); font-size:.9rem; margin-bottom:.6rem; font-style:italic; }
+    audio{ width:100%; filter:sepia(.25) saturate(1.1); }
+    .player .nodemo{
+      margin-top:.7rem; font-size:.82rem; color:var(--cream-dim);
+      font-family:"Oswald",sans-serif; letter-spacing:.06em; text-transform:uppercase;
+    }
+
+    /* Shows */
+    .shows .empty{
+      display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;
+    }
+    .shows .empty .big{
+      font-family:"Oswald",sans-serif; font-weight:600; text-transform:uppercase;
+      letter-spacing:.06em; font-size:1.15rem; color:var(--cream);
+    }
+    .shows .empty .invite{ color:var(--cream-dim); font-size:1rem; max-width:52ch; }
+    .shows .empty .invite a{ font-weight:700; }
+
+    /* Connect */
+    .socials{ display:flex; flex-wrap:wrap; gap:12px; }
+    .social{
+      width:52px; height:52px; border-radius:14px;
+      display:grid; place-items:center;
+      background:var(--char); border:1px solid var(--line); color:var(--cream);
+      transition:transform .15s ease, border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .social:hover{ border-color:var(--bourbon); color:var(--bourbon-bright); transform:translateY(-3px); background:#1d150c; }
+    .social svg{ width:24px; height:24px; }
+    .connect .note{ color:var(--cream-dim); font-size:.86rem; margin-top:1rem; font-style:italic; }
+
+    /* Booking */
+    .booking{ border-top:1px solid rgba(80,56,31,.45); }
+    .booking-card{
+      background:
+        radial-gradient(120% 130% at 100% 0%, rgba(255,207,122,.16), transparent 55%),
+        linear-gradient(160deg, var(--walnut-soft), var(--char));
+      border:1px solid var(--bourbon); border-radius:var(--radius);
+      padding:34px 26px; box-shadow:var(--shadow);
+    }
+    .booking-card h2{
+      font-family:"Oswald",sans-serif; font-weight:700; text-transform:uppercase;
+      letter-spacing:.03em; font-size:clamp(1.9rem,6vw,2.7rem); margin:0 0 .5rem;
+      color:var(--cream);
+    }
+    .booking-card h2 .hi{ color:var(--bourbon-bright); }
+    .booking-card p{ color:var(--cream-dim); max-width:54ch; margin:0 0 1.4rem; font-size:1.05rem; }
+    .booking-row{ display:flex; flex-wrap:wrap; gap:14px; }
+    .booking-row .meta{
+      margin-top:1.4rem; font-size:.88rem; color:var(--cream-dim);
+      font-family:"Bitter",serif;
+    }
+    .booking-row .meta a{ color:var(--bourbon-bright); text-decoration:none; }
+    .booking-row .meta a:hover{ text-decoration:underline; }
+
+    /* ============ FOOTER ============ */
+    footer.site{
+      border-top:1px solid var(--line);
+      background:var(--char);
+      padding:34px 0 44px; margin-top:8px;
+    }
+    .foot{ display:flex; flex-direction:column; gap:14px; align-items:center; text-align:center; }
+    .foot a.family{
+      display:inline-flex; align-items:center; gap:12px; text-decoration:none;
+      color:var(--cream); font-family:"Oswald",sans-serif; letter-spacing:.06em;
+      text-transform:uppercase; font-size:.82rem;
+      padding:.4rem .2rem; border-radius:10px;
+    }
+    .foot a.family:hover .ftxt{ color:var(--bourbon-bright); }
+    .foot .fmark{
+      width:38px; height:38px; border-radius:50%;
+      background:radial-gradient(circle at 50% 35%, #34230f, #120b04);
+      border:1.5px solid var(--bourbon); display:grid; place-items:center; overflow:hidden;
+    }
+    .foot .fmark img{ width:78%; height:78%; object-fit:contain; }
+    .foot .copy{ color:var(--cream-dim); font-size:.78rem; letter-spacing:.04em; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- (a) HEADER -->
+  <header class="site">
+    <div class="wrap bar">
+      <span class="badge" aria-hidden="true">
+        <img src="../images/heron-mark.png" alt="" />
+      </span>
+      <span class="who">
+        <span class="name">Willie Smith</span>
+        <span class="sub">Country &middot; Southern Soul</span>
+      </span>
+      <a class="home" href="../index.html">Blue Heron Records</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- (b) HERO -->
+    <section class="hero" aria-labelledby="artist-name">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Blue Heron Records &mdash; Artist</p>
+          <h1 id="artist-name">Willie <span class="hi">Smith</span></h1>
+          <p class="tagline">Country &amp; Southern soul with grit and heart &mdash; cut from the same cloth as Jelly Roll.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#listen">Listen</a>
+            <a class="btn btn-ghost" href="#booking">Book / Contact</a>
+          </div>
+        </div>
+        <div class="hero-visual" role="img" aria-label="Themed Blue Heron Records placeholder panel for Willie Smith; an artist photo is coming soon.">
+          <img class="mark" src="../images/heron-mark.png" alt="" />
+          <span class="placeholder-note">Artist photo coming soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- (c) ABOUT -->
+    <section id="about" class="about" aria-labelledby="about-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="kick">01</span>
+          <h2 id="about-h">About<span class="dot">.</span></h2>
+        </div>
+        <div class="panel">
+          <p>Willie Smith is a singer-songwriter on Blue Heron Records, working in country and Southern soul &mdash; music with grit and heart that nods to the spirit of Jelly Roll. His original songs were recorded with Blue Heron Records at Picture-Minded Studio.</p>
+          <p style="color:var(--cream-dim);font-style:italic;">Full bio coming soon.</p>
+          <ul class="facts">
+            <li><strong>BMI</strong> &nbsp;Affiliated</li>
+            <li><strong>ASCAP</strong> &nbsp;Affiliated</li>
+            <li>Recorded at <strong>Picture-Minded Studio</strong></li>
+            <li>Country &middot; Southern Soul</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- (d) LISTEN -->
+    <section id="listen" aria-labelledby="listen-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="kick">02</span>
+          <h2 id="listen-h">Listen<span class="dot">.</span></h2>
+        </div>
+
+        <div class="stream-row">
+          <a class="stream" href="#" aria-label="Listen to Willie Smith on Spotify — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.43a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.22c3.81-.87 7.09-.5 9.72 1.11.3.18.39.57.21.86Zm1.23-2.74a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.64-1.1 8.16-.56 11.24 1.33.37.23.49.71.25 1.07Zm.11-2.85C14.82 8.98 9.5 8.8 6.43 9.73a.93.93 0 1 1-.54-1.79c3.52-1.07 9.4-.86 13.11 1.34a.94.94 0 0 1-.96 1.61Z"/></svg>
+            Spotify <span class="coming">soon</span>
+          </a>
+          <a class="stream" href="#" aria-label="Listen to Willie Smith on Apple Music — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3.2 8.9 4.8c-.7.15-1.1.7-1.1 1.4v8.05c-.4-.18-.85-.27-1.35-.27-1.6 0-2.9 1.05-2.9 2.5s1.3 2.5 2.9 2.5 2.9-1.05 2.9-2.5V9.2l6.1-1.28v4.62c-.4-.18-.85-.27-1.35-.27-1.6 0-2.9 1.05-2.9 2.5s1.3 2.5 2.9 2.5 2.9-1.05 2.9-2.5V4.6c0-.95-.78-1.6-1.6-1.4Z"/></svg>
+            Apple Music <span class="coming">soon</span>
+          </a>
+          <a class="stream" href="#" aria-label="Watch Willie Smith on YouTube — link coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 4.9 12 4.9 12 4.9s-7.1 0-8.9.5A3 3 0 0 0 1 7.5 31.3 31.3 0 0 0 .5 12 31.3 31.3 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1 31.3 31.3 0 0 0 .5-4.5 31.3 31.3 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg>
+            YouTube <span class="coming">soon</span>
+          </a>
+        </div>
+
+        <figure class="player panel">
+          <figcaption>Demo track</figcaption>
+          <!-- A demo MP3 will be added here later, e.g. <audio src="../audio/willie-smith-demo.mp3"> -->
+          <audio controls preload="none" aria-label="Willie Smith demo player — audio coming soon">
+            Your browser does not support the audio element.
+          </audio>
+          <p class="nodemo">No demo loaded yet &mdash; a track will be added soon.</p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- (e) SHOWS -->
+    <section id="shows" class="shows" aria-labelledby="shows-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="kick">03</span>
+          <h2 id="shows-h">Upcoming Shows<span class="dot">.</span></h2>
+        </div>
+        <div class="panel empty">
+          <span class="big">No shows announced yet &mdash; check back soon.</span>
+          <span class="invite">Venues &amp; booking agents: want Willie on your stage? <a href="#booking">Get in touch</a> and let&rsquo;s set a date.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- (f) CONNECT -->
+    <section id="connect" class="connect" aria-labelledby="connect-h">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="kick">04</span>
+          <h2 id="connect-h">Connect<span class="dot">.</span></h2>
+        </div>
+        <div class="panel">
+          <div class="socials">
+            <a class="social" href="#" aria-label="Willie Smith on Instagram — link coming soon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a class="social" href="#" aria-label="Willie Smith on Facebook — link coming soon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V7c0-.8.2-1.2 1.3-1.2H17V3h-2.7C11.6 3 11 4.6 11 6.8v1.7H9V11h2v10h3V11h2.3l.3-2.5H14Z"/></svg>
+            </a>
+            <a class="social" href="#" aria-label="Willie Smith on TikTok — link coming soon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.8c-1.3.1-2.5-.3-3.5-1v5.7c0 3.3-2.5 5.6-5.6 5.6A5.4 5.4 0 0 1 5.5 14c0-3 2.6-5.4 5.8-5.1v2.9c-.3-.1-.7-.2-1-.2-1.3 0-2.3 1-2.3 2.4 0 1.3 1 2.4 2.4 2.4 1.4 0 2.4-1 2.4-2.6V3h3.7Z"/></svg>
+            </a>
+            <a class="social" href="#" aria-label="Willie Smith on YouTube — link coming soon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 4.9 12 4.9 12 4.9s-7.1 0-8.9.5A3 3 0 0 0 1 7.5 31.3 31.3 0 0 0 .5 12 31.3 31.3 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1 31.3 31.3 0 0 0 .5-4.5 31.3 31.3 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg>
+            </a>
+          </div>
+          <p class="note">Social links are on the way &mdash; follow along once they go live.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- (g) BOOKING -->
+    <section id="booking" class="booking" aria-labelledby="booking-h">
+      <div class="wrap">
+        <div class="booking-card">
+          <h2 id="booking-h">Book <span class="hi">Willie Smith</span></h2>
+          <p>Booking a venue, festival, or private event? Reach out to Blue Heron Records and we&rsquo;ll get Willie on your calendar.</p>
+          <div class="booking-row">
+            <a class="btn btn-primary" href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Willie%20Smith">Email to Book</a>
+            <a class="btn btn-ghost" href="tel:+16309260446">Call (630) 926-0446</a>
+          </div>
+          <p class="booking-row meta">
+            Blue Heron Records &mdash; Oak Lawn, Illinois<br/>
+            <a href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Willie%20Smith">joeleduc@msn.com</a>
+            &nbsp;&middot;&nbsp;
+            <a href="tel:+16309260446">(630) 926-0446</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- (h) FOOTER -->
+  <footer class="site">
+    <div class="wrap foot">
+      <a class="family" href="../index.html">
+        <span class="fmark" aria-hidden="true"><img src="../images/heron-mark.png" alt="" /></span>
+        <span class="ftxt">Part of the Blue Heron Records family</span>
+      </a>
+      <p class="copy">&copy; 2026 Blue Heron Records. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

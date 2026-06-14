@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Our First Recording Session (2024) | Blue Heron Records</title>
+  <meta name="description" content="A photo story from Blue Heron Records' very first recording session at Picture-Minded Studio in Lemont, Illinois, in 2024 — the day BHR officially became a record company by recording two original songs." />
+  <meta name="theme-color" content="#070b1c" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Blue Heron Records" />
+  <meta property="og:title" content="Our First Recording Session (2024) — Blue Heron Records" />
+  <meta property="og:description" content="The day Blue Heron Records officially became a record company: our first session at Picture-Minded Studio in Lemont, IL, 2024." />
+  <meta property="og:image" content="../images/sessions/session-11.jpg" />
+  <meta property="og:image:alt" content="Four people standing together in front of the Picture-Minded studio sign after the first Blue Heron Records session." />
+
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="../images/sessions/session-11.jpg" fetchpriority="high" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --navy:#070b1c;        /* page background */
+      --panel:#0c1430;       /* panels / cards */
+      --panel-2:#101a3d;     /* raised panel */
+      --cream:#f3f7ef;       /* primary text */
+      --heron:#6f93b0;       /* slate-blue accent */
+      --heron-light:#a8c4d8; /* light accent */
+      --taupe:#5a4a44;       /* warm taupe divider */
+      --muted:#9fb0c4;       /* secondary text */
+      --line:rgba(168,196,216,.16);
+      --radius:18px;
+      --maxw:1180px;
+      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --focus:#a8c4d8;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    }
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(111,147,176,.18), transparent 60%),
+        radial-gradient(900px 520px at 8% 0%, rgba(168,196,216,.10), transparent 55%),
+        var(--navy);
+      color:var(--cream);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+    a{color:var(--heron-light);text-decoration:none}
+    a:hover{color:var(--cream)}
+
+    /* Focus visibility */
+    a:focus-visible,
+    button:focus-visible{
+      outline:3px solid var(--focus);
+      outline-offset:3px;
+      border-radius:8px;
+    }
+
+    .skip-link{
+      position:absolute;left:-999px;top:0;z-index:200;
+      background:var(--cream);color:var(--navy);
+      padding:.7rem 1.1rem;border-radius:0 0 12px 0;font-weight:600;
+    }
+    .skip-link:focus{left:0}
+
+    /* ===== Header ===== */
+    header.site{
+      position:sticky;top:0;z-index:100;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(7,11,28,.82);
+      border-bottom:1px solid var(--line);
+    }
+    .bar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:.7rem 0;
+    }
+    .brand{display:flex;align-items:center;gap:.7rem;min-width:0}
+    .mark{
+      width:44px;height:44px;flex:none;border-radius:50%;
+      background:radial-gradient(circle at 50% 35%, #122152, #070b1c 80%);
+      border:1px solid var(--line);
+      display:grid;place-items:center;overflow:hidden;
+      box-shadow:inset 0 0 18px rgba(168,196,216,.12);
+    }
+    .mark img{width:84%;height:84%;object-fit:contain;display:block}
+    .brand .titles{min-width:0}
+    .kicker{
+      font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+      color:var(--heron);margin:0;font-weight:600;
+    }
+    .brand .name{
+      font-family:Fraunces, Georgia, serif;font-weight:600;
+      font-size:1.02rem;margin:0;line-height:1.1;color:var(--cream);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .home-link{
+      font-size:.84rem;font-weight:600;white-space:nowrap;
+      padding:.5rem .8rem;border:1px solid var(--line);border-radius:999px;
+      color:var(--heron-light);transition:background .2s,border-color .2s;
+    }
+    .home-link:hover{background:rgba(168,196,216,.10);border-color:var(--heron);color:var(--cream)}
+
+    /* ===== Hero ===== */
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .hero-media{position:relative;min-height:clamp(420px,72vh,720px);display:flex;align-items:flex-end}
+    .hero-media img{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+      filter:saturate(105%) contrast(102%);
+    }
+    .hero-scrim{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,11,28,.55) 0%, rgba(7,11,28,.20) 32%, rgba(7,11,28,.72) 78%, rgba(7,11,28,.96) 100%),
+        linear-gradient(90deg, rgba(7,11,28,.62), transparent 55%);
+    }
+    .hero-inner{position:relative;z-index:2;width:100%;padding:0 0 clamp(28px,5vw,56px)}
+    .hero .eyebrow{
+      display:inline-flex;align-items:center;gap:.55rem;
+      font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+      color:var(--navy);background:var(--heron-light);
+      padding:.4rem .8rem;border-radius:999px;margin:0 0 1rem;
+    }
+    .hero h1{
+      font-family:Fraunces, Georgia, serif;font-weight:900;
+      font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.02;margin:0;
+      letter-spacing:-.01em;
+      text-shadow:0 3px 30px rgba(0,0,0,.55);
+      max-width:16ch;
+    }
+    .hero .lede{
+      margin:1rem 0 0;max-width:54ch;font-size:clamp(1.02rem,2.4vw,1.22rem);
+      color:var(--cream);text-shadow:0 2px 18px rgba(0,0,0,.6);
+    }
+    .hero .stamp{
+      display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-top:1.1rem;
+      font-size:.9rem;color:var(--heron-light);font-weight:600;
+    }
+    .hero .stamp span{display:inline-flex;align-items:center;gap:.4rem}
+    .hero .stamp .dot{width:6px;height:6px;border-radius:50%;background:var(--heron)}
+
+    /* ===== Sections ===== */
+    section{padding:clamp(46px,7vw,84px) 0}
+    .section-head{max-width:64ch}
+    .eyebrow-line{
+      display:inline-flex;align-items:center;gap:.6rem;
+      font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+      color:var(--heron);margin:0 0 .8rem;
+    }
+    .eyebrow-line::before{content:"";width:30px;height:2px;background:var(--taupe);display:inline-block}
+    h2{
+      font-family:Fraunces, Georgia, serif;font-weight:700;
+      font-size:clamp(1.7rem,4.2vw,2.7rem);line-height:1.08;margin:0;
+      letter-spacing:-.01em;
+    }
+    .section-head p{color:var(--muted);font-size:1.06rem;margin:.9rem 0 0}
+
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--taupe),transparent);border:0;margin:0}
+
+    /* Story / intro panel */
+    .story{
+      background:linear-gradient(180deg,var(--panel),var(--navy));
+      border:1px solid var(--line);border-radius:var(--radius);
+      padding:clamp(22px,4vw,40px);box-shadow:var(--shadow);
+      display:grid;gap:1.4rem;
+    }
+    .story p{margin:0;color:#dce6f0;font-size:1.05rem}
+    .story .lead{font-size:1.16rem;color:var(--cream)}
+    .facts{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:14px;margin-top:.4rem;
+    }
+    .fact{
+      background:var(--panel-2);border:1px solid var(--line);border-radius:14px;
+      padding:16px 18px;
+    }
+    .fact .k{
+      font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--heron);font-weight:700;margin:0 0 .35rem;
+    }
+    .fact .v{font-family:Fraunces, Georgia, serif;font-weight:600;font-size:1.18rem;margin:0;color:var(--cream)}
+
+    /* ===== Gallery ===== */
+    .gallery{
+      display:grid;gap:16px;
+      grid-template-columns:repeat(12,1fr);
+      grid-auto-flow:dense;
+    }
+    .tile{
+      position:relative;margin:0;overflow:hidden;border-radius:14px;
+      border:1px solid var(--line);background:var(--panel);
+      grid-column:span 6;aspect-ratio:4/3;
+    }
+    .tile.wide{grid-column:span 8}
+    .tile.tall{grid-column:span 4;aspect-ratio:3/4}
+    .tile.full{grid-column:span 12;aspect-ratio:16/9}
+    .tile button.shot{
+      all:unset;display:block;width:100%;height:100%;cursor:pointer;position:relative;
+    }
+    .tile img{
+      width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .5s ease, filter .5s ease;
+      filter:saturate(98%);
+    }
+    .tile button.shot:hover img,
+    .tile button.shot:focus-visible img{transform:scale(1.05);filter:saturate(112%)}
+    .tile button.shot:focus-visible{outline:3px solid var(--focus);outline-offset:-3px;border-radius:14px}
+    .tile figcaption{
+      position:absolute;left:0;right:0;bottom:0;
+      padding:34px 16px 14px;
+      font-size:.9rem;line-height:1.35;color:var(--cream);
+      background:linear-gradient(180deg,transparent,rgba(7,11,28,.92));
+      pointer-events:none;
+    }
+    .tile .zoom-hint{
+      position:absolute;top:12px;right:12px;
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(7,11,28,.72);border:1px solid var(--line);
+      display:grid;place-items:center;color:var(--heron-light);
+      opacity:0;transform:scale(.85);transition:opacity .25s,transform .25s;
+      pointer-events:none;
+    }
+    .tile button.shot:hover .zoom-hint,
+    .tile button.shot:focus-visible .zoom-hint{opacity:1;transform:scale(1)}
+
+    @media (max-width:780px){
+      .tile,.tile.wide,.tile.tall,.tile.full{grid-column:span 12;aspect-ratio:4/3}
+    }
+
+    /* ===== Lightbox ===== */
+    .lightbox{
+      position:fixed;inset:0;z-index:300;
+      display:none;align-items:center;justify-content:center;
+      background:rgba(3,6,16,.94);
+      padding:clamp(12px,3vw,40px);
+    }
+    .lightbox.open{display:flex}
+    .lb-stage{
+      position:relative;max-width:min(1100px,96vw);max-height:92vh;
+      display:flex;flex-direction:column;gap:12px;align-items:center;
+    }
+    .lb-stage img{
+      max-width:100%;max-height:78vh;object-fit:contain;
+      border-radius:12px;border:1px solid var(--line);
+      box-shadow:0 30px 80px rgba(0,0,0,.6);background:var(--navy);
+    }
+    .lb-caption{
+      color:var(--cream);font-size:.96rem;text-align:center;max-width:70ch;margin:0;
+      min-height:1.4em;
+    }
+    .lb-count{color:var(--heron);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+    .lb-btn{
+      all:unset;cursor:pointer;position:absolute;
+      width:50px;height:50px;border-radius:50%;
+      background:rgba(16,26,61,.9);border:1px solid var(--line);
+      display:grid;place-items:center;color:var(--cream);
+      top:50%;transform:translateY(-50%);transition:background .2s,border-color .2s;
+    }
+    .lb-btn:hover{background:var(--heron);color:var(--navy);border-color:var(--heron)}
+    .lb-btn.prev{left:-6px}
+    .lb-btn.next{right:-6px}
+    .lb-close{
+      all:unset;cursor:pointer;position:fixed;top:18px;right:18px;
+      width:46px;height:46px;border-radius:50%;
+      background:rgba(16,26,61,.9);border:1px solid var(--line);
+      display:grid;place-items:center;color:var(--cream);font-size:1.2rem;
+      transition:background .2s;
+    }
+    .lb-close:hover{background:var(--heron);color:var(--navy)}
+    .lb-btn:focus-visible,.lb-close:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+    @media (max-width:560px){
+      .lb-btn{width:42px;height:42px}
+      .lb-btn.prev{left:2px}
+      .lb-btn.next{right:2px}
+    }
+
+    /* CTA to home */
+    .home-cta{
+      background:linear-gradient(135deg,var(--panel-2),var(--panel));
+      border:1px solid var(--line);border-radius:var(--radius);
+      padding:clamp(24px,4vw,44px);text-align:center;box-shadow:var(--shadow);
+    }
+    .home-cta h2{margin-bottom:.6rem}
+    .home-cta p{color:var(--muted);max-width:52ch;margin:0 auto 1.4rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-weight:600;font-size:1rem;padding:.85rem 1.5rem;border-radius:999px;
+      border:1px solid transparent;transition:transform .15s, background .2s, border-color .2s;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--heron-light);color:var(--navy)}
+    .btn-primary:hover{background:var(--cream);color:var(--navy)}
+
+    /* ===== Footer ===== */
+    footer.site{border-top:1px solid var(--line);padding:clamp(34px,5vw,52px) 0;margin-top:10px}
+    .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+    .foot-brand{display:flex;align-items:center;gap:.8rem}
+    .foot-brand .mark{width:50px;height:50px}
+    .foot-brand .txt{font-family:Fraunces, Georgia, serif;font-size:1.02rem;color:var(--cream)}
+    .foot-brand .txt span{display:block;font-family:Inter,sans-serif;font-size:.8rem;color:var(--muted);font-weight:500}
+    .copyright{color:var(--muted);font-size:.85rem}
+    .copyright a{color:var(--heron-light)}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== Header ===== -->
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href="../index.html" aria-label="Blue Heron Records — home">
+        <span class="mark"><img src="../images/heron-mark.png" alt="" /></span>
+        <span class="titles">
+          <span class="kicker">Blue Heron Records</span>
+          <span class="name">Our First Session</span>
+        </span>
+      </a>
+      <a class="home-link" href="../index.html">← Blue Heron Records</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media">
+        <img src="../images/sessions/session-11.jpg"
+             alt="The Blue Heron Records team — a vocalist, a gentleman in a suit, a young engineer, and founder Joe LeDuc — standing together in front of the Picture-Minded studio sign." />
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <div class="wrap">
+            <p class="eyebrow">Picture-Minded Studio · Lemont, IL</p>
+            <h1 id="hero-title">Our First Recording Session</h1>
+            <p class="lede">The day Blue Heron Records officially became a record company — tracking our first two original songs in 2024.</p>
+            <p class="stamp">
+              <span><span class="dot" aria-hidden="true"></span>2024</span>
+              <span><span class="dot" aria-hidden="true"></span>Two original songs</span>
+              <span><span class="dot" aria-hidden="true"></span>11 photos</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Story ===== -->
+    <section aria-labelledby="story-title">
+      <div class="wrap">
+        <div class="section-head" style="margin-bottom:1.8rem">
+          <p class="eyebrow-line">The story</p>
+          <h2 id="story-title">Where it all began</h2>
+        </div>
+        <div class="story">
+          <p class="lead">In 2024, Blue Heron Records walked into Picture-Minded Studio in Lemont, Illinois, and recorded its very first session — the moment BHR officially became a record company.</p>
+          <p>We tracked two original songs that day, with founder and producer Joe LeDuc behind it all. These photos capture the people, the room, and the energy of a label's first day on the record.</p>
+          <div class="facts">
+            <div class="fact"><p class="k">Year</p><p class="v">2024</p></div>
+            <div class="fact"><p class="k">Studio</p><p class="v">Picture-Minded</p></div>
+            <div class="fact"><p class="k">Location</p><p class="v">Lemont, IL</p></div>
+            <div class="fact"><p class="k">Recorded</p><p class="v">Two originals</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ===== Gallery ===== -->
+    <section aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head" style="margin-bottom:1.8rem">
+          <p class="eyebrow-line">The session, frame by frame</p>
+          <h2 id="gallery-title">Photo story</h2>
+          <p>Select any photo to view it larger. Use the arrow keys or the on-screen controls to move through the gallery, and press Escape to close.</p>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <!-- tiles are generated from the data list below; this static markup is the no-JS fallback and the source of truth -->
+
+          <figure class="tile wide">
+            <button class="shot" type="button" data-index="0" aria-label="Enlarge: a Blue Heron Records artist and founder Joe LeDuc sitting together on the studio couch, smiling.">
+              <img src="../images/sessions/session-01.jpg" loading="lazy"
+                   alt="A Blue Heron Records artist and founder Joe LeDuc sitting together on the studio couch, smiling." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>An artist and Joe LeDuc on the studio couch.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile tall">
+            <button class="shot" type="button" data-index="1" aria-label="Enlarge: a vocalist recording at the condenser microphone.">
+              <img src="../images/sessions/session-09.jpg" loading="lazy"
+                   alt="A vocalist recording at the condenser microphone." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>At the condenser mic.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="2" aria-label="Enlarge: an engineer working at the Pro Tools desk in the Picture-Minded control room.">
+              <img src="../images/sessions/session-02.jpg" loading="lazy"
+                   alt="An engineer working at the Pro Tools desk in the Picture-Minded control room." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>The Pro Tools desk.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="3" aria-label="Enlarge: engineers at work in the Picture-Minded control room.">
+              <img src="../images/sessions/session-03.jpg" loading="lazy"
+                   alt="Engineers at work in the Picture-Minded control room." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>In the control room.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="4" aria-label="Enlarge: a drummer tracking during the session.">
+              <img src="../images/sessions/session-04.jpg" loading="lazy"
+                   alt="A drummer tracking during the session." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>Tracking drums.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="5" aria-label="Enlarge: a vocalist at the microphone with an engineer.">
+              <img src="../images/sessions/session-05.jpg" loading="lazy"
+                   alt="A vocalist at the microphone with an engineer." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>Vocals, with the engineer.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile tall">
+            <button class="shot" type="button" data-index="6" aria-label="Enlarge: a producer at the console.">
+              <img src="../images/sessions/session-06.jpg" loading="lazy"
+                   alt="A producer at the console." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>At the console.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="7" aria-label="Enlarge: a vocalist with a notebook, focused.">
+              <img src="../images/sessions/session-07.jpg" loading="lazy"
+                   alt="A vocalist with a notebook, focused." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>Lyrics and a notebook.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile">
+            <button class="shot" type="button" data-index="8" aria-label="Enlarge: a candid portrait during the session.">
+              <img src="../images/sessions/session-08.jpg" loading="lazy"
+                   alt="A candid portrait during the session." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>A candid moment.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile wide">
+            <button class="shot" type="button" data-index="9" aria-label="Enlarge: a vocalist behind the booth glass.">
+              <img src="../images/sessions/session-10.jpg" loading="lazy"
+                   alt="A vocalist behind the booth glass." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>Behind the booth glass.</figcaption>
+            </button>
+          </figure>
+
+          <figure class="tile tall">
+            <button class="shot" type="button" data-index="10" aria-label="Enlarge: the team in front of the Picture-Minded studio sign after the session.">
+              <img src="../images/sessions/session-11.jpg" loading="lazy"
+                   alt="The team — a vocalist, a gentleman in a suit, a young engineer, and Joe LeDuc — in front of the Picture-Minded studio sign." />
+              <span class="zoom-hint" aria-hidden="true">⤢</span>
+              <figcaption>The team at the Picture-Minded sign.</figcaption>
+            </button>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ===== Back-home CTA ===== -->
+    <section aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="home-cta">
+          <p class="eyebrow-line" style="justify-content:center">From the studio to the stage</p>
+          <h2 id="cta-title">Meet the Blue Heron Records family</h2>
+          <p>This is just the beginning. Explore the label and the artists we record, support, and promote.</p>
+          <a class="btn btn-primary" href="../index.html">Visit Blue Heron Records →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Lightbox ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lb-close" id="lbClose" type="button" aria-label="Close photo viewer">✕</button>
+    <button class="lb-btn prev" id="lbPrev" type="button" aria-label="Previous photo">‹</button>
+    <div class="lb-stage">
+      <p class="lb-count" id="lbCount"></p>
+      <img id="lbImg" src="" alt="" />
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+    <button class="lb-btn next" id="lbNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site">
+    <div class="wrap foot">
+      <a class="foot-brand" href="../index.html" aria-label="Blue Heron Records — home">
+        <span class="mark"><img src="../images/heron-mark.png" alt="Blue Heron Records heron-and-moon mark" /></span>
+        <span class="txt">Part of the Blue Heron Records family
+          <span>Oak Lawn, Illinois</span>
+        </span>
+      </a>
+      <p class="copyright">© 2026 Blue Heron Records · <a href="../index.html">blueheronrecords.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      "use strict";
+
+      // Build the ordered photo list straight from the gallery DOM so the
+      // lightbox and the visible grid can never drift out of sync.
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('#gallery .shot'));
+      var photos = buttons.map(function(btn){
+        var img = btn.querySelector('img');
+        return { src: img.getAttribute('src'), alt: img.getAttribute('alt') };
+      });
+
+      var lb       = document.getElementById('lightbox');
+      var lbImg    = document.getElementById('lbImg');
+      var lbCap    = document.getElementById('lbCaption');
+      var lbCount  = document.getElementById('lbCount');
+      var btnClose = document.getElementById('lbClose');
+      var btnPrev  = document.getElementById('lbPrev');
+      var btnNext  = document.getElementById('lbNext');
+
+      var current = 0;
+      var lastFocused = null;
+
+      function show(i){
+        current = (i + photos.length) % photos.length;
+        var p = photos[current];
+        lbImg.setAttribute('src', p.src);
+        lbImg.setAttribute('alt', p.alt);
+        lbCap.textContent = p.alt;
+        lbCount.textContent = 'Photo ' + (current + 1) + ' of ' + photos.length;
+      }
+
+      function open(i){
+        lastFocused = document.activeElement;
+        show(i);
+        lb.hidden = false;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        btnClose.focus();
+        document.addEventListener('keydown', onKey);
+      }
+
+      function close(){
+        lb.classList.remove('open');
+        lb.hidden = true;
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKey);
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      function onKey(e){
+        if (e.key === 'Escape')      { close(); }
+        else if (e.key === 'ArrowRight') { show(current + 1); }
+        else if (e.key === 'ArrowLeft')  { show(current - 1); }
+        else if (e.key === 'Tab')    { trapFocus(e); }
+      }
+
+      // Keep keyboard focus inside the dialog while it is open.
+      function trapFocus(e){
+        var focusables = [btnClose, btnPrev, btnNext];
+        var first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          open(parseInt(btn.getAttribute('data-index'), 10) || 0);
+        });
+      });
+
+      btnClose.addEventListener('click', close);
+      btnPrev.addEventListener('click', function(){ show(current - 1); });
+      btnNext.addEventListener('click', function(){ show(current + 1); });
+      lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    })();
+  </script>
+</body>
+</html>

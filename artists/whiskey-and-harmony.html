@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Whiskey &amp; Harmony — Americana / Country Duo | Blue Heron Records</title>
+<meta name="description" content="Whiskey &amp; Harmony — the husband-and-wife Americana &amp; country duo Sarah &amp; Craig Hauge. Listen, follow, and book the act. An artist of Blue Heron Records." />
+<meta name="theme-color" content="#3a2415" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="music.musician" />
+<meta property="og:title" content="Whiskey &amp; Harmony — Americana / Country Duo" />
+<meta property="og:description" content="The husband-and-wife Americana &amp; country duo Sarah &amp; Craig Hauge. An artist of Blue Heron Records." />
+<meta property="og:image" content="../images/whiskey-harmony.jpg" />
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+<!-- Google Fonts: rustic display + clean body -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Cardo:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============================================================
+     WHISKEY & HARMONY — rustic sepia / aged leather / bourbon gold
+     Distinct artist theme. Self-contained. Vanilla only.
+     ============================================================ */
+  :root{
+    --paper:        #f3e9d6;   /* aged paper / parchment */
+    --paper-2:      #e8d7ba;
+    --ink:          #2b1c10;   /* dark walnut ink */
+    --ink-soft:     #5a4329;
+    --leather:      #3a2415;   /* aged leather brown */
+    --leather-2:    #51331d;
+    --leather-deep: #281708;
+    --bourbon:      #c4862c;   /* bourbon gold */
+    --bourbon-lt:   #e2ad53;
+    --bourbon-deep: #9c6515;
+    --rust:         #8a4b25;   /* rustic sepia accent */
+    --cream:        #f7efe0;
+    --line:         rgba(58,36,21,.22);
+    --line-gold:    rgba(196,134,44,.45);
+    --shadow:       0 14px 40px rgba(40,23,8,.30);
+    --shadow-sm:    0 6px 18px rgba(40,23,8,.20);
+    --radius:       14px;
+    --radius-lg:    22px;
+    --maxw:         1120px;
+    --focus:        #1f4a4a;   /* deep teal focus, reads against warm palette */
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+    }
+  }
+
+  body{
+    margin:0;
+    font-family:"Cardo", Georgia, "Times New Roman", serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    /* subtle layered parchment + leather grain via gradients (no external img) */
+    background-image:
+      radial-gradient(900px 500px at 12% -8%, rgba(196,134,44,.18), transparent 60%),
+      radial-gradient(1100px 700px at 100% 0%, rgba(138,75,37,.14), transparent 55%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+    background-attachment:fixed;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color:var(--rust); }
+
+  /* ---- Focus visibility (AA, clearly visible) ---- */
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible,
+  audio:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---- Skip link ---- */
+  .skip-link{
+    position:absolute; left:12px; top:-60px;
+    background:var(--leather); color:var(--cream);
+    padding:.6rem 1rem; border-radius:0 0 10px 10px;
+    z-index:200; font-family:"Oswald",sans-serif; letter-spacing:.04em;
+    transition:top .2s ease;
+  }
+  .skip-link:focus{ top:0; }
+
+  .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(1rem,4vw,2.25rem); }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .site-header{
+    position:sticky; top:0; z-index:100;
+    background:linear-gradient(180deg, rgba(40,23,8,.96), rgba(40,23,8,.9));
+    border-bottom:1px solid var(--line-gold);
+    backdrop-filter:saturate(140%) blur(6px);
+  }
+  .header-inner{
+    display:flex; align-items:center; gap:.85rem;
+    padding-block:.6rem;
+  }
+  .brand-badge{
+    width:42px; height:42px; flex:0 0 auto;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 38%, #0a1230, #000120 70%);
+    border:1.5px solid var(--bourbon);
+    display:grid; place-items:center; overflow:hidden;
+    box-shadow:0 0 0 3px rgba(196,134,44,.18);
+  }
+  .brand-badge img{ width:86%; height:86%; object-fit:contain; }
+  .header-artist{
+    font-family:"Rye", "Oswald", serif;
+    font-weight:400;
+    color:var(--cream);
+    font-size:clamp(1rem,2.4vw,1.35rem);
+    letter-spacing:.02em;
+    line-height:1.05;
+    margin:0;
+  }
+  .header-artist .amp{ color:var(--bourbon-lt); }
+  .header-spacer{ flex:1 1 auto; }
+  .home-link{
+    font-family:"Oswald", sans-serif;
+    font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--paper-2); text-decoration:none;
+    border:1px solid var(--line-gold); border-radius:999px;
+    padding:.4rem .85rem; white-space:nowrap;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .home-link:hover{ background:var(--bourbon); color:var(--leather-deep); border-color:var(--bourbon); }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(700px 360px at 80% 18%, rgba(196,134,44,.28), transparent 60%),
+      linear-gradient(160deg, var(--leather) 0%, var(--leather-deep) 100%);
+    color:var(--cream);
+    border-bottom:3px solid var(--bourbon-deep);
+    overflow:hidden;
+  }
+  /* faint hand-bill rule texture */
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:repeating-linear-gradient(135deg, rgba(247,239,224,.035) 0 2px, transparent 2px 9px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,4vw,3rem);
+    align-items:center;
+    padding-block:clamp(2.4rem,7vw,4.5rem);
+    position:relative; z-index:1;
+  }
+  @media (min-width:860px){
+    .hero-inner{ grid-template-columns:1.05fr .95fr; }
+  }
+
+  .eyebrow{
+    font-family:"Oswald", sans-serif;
+    text-transform:uppercase; letter-spacing:.3em;
+    font-size:.72rem; font-weight:600;
+    color:var(--bourbon-lt);
+    margin:0 0 .9rem;
+    display:flex; align-items:center; gap:.7rem;
+  }
+  .eyebrow::after{ content:""; height:1px; flex:1; background:linear-gradient(90deg,var(--line-gold),transparent); }
+
+  .hero-title{
+    font-family:"Rye", serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,8.5vw,5rem);
+    line-height:.98;
+    margin:0;
+    color:var(--cream);
+    text-shadow:0 3px 0 rgba(0,0,0,.35), 0 0 30px rgba(196,134,44,.25);
+  }
+  .hero-title .amp{
+    display:block;
+    font-size:.62em;
+    color:var(--bourbon-lt);
+    font-style:italic;
+    margin:.05em 0;
+    -webkit-text-fill-color:var(--bourbon-lt);
+  }
+  .hero-tagline{
+    font-family:"Cardo", serif; font-style:italic;
+    font-size:clamp(1.05rem,2.6vw,1.4rem);
+    color:var(--paper-2);
+    margin:1.1rem 0 0;
+    max-width:34ch;
+  }
+  .hero-tagline strong{ color:var(--bourbon-lt); font-style:normal; font-weight:700; }
+
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.8rem; }
+
+  .btn{
+    font-family:"Oswald", sans-serif;
+    font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    font-size:.85rem;
+    text-decoration:none; cursor:pointer;
+    display:inline-flex; align-items:center; gap:.55rem;
+    padding:.85rem 1.5rem; border-radius:999px;
+    border:2px solid transparent;
+    transition:transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .btn:active{ transform:translateY(1px); }
+  .btn-primary{
+    background:linear-gradient(180deg, var(--bourbon-lt), var(--bourbon));
+    color:var(--leather-deep);
+    box-shadow:0 8px 20px rgba(196,134,44,.35);
+  }
+  .btn-primary:hover{ background:var(--bourbon-lt); box-shadow:0 10px 26px rgba(196,134,44,.5); }
+  .btn-ghost{
+    background:transparent; color:var(--cream);
+    border-color:var(--bourbon-lt);
+  }
+  .btn-ghost:hover{ background:rgba(226,173,83,.14); }
+
+  /* hero visual = the duo's logo (real asset) */
+  .hero-visual{
+    position:relative;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    background:linear-gradient(160deg, #1c0f05, #2b1809);
+    border:2px solid var(--bourbon-deep);
+    box-shadow:var(--shadow);
+    padding:clamp(1rem,3vw,1.6rem);
+    display:grid; place-items:center;
+  }
+  .hero-visual::after{
+    content:""; position:absolute; inset:0;
+    box-shadow:inset 0 0 70px rgba(0,0,0,.55);
+    pointer-events:none; border-radius:inherit;
+  }
+  .hero-visual img{
+    width:100%; height:auto;
+    border-radius:12px;
+    filter:saturate(1.05) contrast(1.02);
+  }
+  .hero-credit{
+    position:relative; z-index:1;
+    margin-top:.7rem; text-align:center;
+    font-family:"Oswald",sans-serif; font-size:.66rem;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:var(--bourbon-lt); opacity:.85;
+  }
+
+  /* ============================================================
+     SECTIONS (shared)
+     ============================================================ */
+  main section{ padding-block:clamp(2.6rem,6vw,4.2rem); }
+  section + section{ border-top:1px solid var(--line); }
+
+  .sec-kicker{
+    font-family:"Oswald", sans-serif;
+    text-transform:uppercase; letter-spacing:.26em;
+    font-size:.72rem; font-weight:600;
+    color:var(--bourbon-deep);
+    margin:0 0 .5rem;
+  }
+  .sec-title{
+    font-family:"Rye", serif; font-weight:400;
+    font-size:clamp(1.7rem,4.6vw,2.6rem);
+    line-height:1.05;
+    margin:0 0 1.2rem;
+    color:var(--leather);
+  }
+  .sec-title .amp{ color:var(--rust); }
+
+  /* ---- About ---- */
+  .about-grid{ display:grid; gap:2rem; }
+  @media (min-width:760px){ .about-grid{ grid-template-columns:1.4fr .9fr; align-items:start; } }
+  .about-body p{ font-size:1.12rem; margin:0 0 1rem; max-width:62ch; }
+  .about-body p:last-child{ margin-bottom:0; }
+  .placeholder-note{
+    font-style:italic; color:var(--ink-soft);
+  }
+  .member-card{
+    background:linear-gradient(180deg, var(--cream), #efe2cb);
+    border:1px solid var(--line-gold);
+    border-radius:var(--radius);
+    padding:1.4rem 1.5rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .member-card h3{
+    font-family:"Oswald",sans-serif; text-transform:uppercase;
+    letter-spacing:.1em; font-size:.78rem; color:var(--bourbon-deep);
+    margin:0 0 .9rem;
+  }
+  .member-card ul{ list-style:none; margin:0; padding:0; }
+  .member-card li{
+    display:flex; align-items:center; gap:.7rem;
+    font-family:"Cardo",serif; font-size:1.15rem; padding:.4rem 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .member-card li:last-child{ border-bottom:0; }
+  .member-card li .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bourbon); flex:0 0 auto;
+    box-shadow:0 0 0 3px rgba(196,134,44,.2);
+  }
+  .member-card .role{ color:var(--ink-soft); font-size:.95rem; margin-left:auto; font-style:italic; }
+
+  /* ---- Listen ---- */
+  .stream-row{ display:flex; flex-wrap:wrap; gap:.9rem; margin:0 0 1.8rem; }
+  .stream-btn{
+    flex:1 1 180px;
+    display:flex; align-items:center; gap:.7rem;
+    text-decoration:none;
+    font-family:"Oswald",sans-serif; font-weight:600;
+    letter-spacing:.05em; text-transform:uppercase; font-size:.84rem;
+    color:var(--cream);
+    background:linear-gradient(180deg,var(--leather-2),var(--leather));
+    border:1px solid var(--bourbon-deep);
+    border-radius:12px;
+    padding:.95rem 1.15rem;
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+    position:relative;
+  }
+  .stream-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-sm); background:linear-gradient(180deg,var(--rust),var(--leather-2)); }
+  .stream-btn .ico{ width:24px; height:24px; flex:0 0 auto; }
+  .stream-btn .soon{
+    margin-left:auto;
+    font-size:.6rem; letter-spacing:.12em;
+    color:var(--leather-deep);
+    background:var(--bourbon-lt);
+    border-radius:999px; padding:.16rem .5rem;
+    font-weight:700;
+  }
+
+  .player{
+    background:linear-gradient(180deg,var(--cream),#efe2cb);
+    border:1px solid var(--line-gold);
+    border-radius:var(--radius);
+    padding:1.3rem 1.4rem;
+    box-shadow:var(--shadow-sm);
+    max-width:640px;
+  }
+  .player h3{
+    font-family:"Oswald",sans-serif; text-transform:uppercase;
+    letter-spacing:.1em; font-size:.78rem; color:var(--bourbon-deep);
+    margin:0 0 .8rem;
+  }
+  .player audio{ width:100%; }
+  .player .demo-note{ margin:.8rem 0 0; font-style:italic; color:var(--ink-soft); font-size:.98rem; }
+
+  /* ---- Shows ---- */
+  .shows-card{
+    background:
+      repeating-linear-gradient(0deg, rgba(58,36,21,.04) 0 26px, transparent 26px 27px),
+      linear-gradient(180deg,var(--cream),#efe2cb);
+    border:1px dashed var(--bourbon-deep);
+    border-radius:var(--radius);
+    padding:2rem 1.6rem;
+    text-align:center;
+    box-shadow:var(--shadow-sm);
+    max-width:680px;
+  }
+  .shows-card .marquee{
+    font-family:"Rye",serif; font-size:clamp(1.3rem,4vw,1.9rem);
+    color:var(--leather); margin:0 0 .5rem;
+  }
+  .shows-card p{ margin:.4rem auto 0; max-width:46ch; font-size:1.08rem; }
+  .shows-card .booking-line{ margin-top:1.1rem; }
+  .shows-card .booking-line a{ color:var(--rust); font-weight:700; }
+
+  /* ---- Connect ---- */
+  .social-row{ display:flex; flex-wrap:wrap; gap:.9rem; }
+  .social-btn{
+    width:58px; height:58px;
+    display:grid; place-items:center;
+    border-radius:14px;
+    background:linear-gradient(180deg,var(--leather-2),var(--leather));
+    border:1px solid var(--bourbon-deep);
+    color:var(--cream); text-decoration:none;
+    transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
+  }
+  .social-btn:hover{ transform:translateY(-2px); background:linear-gradient(180deg,var(--rust),var(--leather-2)); box-shadow:var(--shadow-sm); }
+  .social-btn svg{ width:26px; height:26px; }
+  .social-note{ margin:1.1rem 0 0; font-style:italic; color:var(--ink-soft); }
+
+  /* ---- Booking ---- */
+  #booking{
+    background:
+      radial-gradient(600px 300px at 85% 10%, rgba(196,134,44,.22), transparent 60%),
+      linear-gradient(160deg, var(--leather) 0%, var(--leather-deep) 100%);
+    color:var(--cream);
+    border-top:3px solid var(--bourbon-deep);
+  }
+  #booking .sec-kicker{ color:var(--bourbon-lt); }
+  #booking .sec-title{ color:var(--cream); }
+  #booking .sec-title .amp{ color:var(--bourbon-lt); }
+  .book-lead{ font-size:1.15rem; color:var(--paper-2); max-width:56ch; margin:0 0 1.6rem; }
+  .book-cta{ display:flex; flex-wrap:wrap; gap:.9rem; align-items:center; }
+  .book-cta .btn-mail{
+    background:linear-gradient(180deg,var(--bourbon-lt),var(--bourbon));
+    color:var(--leather-deep);
+    box-shadow:0 8px 20px rgba(196,134,44,.35);
+  }
+  .book-cta .btn-mail:hover{ background:var(--bourbon-lt); }
+  .book-cta .btn-tel{
+    background:transparent; color:var(--cream); border-color:var(--bourbon-lt);
+  }
+  .book-cta .btn-tel:hover{ background:rgba(226,173,83,.14); }
+  .book-meta{
+    margin-top:1.4rem; font-family:"Oswald",sans-serif;
+    font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--paper-2); opacity:.85;
+  }
+  .book-meta a{ color:var(--bourbon-lt); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .site-footer{
+    background:var(--leather-deep);
+    color:var(--paper-2);
+    padding-block:2.4rem;
+    text-align:center;
+  }
+  .footer-family{
+    display:inline-flex; align-items:center; gap:.8rem;
+    text-decoration:none; color:var(--cream);
+    font-family:"Cardo",serif; font-style:italic; font-size:1.1rem;
+    padding:.4rem .6rem; border-radius:12px;
+    transition:background .2s ease;
+  }
+  .footer-family:hover{ background:rgba(196,134,44,.12); }
+  .footer-mark{
+    width:40px; height:40px; border-radius:50%;
+    background:radial-gradient(circle at 50% 38%, #0a1230, #000120 70%);
+    border:1.5px solid var(--bourbon);
+    display:grid; place-items:center; overflow:hidden;
+    flex:0 0 auto;
+  }
+  .footer-mark img{ width:86%; height:86%; object-fit:contain; }
+  .footer-copy{
+    margin-top:1rem; font-size:.8rem; letter-spacing:.04em;
+    color:rgba(243,233,214,.6);
+    font-family:"Oswald",sans-serif;
+  }
+  .footer-copy a{ color:var(--bourbon-lt); text-decoration:none; }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <span class="brand-badge" aria-hidden="true">
+        <img src="../images/heron-mark.png" alt="" />
+      </span>
+      <p class="header-artist">Whiskey <span class="amp">&amp;</span> Harmony</p>
+      <span class="header-spacer"></span>
+      <a class="home-link" href="../index.html">Blue Heron Records</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Blue Heron Records&nbsp;·&nbsp;Recording Artist</p>
+        <h1 class="hero-title" id="hero-title">
+          Whiskey
+          <span class="amp">&amp;</span>
+          Harmony
+        </h1>
+        <p class="hero-tagline">
+          A husband-and-wife <strong>Americana &amp; country</strong> duo —
+          Sarah &amp; Craig Hauge, two voices and one shared road.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#listen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Listen
+          </a>
+          <a class="btn btn-ghost" href="#booking">Book / Contact</a>
+        </div>
+      </div>
+
+      <!-- Real asset: the duo's logo (leather vests + vintage ribbon mic) -->
+      <figure class="hero-visual">
+        <img src="../images/whiskey-harmony.jpg"
+             alt="Whiskey &amp; Harmony logo: two fringed-leather vests flanking a vintage ribbon microphone." />
+        <figcaption class="hero-credit">Whiskey &amp; Harmony</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <p class="sec-kicker">About the Act</p>
+        <h2 class="sec-title" id="about-title">Two voices, one front porch</h2>
+        <div class="about-grid">
+          <div class="about-body">
+            <p>
+              Whiskey &amp; Harmony is the husband-and-wife Americana and country duo
+              <strong>Sarah &amp; Craig Hauge</strong>.
+            </p>
+            <p class="placeholder-note">
+              Full bio coming soon. Check back for the story behind the duo, their
+              influences, and what to expect from a live set.
+            </p>
+          </div>
+          <aside class="member-card" aria-label="The duo">
+            <h3>The Duo</h3>
+            <ul>
+              <li><span class="dot" aria-hidden="true"></span>Sarah Hauge <span class="role">vocals</span></li>
+              <li><span class="dot" aria-hidden="true"></span>Craig Hauge <span class="role">vocals</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LISTEN ============ -->
+    <section id="listen" aria-labelledby="listen-title">
+      <div class="wrap">
+        <p class="sec-kicker">Press Play</p>
+        <h2 class="sec-title" id="listen-title">Listen</h2>
+
+        <div class="stream-row">
+          <a class="stream-btn" href="#" aria-label="Whiskey &amp; Harmony on Spotify — coming soon">
+            <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.59 14.43a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.21c3.81-.87 7.08-.5 9.72 1.11.29.18.39.57.21.85zm1.22-2.72a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.37.23.49.71.25 1.07zm.1-2.83C14.79 9.16 9.4 8.96 6.3 9.9a.93.93 0 1 1-.54-1.78c3.56-1.08 9.51-.87 13.26 1.36a.93.93 0 1 1-.95 1.6z"/></svg>
+            Spotify
+            <span class="soon" aria-hidden="true">Soon</span>
+          </a>
+          <a class="stream-btn" href="#" aria-label="Whiskey &amp; Harmony on Apple Music — coming soon">
+            <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3.2 9 4.8a1.4 1.4 0 0 0-1.1 1.37v8.36a3 3 0 1 0 1.6 2.65V9.1l6.4-1.36v5.06a3 3 0 1 0 1.6 2.65V4.55a1.4 1.4 0 0 0-1.5-1.35z"/></svg>
+            Apple Music
+            <span class="soon" aria-hidden="true">Soon</span>
+          </a>
+          <a class="stream-btn" href="#" aria-label="Whiskey &amp; Harmony on YouTube — coming soon">
+            <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.3 5.1 12 5.1 12 5.1s-7.3 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77c1.53.43 8.83.43 8.83.43s7.3 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12zM9.75 15.02V8.98L15 12z"/></svg>
+            YouTube
+            <span class="soon" aria-hidden="true">Soon</span>
+          </a>
+        </div>
+
+        <div class="player">
+          <h3>Demo Track</h3>
+          <!--
+            DEMO MP3 PLACEHOLDER:
+            A demo track will be added later. When ready, set the <source> src
+            to the MP3 path, e.g. <source src="../audio/whiskey-harmony-demo.mp3" type="audio/mpeg">,
+            and remove the aria-disabled / muted-state note below.
+          -->
+          <audio controls preload="none" aria-label="Whiskey &amp; Harmony demo track (coming soon)">
+            <!-- <source src="../audio/whiskey-harmony-demo.mp3" type="audio/mpeg"> -->
+            Your browser does not support the audio element.
+          </audio>
+          <p class="demo-note">A demo track is on the way — check back soon to give it a spin.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHOWS ============ -->
+    <section id="shows" aria-labelledby="shows-title">
+      <div class="wrap">
+        <p class="sec-kicker">On the Road</p>
+        <h2 class="sec-title" id="shows-title">Upcoming Shows</h2>
+        <div class="shows-card">
+          <p class="marquee">No shows announced yet</p>
+          <p>Check back soon — dates will be posted here as they're booked.</p>
+          <p class="booking-line">
+            Venues &amp; booking agents:
+            <a href="#booking">get in touch about a date</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONNECT ============ -->
+    <section id="connect" aria-labelledby="connect-title">
+      <div class="wrap">
+        <p class="sec-kicker">Follow Along</p>
+        <h2 class="sec-title" id="connect-title">Connect</h2>
+        <nav class="social-row" aria-label="Whiskey and Harmony social links">
+          <a class="social-btn" href="#" aria-label="Whiskey &amp; Harmony on Instagram — coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.52.01-4.76.07-.9.04-1.39.2-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.12.32-.28.81-.32 1.71C3.21 8.48 3.2 8.85 3.2 12s.01 3.52.07 4.76c.04.9.2 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.12.81.28 1.71.32 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.39-.2 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.12-.32.28-.81.32-1.71.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.2-1.39-.32-1.71a2.86 2.86 0 0 0-.69-1.06 2.86 2.86 0 0 0-1.06-.69c-.32-.12-.81-.28-1.71-.32C15.52 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm5.14-2.94a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Whiskey &amp; Harmony on Facebook — coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Whiskey &amp; Harmony on TikTok — coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.5c-1.3.1-2.5-.3-3.6-1v6.4a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.07v2.6a3.1 3.1 0 1 0 2.2 3V3h2.7z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Whiskey &amp; Harmony on YouTube — coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.3 5.1 12 5.1 12 5.1s-7.3 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77c1.53.43 8.83.43 8.83.43s7.3 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12zM9.75 15.02V8.98L15 12z"/></svg>
+          </a>
+        </nav>
+        <p class="social-note">Social channels coming soon — follow links will go live as they're set up.</p>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
+    <section id="booking" aria-labelledby="booking-title">
+      <div class="wrap">
+        <p class="sec-kicker">Hire the Act</p>
+        <h2 class="sec-title" id="booking-title">Book Whiskey <span class="amp">&amp;</span> Harmony</h2>
+        <p class="book-lead">
+          Looking to add some Americana &amp; country harmony to your venue, festival,
+          or private event? Reach out and we'll talk dates, sets, and details.
+        </p>
+        <div class="book-cta">
+          <a class="btn btn-mail" href="mailto:joeleduc@msn.com?subject=Booking%20inquiry%20%E2%80%94%20Whiskey%20%26%20Harmony">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2 8-5.2H4l8 5.2zM4 9.1V18h16V9.1l-8 5.2-8-5.2z"/></svg>
+            Email to Book
+          </a>
+          <a class="btn btn-tel" href="tel:+16309260446">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.5.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.57 3.5a1 1 0 0 1-.25 1l-2.22 2.3z"/></svg>
+            (630) 926-0446
+          </a>
+        </div>
+        <p class="book-meta">
+          Blue Heron Records · Joe LeDuc ·
+          <a href="mailto:joeleduc@msn.com">joeleduc@msn.com</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <a class="footer-family" href="../index.html">
+        <span class="footer-mark" aria-hidden="true"><img src="../images/heron-mark.png" alt="" /></span>
+        <span>Part of the Blue Heron Records family</span>
+      </a>
+      <p class="footer-copy">
+        &copy; 2026 Blue Heron Records · Whiskey &amp; Harmony ·
+        <a href="../index.html">blueheronrecords.com</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
