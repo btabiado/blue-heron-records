@@ -148,12 +148,28 @@ strong { color: var(--cream); font-weight: 600; }
 .split.reverse .split-media { order: 2; }
 .split-media { position: relative; }
 .split-media img, .split-media video { border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; display: block; object-fit: cover; border: 1px solid var(--line); }
+.split-media img.studio-shot { aspect-ratio: 3 / 2; height: auto; }
 .split-media::after { content: ""; position: absolute; inset: auto auto -18px -18px; width: 55%; height: 55%; border-radius: var(--radius); background: linear-gradient(135deg, var(--heron-deep), var(--taupe)); z-index: -1; opacity: .55; }
 .split-text h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); }
 .split-text p { color: var(--soft); }
 .callout { margin-top: 1.4rem; padding: 18px 20px; border-left: 3px solid var(--heron); background: var(--bg-2); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--muted); }
 .gtku { background: var(--bg-2); }
 .home { background: var(--bg); }
+
+/* ---------- Founder spotlight ---------- */
+.founder { background: radial-gradient(110% 90% at 18% 8%, #10193a 0%, var(--bg) 60%); }
+.founder-grid { display: grid; grid-template-columns: 1fr 360px; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.founder-text h2 { font-size: clamp(2.2rem, 4.8vw, 3.3rem); margin-bottom: .08em; }
+.founder-role { color: var(--sand); text-transform: uppercase; letter-spacing: .14em; font-size: .82rem; font-weight: 600; margin: 0 0 1.2rem; font-family: "Inter", sans-serif; }
+.founder-text p { color: var(--soft); font-size: 1.05rem; }
+.founder-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 1.6rem; }
+.founder-media { position: relative; }
+.founder-media img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line-2); box-shadow: var(--shadow-lg); }
+.founder-media::after { content: ""; position: absolute; inset: auto auto -16px -16px; width: 52%; height: 52%; border-radius: var(--radius); background: linear-gradient(135deg, var(--heron-deep), var(--taupe)); z-index: -1; opacity: .5; }
+@media (max-width: 820px) {
+  .founder-grid { grid-template-columns: 1fr; }
+  .founder-media { order: -1; max-width: 300px; margin: 0 auto; }
+}
 
 /* ---------- Story ---------- */
 .story { background: var(--bg-2); }
