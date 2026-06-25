@@ -384,6 +384,34 @@
   }
 
   /* ---- Newsletter -> Supabase subscribers ---- */
+  /* ---- Subscribe popup open/close ---- */
+  var nlModal = document.getElementById("nlModal");
+  var nlLastFocus = null;
+  function nlOnKey(e) { if (e.key === "Escape") closeNlModal(); }
+  function closeNlModal() {
+    if (!nlModal) return;
+    nlModal.hidden = true;
+    document.removeEventListener("keydown", nlOnKey);
+    if (nlLastFocus && nlLastFocus.focus) { try { nlLastFocus.focus(); } catch (e) {} }
+  }
+  function openNlModal() {
+    if (!nlModal) return;
+    nlLastFocus = document.activeElement;
+    var m = document.getElementById("newsletterMsg"); if (m) { m.hidden = true; m.textContent = ""; }
+    nlModal.hidden = false;
+    var first = document.getElementById("nlName") || document.getElementById("nlEmail");
+    if (first) { try { first.focus(); } catch (e) {} }
+    document.addEventListener("keydown", nlOnKey);
+  }
+  if (nlModal) {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-nl-open]"), function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); openNlModal(); });
+    });
+    Array.prototype.forEach.call(nlModal.querySelectorAll("[data-nl-close]"), function (b) {
+      b.addEventListener("click", closeNlModal);
+    });
+  }
+
   var nlForm = document.getElementById("newsletterForm");
   var nlMsg = document.getElementById("newsletterMsg");
   if (nlForm) {
@@ -406,6 +434,7 @@
         if (!r.ok) throw new Error("sub failed");
         if (nlMsg) nlMsg.textContent = "You’re on the list — thanks!";
         try { nlForm.reset(); } catch (e2) {}
+        setTimeout(closeNlModal, 1600);
       }).catch(function () {
         if (nlMsg) nlMsg.textContent = "Hmm, that didn’t go through — try again in a moment.";
       });
