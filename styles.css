@@ -506,6 +506,7 @@ a.post-card:hover .post-more { color: var(--moon); }
   .reveal { opacity: 1; transform: none; transition: none; }
   .scroll-cue span { animation: none; }
   .listen-record img { animation: none; }
-  .hero-logo { animation: none; }
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  /* Owner's choice: keep the hero logo spinning even under reduce-motion */
+  .hero-logo { animation: bhrspin 32s linear infinite !important; }
 }
