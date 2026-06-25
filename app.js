@@ -176,12 +176,14 @@
         var dt = new Date(e.date + "T00:00:00");
         var mo = isNaN(dt) ? "" : dt.toLocaleString("en-US", { month: "short" }).toUpperCase();
         var day = isNaN(dt) ? "" : dt.getDate();
-        var safe = e.ticketUrl && /^https?:\/\//i.test(e.ticketUrl) ? e.ticketUrl : "";
+        var tu = e.ticket_url || e.ticketUrl;
+        var safe = tu && /^https?:\/\//i.test(tu) ? tu : "";
         var ticket = safe ? '<a class="show-ticket" href="' + esc(safe) + '" target="_blank" rel="noopener">Tickets</a>' : "";
-        var meta = [e.venue, e.city, e.time].filter(Boolean).map(esc).join(" &middot; ");
+        var meta = [e.location, e.venue, e.city, e.time, e.phone].filter(Boolean).map(esc).join(" &middot; ");
+        var prof = e.artist_slug ? '<a class="show-ticket show-artist" href="artist.html?a=' + encodeURIComponent(e.artist_slug) + '">View artist &rarr;</a>' : "";
         return '<div class="show-row"><div class="show-date">' + day + '<span>' + mo + '</span></div>'
           + '<div class="show-info"><h4>' + esc(e.description || e.title || "Live show") + "</h4>"
-          + (meta ? "<p>" + meta + "</p>" : "") + "</div>" + ticket + "</div>";
+          + (meta ? "<p>" + meta + "</p>" : "") + "</div>" + prof + ticket + "</div>";
       }).join("");
       listEl.hidden = false;
       if (emptyEl) emptyEl.hidden = true;
@@ -263,6 +265,8 @@
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
         var row = { date: form.date.value, time: (form.time.value || "").trim(), description: (form.description.value || "").trim() };
+        var loc = (form.location && form.location.value || "").trim(); if (loc) row.location = loc;
+        var ap = document.getElementById("sf-artist"); var aslug = ap ? ap.value : ""; if (aslug) row.artist_slug = aslug;
         if (!ready) { textJoe(row); return; } // no database yet -> just text Joe (old behavior)
         // Process 1: save to the site + email notify
         if (note) note.textContent = "Adding…";
@@ -272,6 +276,20 @@
           .catch(function () { if (note) note.innerHTML = "Couldn&rsquo;t add it &mdash; text the details to <a href='tel:+16309260446'>(630) 926-0446</a>."; });
         // Process 2: fire the real SMS to Joe (within the click gesture)
         textJoe(row);
+      });
+    }
+
+    // Artist picker -> fills the event field + links the show to that profile
+    var artistPick = document.getElementById("sf-artist");
+    if (artistPick && ready) {
+      fetch(SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/artists?select=name,slug&order=sort.asc,name.asc", { headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY } })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (rows) {
+          (rows || []).forEach(function (a) { var o = document.createElement("option"); o.value = a.slug || ""; o.textContent = a.name || ""; artistPick.appendChild(o); });
+        }).catch(function () {});
+      artistPick.addEventListener("change", function () {
+        var o = this.options[this.selectedIndex];
+        if (this.value && o && form) form.description.value = o.textContent;
       });
     }
     if (manageItems) {

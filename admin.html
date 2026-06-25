@@ -170,6 +170,8 @@
     <section id="tab-shows" class="hidden">
       <div class="card">
         <h2>Add a show</h2>
+        <label for="s-artist">Artist / band</label>
+        <select id="s-artist"><option value="">Choose from the roster&hellip;</option></select>
         <div class="row2">
           <div><label for="s-date">Date</label><input type="date" id="s-date" /></div>
           <div><label for="s-time">Time</label><input id="s-time" placeholder="8:00 PM" /></div>
@@ -178,8 +180,10 @@
           <div><label for="s-ticket">Ticket link (URL)</label><input id="s-ticket" placeholder="https://" /></div>
           <div><label for="s-phone">Phone</label><input id="s-phone" placeholder="(630) 555-1234" /></div>
         </div>
-        <label for="s-desc">What&rsquo;s the event? <span class="field-hint">artist, venue, city</span></label>
-        <textarea id="s-desc" rows="2" placeholder="Willie Smith &mdash; FitzGerald's, Berwyn IL"></textarea>
+        <label for="s-loc">Location <span class="field-hint">venue &amp; city</span></label>
+        <input id="s-loc" placeholder="FitzGerald&rsquo;s &mdash; Berwyn, IL" />
+        <label for="s-desc">What&rsquo;s the event? <span class="field-hint">artist / act</span></label>
+        <textarea id="s-desc" rows="2" placeholder="Willie Smith"></textarea>
         <div class="bar"><span class="status" id="s-status"></span><span class="spacer"></span><button class="btn btn-primary" id="s-add" type="button">Add show</button></div>
       </div>
       <h3>Upcoming shows</h3>
@@ -187,6 +191,6 @@
     </section>
   </div>
 
-  <script src="admin.js?v=2"></script>
+  <script src="admin.js?v=3"></script>
 </body>
 </html>

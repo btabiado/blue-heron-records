@@ -647,9 +647,11 @@
         <h2 id="showModalTitle">Add a show</h2>
         <p class="modal-sub">It goes right on the site &mdash; and we&rsquo;ll let Joe know.</p>
         <form id="showForm">
+          <div class="field"><label for="sf-artist">Artist</label><select id="sf-artist"><option value="">Choose an artist&hellip;</option></select></div>
           <div class="field"><label for="sf-date">Date <span class="req" aria-hidden="true">*</span></label><input type="date" id="sf-date" name="date" required /></div>
           <div class="field"><label for="sf-time">Time</label><input type="text" id="sf-time" name="time" placeholder="e.g. 8:00 PM" /></div>
-          <div class="field"><label for="sf-desc">What&rsquo;s the event? <span class="req" aria-hidden="true">*</span></label><textarea id="sf-desc" name="description" rows="3" required placeholder="Artist, venue, city &mdash; whatever you&rsquo;d like listed"></textarea></div>
+          <div class="field"><label for="sf-loc">Location</label><input type="text" id="sf-loc" name="location" placeholder="Venue &amp; city &mdash; e.g. FitzGerald&rsquo;s, Berwyn IL" /></div>
+          <div class="field"><label for="sf-desc">What&rsquo;s the event? <span class="req" aria-hidden="true">*</span></label><textarea id="sf-desc" name="description" rows="3" required placeholder="Artist / act name"></textarea></div>
           <button type="submit" class="btn btn-primary btn-block">Add to the site</button>
           <p class="form-note" id="showFormNote" role="status" aria-live="polite"></p>
         </form>
@@ -712,6 +714,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260624b"></script>
+  <script src="app.js?v=20260624c"></script>
 </body>
 </html>

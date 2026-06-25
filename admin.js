@@ -208,7 +208,7 @@
     $("tab-artists").classList.toggle("hidden", !isArt);
     $("tab-shows").classList.toggle("hidden", isArt);
     Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
-    if (isArt) { show(listView); hide(editView); loadList(); } else loadShows();
+    if (isArt) { show(listView); hide(editView); loadList(); } else { loadShows(); fillArtistDropdown(); }
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
     b.addEventListener("click", function () { setTab(b.getAttribute("data-tab")); });
@@ -224,7 +224,7 @@
       box.innerHTML = rows.map(function (e) {
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-        var meta = [e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
+        var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
         return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
@@ -242,10 +242,28 @@
       ticket_url: $("s-ticket").value.trim() || null, phone: $("s-phone").value.trim() || null,
       description: $("s-desc").value.trim() || null
     };
+    var loc = $("s-loc").value.trim(); if (loc) row.location = loc;
+    var aslug = $("s-artist").value; if (aslug) row.artist_slug = aslug;
     if (!row.date || !row.description) { $("s-status").textContent = "Date and event are required."; return; }
     $("s-status").textContent = "Adding…";
     fetch(SB + "/rest/v1/shows", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
-      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-desc"].forEach(function (id) { $(id).value = ""; }); loadShows(); })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-loc", "s-desc", "s-artist"].forEach(function (id) { $(id).value = ""; }); loadShows(); })
       .catch(function () { $("s-status").textContent = "Add failed."; });
   });
+
+  /* ---------- Artist dropdown (links a show to a profile) ---------- */
+  function fillArtistDropdown() {
+    var sel = $("s-artist"); if (!sel) return;
+    listArtists().then(function (rows) {
+      var opts = '<option value="">Choose from the roster…</option>';
+      (rows || []).forEach(function (a) { opts += '<option value="' + esc(a.slug || "") + '">' + esc(a.name || "") + "</option>"; });
+      sel.innerHTML = opts;
+    }).catch(function () {});
+  }
+  if ($("s-artist")) {
+    $("s-artist").addEventListener("change", function () {
+      var o = this.options[this.selectedIndex];
+      if (this.value && o) $("s-desc").value = o.text;
+    });
+  }
 })();
