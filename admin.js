@@ -221,37 +221,69 @@
   });
 
   /* ---------- House Band acts ---------- */
+  var bandRows = [];
+  var editingBandId = null;
+  function bandFormReset() {
+    editingBandId = null;
+    ["b-name", "b-desc", "b-tag"].forEach(function (id) { if ($(id)) $(id).value = ""; });
+    if ($("b-add")) $("b-add").textContent = "Add act";
+    if ($("b-formTitle")) $("b-formTitle").textContent = "Add an act";
+    if ($("b-status")) $("b-status").textContent = "";
+  }
+  function bandEdit(id) {
+    var b = bandRows.filter(function (x) { return String(x.id) === String(id); })[0];
+    if (!b) return;
+    editingBandId = b.id;
+    $("b-name").value = b.name || "";
+    $("b-desc").value = b.description || "";
+    $("b-tag").value = b.tag || "";
+    if ($("b-add")) $("b-add").textContent = "Save changes";
+    if ($("b-formTitle")) $("b-formTitle").textContent = "Edit act";
+    $("b-status").textContent = "";
+    $("b-form").classList.remove("hidden");
+    $("b-form").scrollIntoView({ block: "nearest" });
+    $("b-name").focus();
+  }
   function loadBands() {
     var box = $("b-list");
     jget("bands?select=*&order=sort.asc,created_at.asc").then(function (rows) {
-      if (!rows || !rows.length) { $("b-empty").textContent = "No acts yet — add one."; box.innerHTML = ""; return; }
+      bandRows = rows || [];
+      if (!bandRows.length) { $("b-empty").textContent = "No acts yet — add one."; box.innerHTML = ""; return; }
       $("b-empty").textContent = "";
-      box.innerHTML = rows.map(function (b) {
+      box.innerHTML = bandRows.map(function (b) {
         var meta = [b.description, b.tag].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(b.id) + '"><div class="meta"><h3>' + esc(b.name || "Untitled") + "</h3><p>" + meta + "</p></div><button class=\"btn btn-danger btn-sm b-del\" type=\"button\">Remove</button></div>";
+        return '<div class="artist-row" data-id="' + esc(b.id) + '"><div class="meta"><h3>' + esc(b.name || "Untitled") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm b-edit" type="button">Edit</button><button class="btn btn-danger btn-sm b-del" type="button">Remove</button></div>';
       }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll(".b-edit"), function (btn) {
+        btn.addEventListener("click", function () { bandEdit(btn.closest("[data-id]").getAttribute("data-id")); });
+      });
       Array.prototype.forEach.call(box.querySelectorAll(".b-del"), function (btn) {
         btn.addEventListener("click", function () {
           var id = btn.closest("[data-id]").getAttribute("data-id");
           if (!window.confirm("Remove this act?")) return;
-          fetch(SB + "/rest/v1/bands?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadBands);
+          fetch(SB + "/rest/v1/bands?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(function () { if (String(editingBandId) === String(id)) bandFormReset(); loadBands(); });
         });
       });
     }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load acts.</p>'; });
   }
   if ($("b-newBtn")) $("b-newBtn").addEventListener("click", function () {
-    $("b-form").classList.remove("hidden"); $("b-status").textContent = "";
-    var i = $("b-form").querySelector("input"); if (i) i.focus();
+    bandFormReset();
+    $("b-form").classList.remove("hidden");
+    $("b-name").focus();
   });
-  if ($("b-cancel")) $("b-cancel").addEventListener("click", function () { $("b-form").classList.add("hidden"); });
+  if ($("b-cancel")) $("b-cancel").addEventListener("click", function () { $("b-form").classList.add("hidden"); bandFormReset(); });
   if ($("b-add")) $("b-add").addEventListener("click", function () {
     var name = $("b-name").value.trim();
     if (!name) { $("b-status").textContent = "Name is required."; return; }
-    var row = { name: name, description: $("b-desc").value.trim() || null, tag: $("b-tag").value.trim() || null, sort: 100 };
-    $("b-status").textContent = "Adding…";
-    fetch(SB + "/rest/v1/bands", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
-      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("b-status").textContent = "Added ✓"; ["b-name", "b-desc", "b-tag"].forEach(function (id) { $(id).value = ""; }); $("b-form").classList.add("hidden"); loadBands(); })
-      .catch(function () { $("b-status").textContent = "Add failed."; });
+    var row = { name: name, description: $("b-desc").value.trim() || null, tag: $("b-tag").value.trim() || null };
+    var editing = editingBandId;
+    $("b-status").textContent = editing ? "Saving…" : "Adding…";
+    var url = editing ? SB + "/rest/v1/bands?id=eq." + editing : SB + "/rest/v1/bands";
+    var method = editing ? "PATCH" : "POST";
+    if (!editing) row.sort = 100;
+    fetch(url, { method: method, headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("b-status").textContent = editing ? "Saved ✓" : "Added ✓"; $("b-form").classList.add("hidden"); bandFormReset(); loadBands(); })
+      .catch(function () { $("b-status").textContent = editing ? "Save failed." : "Add failed."; });
   });
 
   /* ---------- Listen: featured-song streaming links ---------- */
