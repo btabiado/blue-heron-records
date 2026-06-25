@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var BUSINESS_EMAIL = "joeleduc@msn.com";
+  var BUSINESS_EMAIL = "joeleduc@blueheronrecords.com";
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Respect reduced-motion for autoplay video (show poster instead) ---- */
@@ -149,7 +149,7 @@
     var SUPABASE_URL = "https://ofolxqldojhifnqmmsws.supabase.co";
     var SUPABASE_KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
     var WEB3_KEY = "27123b13-8671-41c1-bab4-2f08aee37de1"; // notify on new submissions
-    var NOTIFY_CC = "joeleduc@msn.com";                    // Joe gets a copy
+    var NOTIFY_CC = "joeleduc@blueheronrecords.com";                    // Joe gets a copy
 
     var listEl = document.getElementById("showsList");
     var emptyEl = document.getElementById("showsEmpty");

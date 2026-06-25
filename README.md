@@ -53,7 +53,7 @@ static `events.json` file below (edit it on GitHub to manage the calendar by han
 ## Form backend + newsletter (two keys to plug in)
 - **Contact/Booking form → Web3Forms.** Get a free access key at https://web3forms.com (enter **btab1130@gmail.com**;
   the key is emailed there). In `index.html`, replace `YOUR_WEB3FORMS_ACCESS_KEY` (hidden input in the contact form).
-  Submissions go to that inbox; a hidden `cc` also copies **joeleduc@msn.com**. Until the key is set, the form
+  Submissions go to that inbox; a hidden `cc` also copies **joeleduc@blueheronrecords.com**. Until the key is set, the form
   gracefully falls back to opening a pre-filled email.
 - **Newsletter → Buttondown.** Create a free account at https://buttondown.com, then in `index.html` replace
   `BUTTONDOWN_USERNAME` in the newsletter form's `action` URL with Joe's Buttondown username.
@@ -62,6 +62,6 @@ static `events.json` file below (edit it on GitHub to manage the calendar by han
 - **Willie Smith** and **Carol Jenkins** have full real bios + photos. Abby, Mary, Brant "The Bluesman"
   Buckley, and the Southside Chicago Blues Band are roster names with "coming soon" placeholders.
 - **Demo MP3s**, real **streaming/social links**, and **show dates** are placeholders awaiting content.
-- Contact is **Text/Call (630) 926-0446** and **joeleduc@msn.com** (SMS/tel/mailto — no server backend).
+- Contact is **Text/Call (630) 926-0446** and **joeleduc@blueheronrecords.com** (SMS/tel/mailto — no server backend).
 
 © Blue Heron Records.

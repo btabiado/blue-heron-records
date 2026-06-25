@@ -274,7 +274,7 @@ strong { color: var(--cream); font-weight: 600; }
 .room:hover { transform: translateY(-5px); border-color: var(--line-2); box-shadow: var(--shadow); }
 .room-media { padding: 0; border: 0; background: var(--bg-3); cursor: pointer; aspect-ratio: 4 / 3; overflow: hidden; position: relative; display: block; }
 .room-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
-.room-media::after { content: "\\2922"; position: absolute; right: 12px; bottom: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgba(6,9,20,.7); color: var(--cream); display: grid; place-items: center; font-size: 1rem; opacity: 0; transition: opacity .25s; }
+.room-media::after { content: "⤢"; position: absolute; right: 12px; bottom: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgba(6,9,20,.7); color: var(--cream); display: grid; place-items: center; font-size: 1rem; opacity: 0; transition: opacity .25s; }
 .room:hover .room-media img { transform: scale(1.06); }
 .room:hover .room-media::after { opacity: 1; }
 .room-media:focus-visible { outline: 3px solid var(--heron-light); outline-offset: -3px; }
