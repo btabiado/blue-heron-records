@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://blueheronrecords.com/images/og.jpg" />
 
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; base-uri 'none'; form-action 'self' mailto: tel: https://buttondown.com; frame-src https://buttondown.com; frame-ancestors 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; base-uri 'none'; form-action 'self' mailto: tel:; frame-ancestors 'none'" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260624c" />
+  <link rel="stylesheet" href="styles.css?v=20260624d" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 
   <script type="application/ld+json">
@@ -630,12 +630,10 @@
           <h2>New music &amp; show dates</h2>
           <p>Join the Blue Heron Records list &mdash; an occasional note when there&rsquo;s a new release or a live date. No spam, ever.</p>
         </div>
-        <!-- Buttondown: replace BUTTONDOWN_USERNAME in the action URL with Joe's Buttondown username. -->
-        <form class="newsletter-form" id="newsletterForm" action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" target="bd-frame">
-          <input type="email" name="email" required placeholder="you@email.com" autocomplete="email" aria-label="Your email address" />
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" id="nlEmail" name="email" required placeholder="you@email.com" autocomplete="email" aria-label="Your email address" />
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
-        <iframe name="bd-frame" title="Newsletter subscription" tabindex="-1" aria-hidden="true" style="display:none"></iframe>
         <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
       </div>
     </section>
@@ -714,6 +712,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260624d"></script>
+  <script src="app.js?v=20260624e"></script>
 </body>
 </html>

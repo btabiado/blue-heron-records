@@ -204,11 +204,13 @@
 
   /* ---------- Tabs ---------- */
   function setTab(name) {
-    var isArt = name === "artists";
-    $("tab-artists").classList.toggle("hidden", !isArt);
-    $("tab-shows").classList.toggle("hidden", isArt);
+    $("tab-artists").classList.toggle("hidden", name !== "artists");
+    $("tab-shows").classList.toggle("hidden", name !== "shows");
+    $("tab-subs").classList.toggle("hidden", name !== "subs");
     Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
-    if (isArt) { show(listView); hide(editView); loadList(); } else { loadShows(); fillArtistDropdown(); }
+    if (name === "artists") { show(listView); hide(editView); loadList(); }
+    else if (name === "shows") { loadShows(); fillArtistDropdown(); }
+    else if (name === "subs") { loadSubs(); }
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
     b.addEventListener("click", function () { setTab(b.getAttribute("data-tab")); });
@@ -264,6 +266,37 @@
     $("s-artist").addEventListener("change", function () {
       var o = this.options[this.selectedIndex];
       if (this.value && o) $("s-desc").value = o.text;
+    });
+  }
+
+  /* ---------- Mailing list ---------- */
+  var subsRows = [];
+  function loadSubs() {
+    var box = $("subsList"); if (!box) return;
+    box.innerHTML = '<p class="muted">Loading…</p>'; $("subsCount").textContent = "";
+    jget("subscribers?select=*&order=created_at.desc").then(function (rows) {
+      subsRows = rows || [];
+      if (!subsRows.length) { box.innerHTML = '<p class="muted">No subscribers yet.</p>'; return; }
+      $("subsCount").textContent = subsRows.length + (subsRows.length === 1 ? " subscriber" : " subscribers");
+      box.innerHTML = subsRows.map(function (s) {
+        var when = s.created_at ? new Date(s.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
+        return '<div class="artist-row" data-id="' + esc(s.id) + '"><div class="meta"><h3 style="font-size:1rem">' + esc(s.email || "") + '</h3><p>' + esc(when) + "</p></div><button class=\"btn btn-danger btn-sm sub-del\" type=\"button\">Remove</button></div>";
+      }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll(".sub-del"), function (b) {
+        b.addEventListener("click", function () {
+          var id = b.closest("[data-id]").getAttribute("data-id");
+          if (!window.confirm("Remove this subscriber?")) return;
+          fetch(SB + "/rest/v1/subscribers?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadSubs);
+        });
+      });
+    }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load the list.</p>'; });
+  }
+  if ($("subsCopy")) {
+    $("subsCopy").addEventListener("click", function () {
+      var emails = subsRows.map(function (s) { return s.email; }).filter(Boolean).join(", ");
+      if (!emails) { toast("No emails yet"); return; }
+      if (navigator.clipboard) navigator.clipboard.writeText(emails).then(function () { toast("Copied " + subsRows.length + " emails"); }, function () { toast("Copy failed"); });
+      else toast("Copy not supported");
     });
   }
 })();

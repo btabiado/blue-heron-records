@@ -381,14 +381,29 @@
     });
   }
 
-  /* ---- Newsletter (Buttondown) ---- */
+  /* ---- Newsletter -> Supabase subscribers ---- */
   var nlForm = document.getElementById("newsletterForm");
   var nlMsg = document.getElementById("newsletterMsg");
   if (nlForm) {
-    nlForm.addEventListener("submit", function () {
-      // Native POST goes to the hidden iframe; show an optimistic confirmation.
-      if (nlMsg) { nlMsg.hidden = false; nlMsg.textContent = "Thanks for subscribing! Check your inbox to confirm."; }
-      setTimeout(function () { try { nlForm.reset(); } catch (e) {} }, 400);
+    var NL_SB = "https://ofolxqldojhifnqmmsws.supabase.co";
+    var NL_KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
+    nlForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var emailEl = document.getElementById("nlEmail");
+      var email = (emailEl && emailEl.value || "").trim();
+      if (!email) return;
+      if (nlMsg) { nlMsg.hidden = false; nlMsg.textContent = "Adding you…"; }
+      fetch(NL_SB + "/rest/v1/subscribers", {
+        method: "POST",
+        headers: { apikey: NL_KEY, Authorization: "Bearer " + NL_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ email: email })
+      }).then(function (r) {
+        if (!r.ok) throw new Error("sub failed");
+        if (nlMsg) nlMsg.textContent = "You’re on the list — thanks!";
+        try { nlForm.reset(); } catch (e2) {}
+      }).catch(function () {
+        if (nlMsg) nlMsg.textContent = "Hmm, that didn’t go through — try again in a moment.";
+      });
     });
   }
 
