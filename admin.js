@@ -227,7 +227,7 @@
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email</button><button class="btn btn-outline btn-sm s-remind" data-ch="text" type="button">Text</button><button class="btn btn-outline btn-sm s-remind" data-ch="both" type="button">Both</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email the list</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
         b.addEventListener("click", function () {
@@ -240,13 +240,13 @@
         b.addEventListener("click", function () {
           var id = b.closest("[data-id]").getAttribute("data-id");
           var show = rows.filter(function (x) { return String(x.id) === String(id); })[0];
-          if (show) sendReminder(show, b.getAttribute("data-ch"));
+          if (show) sendReminder(show);
         });
       });
     }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load shows.</p>'; });
   }
-  function sendReminder(show, channel) {
-    jget("subscribers?select=email,phone").then(function (subs) {
+  function sendReminder(show) {
+    jget("subscribers?select=email").then(function (subs) {
       subs = subs || [];
       var dt = new Date(show.date + "T00:00:00");
       var when = isNaN(dt) ? show.date : dt.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
@@ -260,24 +260,10 @@
         "", "See you there!", "— Blue Heron Records"
       ].filter(Boolean).join("\n");
       var emails = subs.map(function (s) { return s.email; }).filter(Boolean);
-      var phones = subs.map(function (s) { return (s.phone || "").replace(/[^0-9+]/g, ""); }).filter(function (p) { return p.length >= 10; });
+      if (!emails.length) { toast("No email subscribers yet"); return; }
       var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
-      function openEmail() { window.location.href = "mailto:joeleduc@blueheronrecords.com?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
-      function openText() { window.location.href = "sms:" + phones.join(",") + "?&body=" + encodeURIComponent(body); }
-      if (channel === "both") {
-        if (!emails.length && !phones.length) { toast("No contacts on the list yet"); return; }
-        toast("Opening email (" + emails.length + ") + Messages (" + phones.length + ")…");
-        if (emails.length) openEmail();
-        if (phones.length) setTimeout(openText, 1200);
-      } else if (channel === "text") {
-        if (!phones.length) { toast("No phone numbers on the list yet"); return; }
-        toast("Opening Messages — " + phones.length + " number" + (phones.length === 1 ? "" : "s"));
-        openText();
-      } else {
-        if (!emails.length) { toast("No email subscribers yet"); return; }
-        toast("Opening your email — " + emails.length + " BCC'd");
-        openEmail();
-      }
+      toast("Opening your email — " + emails.length + " BCC'd (hidden)");
+      window.location.href = "mailto:joeleduc@blueheronrecords.com?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     }).catch(function () { toast("Couldn’t load the mailing list"); });
   }
   $("s-add").addEventListener("click", function () {
