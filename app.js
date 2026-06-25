@@ -15,6 +15,12 @@
     });
   }
 
+  /* ---- Deter casual audio download (hide download button + block right-click) ---- */
+  Array.prototype.forEach.call(document.querySelectorAll("audio"), function (a) {
+    a.setAttribute("controlslist", "nodownload noplaybackrate");
+    a.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  });
+
   /* ---- Year in footer ---- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

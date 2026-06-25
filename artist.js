@@ -154,11 +154,14 @@
       html +=
         '<li class="track-item">' +
           '<div class="track-title">' + esc(track.title) + '</div>' +
-          '<audio class="track-audio" controls preload="none" src="' + esc(track.audio) + '" aria-label="' + esc(track.title) + '"></audio>' +
+          '<audio class="track-audio" controls controlslist="nodownload noplaybackrate" preload="none" src="' + esc(track.audio) + '" aria-label="' + esc(track.title) + '"></audio>' +
         '</li>';
     });
     html += '</ul>';
     section.innerHTML = html;
+    Array.prototype.forEach.call(section.querySelectorAll('audio'), function (a) {
+      a.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
     section.style.display = '';
   }
 
