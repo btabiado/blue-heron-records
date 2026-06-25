@@ -201,13 +201,16 @@
       <div class="bar" style="margin:0 0 16px">
         <h2 style="margin:0">Mailing list</h2>
         <span class="spacer"></span>
-        <button class="btn btn-outline btn-sm" id="subsCopy" type="button">Copy all emails</button>
+        <button class="btn btn-outline btn-sm" id="subsUploadBtn" type="button">Upload contacts</button>
+        <button class="btn btn-outline btn-sm" id="subsCopy" type="button">Copy emails</button>
+        <button class="btn btn-outline btn-sm" id="subsCopyPhones" type="button">Copy phones</button>
+        <input type="file" id="subsFile" accept=".csv,text/csv" style="display:none" />
       </div>
       <p class="muted" id="subsCount"></p>
       <div id="subsList"></div>
     </section>
   </div>
 
-  <script src="admin.js?v=7"></script>
+  <script src="admin.js?v=8"></script>
 </body>
 </html>

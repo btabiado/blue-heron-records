@@ -398,11 +398,14 @@
       var emailEl = document.getElementById("nlEmail");
       var email = (emailEl && emailEl.value || "").trim();
       if (!email) return;
+      var rec = { email: email };
+      var nm = (document.getElementById("nlName") || {}).value; if (nm && nm.trim()) rec.name = nm.trim();
+      var ph = (document.getElementById("nlPhone") || {}).value; if (ph && ph.trim()) rec.phone = ph.trim();
       if (nlMsg) { nlMsg.hidden = false; nlMsg.textContent = "Adding you…"; }
       fetch(NL_SB + "/rest/v1/subscribers", {
         method: "POST",
         headers: { apikey: NL_KEY, Authorization: "Bearer " + NL_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify(rec)
       }).then(function (r) {
         if (!r.ok) throw new Error("sub failed");
         if (nlMsg) nlMsg.textContent = "You’re on the list — thanks!";

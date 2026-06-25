@@ -227,7 +227,7 @@
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" type="button">Remind</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email</button><button class="btn btn-outline btn-sm s-remind" data-ch="text" type="button">Text</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
         b.addEventListener("click", function () {
@@ -240,15 +240,14 @@
         b.addEventListener("click", function () {
           var id = b.closest("[data-id]").getAttribute("data-id");
           var show = rows.filter(function (x) { return String(x.id) === String(id); })[0];
-          if (show) sendReminder(show);
+          if (show) sendReminder(show, b.getAttribute("data-ch"));
         });
       });
     }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load shows.</p>'; });
   }
-  function sendReminder(show) {
-    jget("subscribers?select=email").then(function (subs) {
-      var emails = (subs || []).map(function (s) { return s.email; }).filter(Boolean);
-      if (!emails.length) { toast("No subscribers on the list yet"); return; }
+  function sendReminder(show, channel) {
+    jget("subscribers?select=email,phone").then(function (subs) {
+      subs = subs || [];
       var dt = new Date(show.date + "T00:00:00");
       var when = isNaN(dt) ? show.date : dt.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
       var body = [
@@ -258,13 +257,20 @@
         when + (show.time ? " · " + show.time : ""),
         (show.location || ""),
         (show.ticket_url ? "Tickets: " + show.ticket_url : ""),
-        (show.phone ? "Info: " + show.phone : ""),
         "", "See you there!", "— Blue Heron Records"
       ].filter(Boolean).join("\n");
-      var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
-      var mailto = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      toast("Opening your email — " + emails.length + " subscriber" + (emails.length === 1 ? "" : "s") + " BCC'd");
-      window.location.href = mailto;
+      if (channel === "text") {
+        var phones = subs.map(function (s) { return (s.phone || "").replace(/[^0-9+]/g, ""); }).filter(function (p) { return p.length >= 10; });
+        if (!phones.length) { toast("No phone numbers on the list yet"); return; }
+        toast("Opening Messages — " + phones.length + " number" + (phones.length === 1 ? "" : "s"));
+        window.location.href = "sms:" + phones.join(",") + "?&body=" + encodeURIComponent(body);
+      } else {
+        var emails = subs.map(function (s) { return s.email; }).filter(Boolean);
+        if (!emails.length) { toast("No email subscribers yet"); return; }
+        var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
+        toast("Opening your email — " + emails.length + " BCC'd");
+        window.location.href = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      }
     }).catch(function () { toast("Couldn’t load the mailing list"); });
   }
   $("s-add").addEventListener("click", function () {
@@ -314,7 +320,9 @@
       $("subsCount").textContent = subsRows.length + (subsRows.length === 1 ? " subscriber" : " subscribers");
       box.innerHTML = subsRows.map(function (s) {
         var when = s.created_at ? new Date(s.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
-        return '<div class="artist-row" data-id="' + esc(s.id) + '"><div class="meta"><h3 style="font-size:1rem">' + esc(s.email || "") + '</h3><p>' + esc(when) + "</p></div><button class=\"btn btn-danger btn-sm sub-del\" type=\"button\">Remove</button></div>";
+        var title = s.name ? esc(s.name) : esc(s.email || "");
+        var sub = [s.name ? esc(s.email || "") : "", s.phone ? esc(s.phone) : "", esc(when)].filter(Boolean).join(" · ");
+        return '<div class="artist-row" data-id="' + esc(s.id) + '"><div class="meta"><h3 style="font-size:1rem">' + title + '</h3><p>' + sub + "</p></div><button class=\"btn btn-danger btn-sm sub-del\" type=\"button\">Remove</button></div>";
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".sub-del"), function (b) {
         b.addEventListener("click", function () {
@@ -331,6 +339,44 @@
       if (!emails) { toast("No emails yet"); return; }
       if (navigator.clipboard) navigator.clipboard.writeText(emails).then(function () { toast("Copied " + subsRows.length + " emails"); }, function () { toast("Copy failed"); });
       else toast("Copy not supported");
+    });
+  }
+  if ($("subsCopyPhones")) {
+    $("subsCopyPhones").addEventListener("click", function () {
+      var phones = subsRows.map(function (s) { return s.phone; }).filter(Boolean).join(", ");
+      if (!phones) { toast("No phone numbers yet"); return; }
+      if (navigator.clipboard) navigator.clipboard.writeText(phones).then(function () { toast("Copied phone numbers"); }, function () { toast("Copy failed"); });
+      else toast("Copy not supported");
+    });
+  }
+  function parseContactsCSV(text) {
+    var out = [];
+    text.split(/\r?\n/).forEach(function (line) {
+      line = line.trim(); if (!line) return;
+      var cells = line.split(",").map(function (c) { return c.trim().replace(/^"|"$/g, ""); });
+      var email = cells.filter(function (c) { return /@/.test(c); })[0];
+      if (!email || /^email$/i.test(email)) return;
+      var phone = cells.filter(function (c) { return !/@/.test(c) && /\d{3}/.test(c); })[0] || null;
+      var name = cells.filter(function (c) { return c && c !== email && c !== phone; })[0] || null;
+      out.push({ email: email, name: name, phone: phone });
+    });
+    return out;
+  }
+  if ($("subsUploadBtn")) {
+    $("subsUploadBtn").addEventListener("click", function () { $("subsFile").click(); });
+    $("subsFile").addEventListener("change", function () {
+      var f = this.files && this.files[0]; if (!f) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        var parsed = parseContactsCSV(String(reader.result || ""));
+        var existing = {}; subsRows.forEach(function (s) { if (s.email) existing[s.email.toLowerCase()] = 1; });
+        var toAdd = parsed.filter(function (r) { return r.email && !existing[r.email.toLowerCase()]; });
+        if (!toAdd.length) { toast("No new contacts found in the file"); $("subsFile").value = ""; return; }
+        fetch(SB + "/rest/v1/subscribers", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(toAdd) })
+          .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); toast("Added " + toAdd.length + " contact" + (toAdd.length === 1 ? "" : "s")); $("subsFile").value = ""; loadSubs(); })
+          .catch(function () { toast("Upload failed — check the file format"); $("subsFile").value = ""; });
+      };
+      reader.readAsText(f);
     });
   }
 })();

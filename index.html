@@ -580,6 +580,10 @@
               <svg viewBox="0 0 24 24" aria-hidden="true" class="ico" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M3 6.5h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="m3 7 9 6 9-6"/></svg>
               Email us
             </a>
+            <a class="btn btn-outline btn-lg btn-block" href="#newsletter">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="ico" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              Join the mailing list
+            </a>
           </div>
           <dl class="contact-meta">
             <div><dt>Label</dt><dd>Blue Heron Records</dd></div>
@@ -626,7 +630,9 @@
           <p>Join the Blue Heron Records list &mdash; an occasional note when there&rsquo;s a new release or a live date. No spam, ever.</p>
         </div>
         <form class="newsletter-form" id="newsletterForm">
+          <input type="text" id="nlName" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
           <input type="email" id="nlEmail" name="email" required placeholder="you@email.com" autocomplete="email" aria-label="Your email address" />
+          <input type="tel" id="nlPhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Your phone number (optional)" />
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
         <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
@@ -707,6 +713,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260624g"></script>
+  <script src="app.js?v=20260624h"></script>
 </body>
 </html>
