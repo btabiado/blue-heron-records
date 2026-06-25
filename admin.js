@@ -208,14 +208,50 @@
     $("tab-shows").classList.toggle("hidden", name !== "shows");
     $("tab-subs").classList.toggle("hidden", name !== "subs");
     $("tab-listen").classList.toggle("hidden", name !== "listen");
+    $("tab-bands").classList.toggle("hidden", name !== "bands");
     Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { var on = b.getAttribute("data-tab") === name; b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     if (name === "artists") { show(listView); hide(editView); loadList(); }
     else if (name === "shows") { var sf = $("s-form"); if (sf) sf.classList.add("hidden"); loadShows(); fillArtistDropdown(); }
     else if (name === "subs") { loadSubs(); }
     else if (name === "listen") { loadListen(); }
+    else if (name === "bands") { var bf = $("b-form"); if (bf) bf.classList.add("hidden"); loadBands(); }
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
     b.addEventListener("click", function () { setTab(b.getAttribute("data-tab")); });
+  });
+
+  /* ---------- House Band acts ---------- */
+  function loadBands() {
+    var box = $("b-list");
+    jget("bands?select=*&order=sort.asc,created_at.asc").then(function (rows) {
+      if (!rows || !rows.length) { $("b-empty").textContent = "No acts yet — add one."; box.innerHTML = ""; return; }
+      $("b-empty").textContent = "";
+      box.innerHTML = rows.map(function (b) {
+        var meta = [b.description, b.tag].filter(Boolean).map(esc).join(" · ");
+        return '<div class="artist-row" data-id="' + esc(b.id) + '"><div class="meta"><h3>' + esc(b.name || "Untitled") + "</h3><p>" + meta + "</p></div><button class=\"btn btn-danger btn-sm b-del\" type=\"button\">Remove</button></div>";
+      }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll(".b-del"), function (btn) {
+        btn.addEventListener("click", function () {
+          var id = btn.closest("[data-id]").getAttribute("data-id");
+          if (!window.confirm("Remove this act?")) return;
+          fetch(SB + "/rest/v1/bands?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadBands);
+        });
+      });
+    }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load acts.</p>'; });
+  }
+  if ($("b-newBtn")) $("b-newBtn").addEventListener("click", function () {
+    $("b-form").classList.remove("hidden"); $("b-status").textContent = "";
+    var i = $("b-form").querySelector("input"); if (i) i.focus();
+  });
+  if ($("b-cancel")) $("b-cancel").addEventListener("click", function () { $("b-form").classList.add("hidden"); });
+  if ($("b-add")) $("b-add").addEventListener("click", function () {
+    var name = $("b-name").value.trim();
+    if (!name) { $("b-status").textContent = "Name is required."; return; }
+    var row = { name: name, description: $("b-desc").value.trim() || null, tag: $("b-tag").value.trim() || null, sort: 100 };
+    $("b-status").textContent = "Adding…";
+    fetch(SB + "/rest/v1/bands", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("b-status").textContent = "Added ✓"; ["b-name", "b-desc", "b-tag"].forEach(function (id) { $(id).value = ""; }); $("b-form").classList.add("hidden"); loadBands(); })
+      .catch(function () { $("b-status").textContent = "Add failed."; });
   });
 
   /* ---------- Listen: featured-song streaming links ---------- */

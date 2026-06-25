@@ -495,4 +495,22 @@
       })
       .catch(function () {});
   })();
+
+  /* ---- House Band acts (data-driven from Supabase 'bands'; falls back to hardcoded cards) ---- */
+  (function () {
+    var grid = document.getElementById("housebandGrid");
+    if (!grid) return;
+    var U = "https://ofolxqldojhifnqmmsws.supabase.co";
+    var K = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
+    fetch(U + "/rest/v1/bands?select=name,description,tag&order=sort.asc,created_at.asc", { headers: { apikey: K, Authorization: "Bearer " + K } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rows) {
+        if (!rows || !rows.length) return; // keep the hardcoded fallback cards
+        grid.innerHTML = rows.map(function (b) {
+          var tag = b.tag ? '<span class="band-free">' + esc(b.tag) + "</span>" : "";
+          return '<article class="band"><h4>' + esc(b.name || "") + "</h4><p>" + esc(b.description || "") + "</p>" + tag + "</article>";
+        }).join("");
+      })
+      .catch(function () {});
+  })();
 })();

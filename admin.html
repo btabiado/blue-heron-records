@@ -89,6 +89,7 @@
       <button class="tab-btn" data-tab="shows" type="button" role="tab" aria-selected="false">Shows</button>
       <button class="tab-btn" data-tab="subs" type="button" role="tab" aria-selected="false">Mailing list</button>
       <button class="tab-btn" data-tab="listen" type="button" role="tab" aria-selected="false">Listen</button>
+      <button class="tab-btn" data-tab="bands" type="button" role="tab" aria-selected="false">House Band</button>
     </nav>
 
     <div id="tab-artists">
@@ -227,8 +228,28 @@
         <div class="bar"><button class="btn btn-primary" id="ls-save" type="button">Save links</button><span class="status" id="ls-status"></span></div>
       </div>
     </section>
+
+    <!-- House Band acts -->
+    <section id="tab-bands" class="hidden" role="tabpanel">
+      <div class="bar" style="margin:0 0 16px">
+        <h2 style="margin:0">House Band acts</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" id="b-newBtn" type="button">+ Add an act</button>
+      </div>
+      <div class="card hidden" id="b-form">
+        <div class="row2">
+          <div><label for="b-name">Name</label><input id="b-name" placeholder="e.g. Bayou Blues Band" /></div>
+          <div><label for="b-tag">Tag <span class="field-hint">optional badge</span></label><input id="b-tag" placeholder="e.g. Free at charity &amp; care events" /></div>
+        </div>
+        <label for="b-desc">Description</label>
+        <input id="b-desc" placeholder="e.g. New Orleans &amp; Chicago blues." />
+        <div class="bar"><button class="btn btn-primary" id="b-add" type="button">Add act</button><button class="btn btn-outline" id="b-cancel" type="button">Cancel</button><span class="status" id="b-status"></span></div>
+      </div>
+      <p class="muted" id="b-empty">Loading&hellip;</p>
+      <div id="b-list"></div>
+    </section>
   </div>
 
-  <script src="admin.js?v=13"></script>
+  <script src="admin.js?v=14"></script>
 </body>
 </html>
