@@ -227,7 +227,7 @@
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" type="button">Remind</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
         b.addEventListener("click", function () {
@@ -236,7 +236,36 @@
           fetch(SB + "/rest/v1/shows?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadShows);
         });
       });
+      Array.prototype.forEach.call(box.querySelectorAll(".s-remind"), function (b) {
+        b.addEventListener("click", function () {
+          var id = b.closest("[data-id]").getAttribute("data-id");
+          var show = rows.filter(function (x) { return String(x.id) === String(id); })[0];
+          if (show) sendReminder(show);
+        });
+      });
     }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load shows.</p>'; });
+  }
+  function sendReminder(show) {
+    jget("subscribers?select=email").then(function (subs) {
+      var emails = (subs || []).map(function (s) { return s.email; }).filter(Boolean);
+      if (!emails.length) { toast("No subscribers on the list yet"); return; }
+      var dt = new Date(show.date + "T00:00:00");
+      var when = isNaN(dt) ? show.date : dt.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      var body = [
+        "Hi from Blue Heron Records!", "",
+        "Don't miss this show:",
+        (show.description || "Live show"),
+        when + (show.time ? " · " + show.time : ""),
+        (show.location || ""),
+        (show.ticket_url ? "Tickets: " + show.ticket_url : ""),
+        (show.phone ? "Info: " + show.phone : ""),
+        "", "See you there!", "— Blue Heron Records"
+      ].filter(Boolean).join("\n");
+      var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
+      var mailto = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      toast("Opening your email — " + emails.length + " subscriber" + (emails.length === 1 ? "" : "s") + " BCC'd");
+      window.location.href = mailto;
+    }).catch(function () { toast("Couldn’t load the mailing list"); });
   }
   $("s-add").addEventListener("click", function () {
     var row = {
