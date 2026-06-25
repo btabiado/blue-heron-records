@@ -262,7 +262,7 @@
       var emails = subs.map(function (s) { return s.email; }).filter(Boolean);
       var phones = subs.map(function (s) { return (s.phone || "").replace(/[^0-9+]/g, ""); }).filter(function (p) { return p.length >= 10; });
       var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
-      function openEmail() { window.location.href = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+      function openEmail() { window.location.href = "mailto:joeleduc@blueheronrecords.com?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
       function openText() { window.location.href = "sms:" + phones.join(",") + "?&body=" + encodeURIComponent(body); }
       if (channel === "both") {
         if (!emails.length && !phones.length) { toast("No contacts on the list yet"); return; }
