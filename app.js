@@ -373,4 +373,36 @@
       setTimeout(function () { try { nlForm.reset(); } catch (e) {} }, 400);
     });
   }
+
+  /* ---- Artists & bands roster (homepage), data-driven from Supabase ---- */
+  (function () {
+    var SB = "https://ofolxqldojhifnqmmsws.supabase.co";
+    var KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
+    var ag = document.getElementById("artistGrid");
+    var bg = document.getElementById("bandGrid");
+    if (!ag && !bg) return;
+    function e2(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+    function card(a) {
+      var slug = encodeURIComponent(a.slug || "");
+      var ok = a.photo && (/^https?:\/\//i.test(a.photo) || !/:/.test(a.photo));
+      var photo = ok ? '<span class="artist-photo"><img src="' + e2(a.photo) + '" alt="' + e2(a.name) + '" loading="lazy" /></span>'
+                     : '<span class="artist-photo placeholder"><img src="images/heron-mark.png" alt="' + e2(a.name) + '" loading="lazy" /></span>';
+      var role = a.role ? '<p class="artist-role">' + e2(a.role) + "</p>" : "";
+      var tag = a.tagline ? "<p>" + e2(a.tagline) + "</p>" : "";
+      return '<a class="artist-card" href="artist.html?a=' + slug + '">' + photo +
+        '<span class="artist-body"><h3>' + e2(a.name) + "</h3>" + role + tag + '<span class="artist-link">View page &rarr;</span></span></a>';
+    }
+    fetch(SB + "/rest/v1/artists?select=*&order=sort.asc,name.asc", { headers: { apikey: KEY, Authorization: "Bearer " + KEY } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rows) {
+        if (!rows || !rows.length) return;
+        var pub = rows.filter(function (a) { return a.published !== false; });
+        var sortv = function (a) { return a.sort == null ? 100 : a.sort; };
+        var arts = pub.filter(function (a) { return sortv(a) < 100; });
+        var bands = pub.filter(function (a) { return sortv(a) >= 100; });
+        if (ag && arts.length) ag.innerHTML = arts.map(card).join("");
+        if (bg && bands.length) bg.innerHTML = bands.map(card).join("");
+      })
+      .catch(function () {});
+  })();
 })();
