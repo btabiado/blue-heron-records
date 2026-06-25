@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://*.supabase.co; base-uri 'none'; form-action 'self'; frame-ancestors 'none'" />
+  <title>BHR Admin</title>
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#070b1c; --bg2:#0d1430; --line:#23304f; --line2:#33425f; --heron:#6f93b0; --heron-l:#9bbdd6; --moon:#f3f7ef; --muted:#9aa6bd; --ok:#3f9d6b; --danger:#b3322f; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--moon); font-family:"Inter",sans-serif; line-height:1.5; }
+    h1,h2,h3 { font-family:"Fraunces",serif; font-weight:600; margin:0 0 .4em; }
+    a { color:var(--heron-l); }
+    .wrap { max-width:880px; margin:0 auto; padding:24px 18px 80px; }
+    header.top { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 0; border-bottom:1px solid var(--line); margin-bottom:24px; }
+    header.top .brand { display:flex; align-items:center; gap:12px; }
+    header.top img { width:38px; height:38px; border-radius:50%; }
+    .muted { color:var(--muted); }
+    .btn { font:inherit; font-weight:600; border:none; border-radius:10px; padding:.7em 1.1em; cursor:pointer; }
+    .btn-primary { background:var(--moon); color:#0a1024; }
+    .btn-outline { background:transparent; color:var(--moon); border:1px solid var(--line2); }
+    .btn-danger { background:var(--danger); color:#fff; }
+    .btn-sm { padding:.45em .8em; font-size:.85rem; border-radius:8px; }
+    input, textarea, select { width:100%; padding:.7em .85em; border:1.5px solid var(--line2); border-radius:9px; background:var(--bg); color:var(--moon); font:inherit; }
+    input:focus, textarea:focus, select:focus { outline:none; border-color:var(--heron); box-shadow:0 0 0 3px rgba(111,147,176,.22); }
+    label { display:block; font-weight:600; font-size:.85rem; margin:14px 0 5px; }
+    .field-hint { font-weight:400; color:var(--muted); font-size:.8rem; }
+    /* gate */
+    #gate { max-width:360px; margin:14vh auto; text-align:center; padding:0 18px; }
+    #gate img { width:64px; height:64px; border-radius:50%; margin-bottom:14px; }
+    #gateMsg { color:var(--danger); min-height:1.1em; font-size:.9rem; margin-top:10px; }
+    .hidden { display:none !important; }
+    /* list */
+    .artist-row { display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:var(--bg2); }
+    .artist-row img { width:46px; height:46px; border-radius:9px; object-fit:cover; background:var(--bg); flex:none; }
+    .artist-row .meta { flex:1; min-width:0; }
+    .artist-row .meta h3 { margin:0; font-size:1.05rem; }
+    .artist-row .meta p { margin:0; color:var(--muted); font-size:.82rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .pill { font-size:.7rem; font-weight:600; padding:.2em .6em; border-radius:999px; border:1px solid var(--line2); color:var(--muted); }
+    .pill.draft { color:#d8b15a; border-color:#6b5a2e; }
+    /* editor */
+    .card { background:var(--bg2); border:1px solid var(--line); border-radius:16px; padding:22px; margin-bottom:18px; }
+    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media (max-width:560px){ .row2 { grid-template-columns:1fr; } }
+    .photo-prev { width:90px; height:90px; border-radius:10px; object-fit:cover; background:var(--bg); border:1px solid var(--line2); margin-top:8px; }
+    .track { display:flex; align-items:center; gap:10px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:7px; }
+    .track audio { height:30px; }
+    .track .t-title { flex:1; }
+    .bar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:18px; }
+    .status { font-size:.85rem; font-weight:600; color:var(--heron-l); min-height:1.1em; }
+    .spacer { flex:1; }
+    .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--ok); color:#fff; padding:.7em 1.2em; border-radius:10px; font-weight:600; box-shadow:0 10px 30px rgba(0,0,0,.4); }
+  </style>
+</head>
+<body>
+  <!-- Password gate -->
+  <div id="gate">
+    <img src="images/favicon-32.png" alt="" />
+    <h1>Blue Heron Records</h1>
+    <p class="muted">Studio admin &mdash; enter the password.</p>
+    <form id="gateForm" autocomplete="off">
+      <input type="password" id="gatePass" placeholder="Password" autocomplete="current-password" />
+      <div style="margin-top:12px"><button class="btn btn-primary" style="width:100%" type="submit">Enter</button></div>
+      <p id="gateMsg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <!-- Admin app -->
+  <div id="app" class="wrap hidden">
+    <header class="top">
+      <div class="brand"><img src="images/favicon-32.png" alt="" /><div><strong>BHR Admin</strong><div class="muted" style="font-size:.8rem">Artists &amp; music</div></div></div>
+      <button class="btn btn-outline btn-sm" id="logoutBtn" type="button">Lock</button>
+    </header>
+
+    <!-- List view -->
+    <section id="listView">
+      <div class="bar" style="margin:0 0 16px">
+        <h2 style="margin:0">Artists &amp; bands</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" id="newBtn" type="button">+ Add new</button>
+      </div>
+      <p class="muted" id="listEmpty">Loading&hellip;</p>
+      <div id="artistList"></div>
+    </section>
+
+    <!-- Editor view -->
+    <section id="editView" class="hidden">
+      <div class="bar" style="margin:0 0 16px">
+        <button class="btn btn-outline btn-sm" id="backBtn" type="button">&larr; Back</button>
+        <span class="spacer"></span>
+        <button class="btn btn-danger btn-sm" id="deleteBtn" type="button">Delete</button>
+      </div>
+      <div class="card">
+        <h2 id="editTitle">New profile</h2>
+        <div class="row2">
+          <div><label for="f-name">Name</label><input id="f-name" /></div>
+          <div><label for="f-slug">Web address (slug) <span class="field-hint">e.g. willie-smith</span></label><input id="f-slug" /></div>
+        </div>
+        <label for="f-tagline">Tagline <span class="field-hint">short line under the name</span></label>
+        <input id="f-tagline" placeholder="Child of God &middot; Singer/Songwriter &middot; Vocal Coach" />
+        <label for="f-role">Role / kind <span class="field-hint">e.g. Recording artist, Band</span></label>
+        <input id="f-role" />
+        <label for="f-bio">Bio</label>
+        <textarea id="f-bio" rows="6"></textarea>
+        <div class="row2">
+          <div>
+            <label for="f-theme">Theme (look)</label>
+            <select id="f-theme">
+              <option value="navy">Navy (default)</option>
+              <option value="whiskey">Whiskey amber</option>
+              <option value="vintage">Vintage film</option>
+              <option value="forest">Forest green</option>
+              <option value="rose">Rose</option>
+              <option value="mono">Mono / minimal</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-sort">Order <span class="field-hint">lower shows first</span></label>
+            <input id="f-sort" type="number" value="100" />
+          </div>
+        </div>
+
+        <label>Main photo</label>
+        <input type="file" id="f-photo" accept="image/*" />
+        <div><img id="photoPrev" class="photo-prev hidden" alt="" /></div>
+
+        <h3 style="margin-top:24px">Links</h3>
+        <div class="row2">
+          <div><label for="l-spotify">Spotify</label><input id="l-spotify" placeholder="https://" /></div>
+          <div><label for="l-apple">Apple Music</label><input id="l-apple" placeholder="https://" /></div>
+          <div><label for="l-youtube">YouTube</label><input id="l-youtube" placeholder="https://" /></div>
+          <div><label for="l-instagram">Instagram</label><input id="l-instagram" placeholder="https://" /></div>
+          <div><label for="l-facebook">Facebook</label><input id="l-facebook" placeholder="https://" /></div>
+          <div><label for="l-website">Website / Linktree</label><input id="l-website" placeholder="https://" /></div>
+        </div>
+
+        <h3 style="margin-top:24px">Music</h3>
+        <div id="trackList"></div>
+        <label for="t-file">Add a track <span class="field-hint">MP3 or WAV</span></label>
+        <input id="t-title" placeholder="Track title" style="margin-bottom:8px" />
+        <input type="file" id="t-file" accept="audio/*" />
+        <div style="margin-top:8px"><button class="btn btn-outline btn-sm" id="addTrackBtn" type="button">Upload track</button> <span class="status" id="trackStatus"></span></div>
+
+        <div class="bar">
+          <label for="f-pub" style="display:flex;align-items:center;gap:8px;margin:0;cursor:pointer"><input type="checkbox" id="f-pub" checked style="width:auto" /> Published (visible on site)</label>
+          <span class="spacer"></span>
+          <span class="status" id="saveStatus"></span>
+          <button class="btn btn-primary" id="saveBtn" type="button">Save</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
