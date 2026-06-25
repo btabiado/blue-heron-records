@@ -340,7 +340,7 @@
   /* ---- Contact form -> pre-filled email ---- */
   var form = document.getElementById("contactForm");
   var formStatus = document.getElementById("formStatus");
-  function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();

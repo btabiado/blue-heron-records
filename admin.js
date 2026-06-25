@@ -22,7 +22,7 @@
     if (extra) for (var k in extra) h[k] = extra[k];
     return h;
   }
-  function jget(path) { return fetch(SB + "/rest/v1/" + path, { headers: H() }).then(function (r) { return r.json(); }); }
+  function jget(path) { return fetch(SB + "/rest/v1/" + path, { headers: H() }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   function listArtists() { return jget("artists?select=*&order=sort.asc,name.asc"); }
   function saveArtist(a, id) {
     var isUpd = !!id;
