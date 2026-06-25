@@ -120,8 +120,11 @@ strong { color: var(--cream); font-weight: 600; }
 .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: radial-gradient(120% 90% at 50% 8%, #0e1838 0%, var(--bg) 60%); text-align: center; }
 .hero-glow { position: absolute; inset: 0; background: radial-gradient(60% 45% at 50% 30%, rgba(168,196,216,.14), transparent 70%); z-index: 1; }
 .hero-content { position: relative; z-index: 3; max-width: 820px; margin: 0 auto; padding: 120px 0 96px; }
-.hero-logo-vid { width: min(460px, 84vw); aspect-ratio: 1; margin: 0 auto 8px; border-radius: 28px; overflow: hidden; box-shadow: 0 26px 70px rgba(0,0,0,.55); background: #0b1326; }
-.hero-logo-vid video, .hero-logo-vid img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* The logo video is 640x640 with a white background; the actual disc is ~534px wide,
+   centered at (292,288) — up & left of frame center. We position the video so the disc
+   fills the circular frame exactly (no white, centered). */
+.hero-logo-vid { position: relative; width: min(480px, 84vw); aspect-ratio: 1; margin: 0 auto 8px; border-radius: 50%; overflow: hidden; filter: drop-shadow(0 24px 60px rgba(0,0,0,.55)); background: #0b1326; }
+.hero-logo-vid video, .hero-logo-vid img { position: absolute; width: 120%; height: 120%; left: -4.75%; top: -4%; object-fit: cover; display: block; }
 .hero .eyebrow { color: var(--sand); margin-top: 26px; }
 .hero h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }  /* logo carries the name; keep h1 for a11y */
 .hero-sub { font-size: clamp(1.08rem, 2.1vw, 1.3rem); max-width: 600px; margin: 0 auto 2rem; color: var(--cream); opacity: .92; }
