@@ -207,7 +207,7 @@
     $("tab-artists").classList.toggle("hidden", name !== "artists");
     $("tab-shows").classList.toggle("hidden", name !== "shows");
     $("tab-subs").classList.toggle("hidden", name !== "subs");
-    Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
+    Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { var on = b.getAttribute("data-tab") === name; b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     if (name === "artists") { show(listView); hide(editView); loadList(); }
     else if (name === "shows") { var sf = $("s-form"); if (sf) sf.classList.add("hidden"); loadShows(); fillArtistDropdown(); }
     else if (name === "subs") { loadSubs(); }
