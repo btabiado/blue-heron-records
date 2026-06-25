@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://blueheronrecords.com/images/og.jpg" />
 
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; base-uri 'none'; form-action 'self' mailto: tel: https://buttondown.com; frame-src https://buttondown.com; frame-ancestors 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; base-uri 'none'; form-action 'self' mailto: tel: https://buttondown.com; frame-src https://buttondown.com; frame-ancestors 'none'" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260614b" />
+  <link rel="stylesheet" href="styles.css?v=20260624" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 
   <script type="application/ld+json">
@@ -139,10 +139,12 @@
     <section class="section split gtku" id="about">
       <div class="container split-grid">
         <div class="split-media reveal">
-          <video class="logo-video" autoplay muted loop playsinline poster="images/logo-anim-poster.jpg" aria-label="Animated Blue Heron Records logo">
-            <source src="images/logo-anim.mp4" type="video/mp4" />
-            <img src="images/logo.png" alt="Blue Heron Records logo — a blue heron before a full moon" />
-          </video>
+          <div class="logo-round">
+            <video class="logo-video" autoplay muted loop playsinline poster="images/logo-video-poster.jpg" aria-label="Animated Blue Heron Records logo">
+              <source src="images/logo-video.mp4" type="video/mp4" />
+              <img src="images/logo.png" alt="Blue Heron Records logo — a heron in flight over a vinyl record" />
+            </video>
+          </div>
         </div>
         <div class="split-text reveal">
           <p class="eyebrow">Get to know us</p>
@@ -396,11 +398,9 @@
           <div class="listen-art listen-record" aria-hidden="true"><img src="images/logo-hero.png" alt="" loading="lazy" /></div>
           <div class="listen-body">
             <p class="listen-label">Featured &middot; Willie Smith</p>
-            <h3>A new original, fresh from the studio</h3>
-            <p>Press play for the demo &mdash; full streaming links land here as each release drops. More from Carol Jenkins and the BHR family soon.</p>
-            <!-- TODO: when Willie's demo MP3 is added (e.g. audio/willie-demo.mp3), replace this notice with:
-                 <audio class="listen-player" controls preload="none"><source src="audio/willie-demo.mp3" type="audio/mpeg"></audio> -->
-            <p class="listen-soon" role="note"><span aria-hidden="true">&#9834;</span> Demo coming soon &mdash; the first single will play right here.</p>
+            <h3>&ldquo;When God Made A Woman&rdquo;</h3>
+            <p>Blue Heron Records&rsquo; latest mixed &amp; mastered track &mdash; written and performed by Willie Smith, Chicago Southside&rsquo;s Romantic Cowboy. Press play.</p>
+            <audio id="listenPlayer" class="listen-player" controls preload="none" src="https://ofolxqldojhifnqmmsws.supabase.co/storage/v1/object/public/music/willie-when-god-made-a-woman.m4a"></audio>
             <div class="listen-links">
               <a class="chip" href="#" aria-label="Spotify — coming soon">Spotify</a>
               <a class="chip" href="#" aria-label="Apple Music — coming soon">Apple Music</a>
@@ -655,7 +655,7 @@
       </div>
     </div>
     <!-- Discreet on-theme handle: the little blue heron, bottom-left -> add/remove panel -->
-    <button type="button" class="edit-toggle" id="editToggle" aria-label="Manage shows" title="Manage shows">
+    <button type="button" class="edit-toggle" id="editToggle" aria-label="Studio admin" title="Studio admin">
       <img src="images/favicon-32.png" alt="" width="26" height="26" />
     </button>
   </main>
@@ -707,6 +707,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260614c"></script>
+  <script src="app.js?v=20260624"></script>
 </body>
 </html>

@@ -229,7 +229,7 @@
     function closeModal() { if (!modal) return; modal.hidden = true; document.body.style.overflow = ""; if (note) note.textContent = ""; }
 
     if (openBtn) openBtn.addEventListener("click", function () { openModal(false); });
-    if (heron) heron.addEventListener("click", function () { openModal(true); });
+    if (heron) heron.addEventListener("click", function () { window.location.href = "admin.html"; });
     if (closeBtn) closeBtn.addEventListener("click", closeModal);
     if (modal) modal.addEventListener("click", function (e) { if (e.target.hasAttribute("data-close")) closeModal(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && modal && !modal.hidden) closeModal(); });

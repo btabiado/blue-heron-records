@@ -21,6 +21,10 @@
     header.top .brand { display:flex; align-items:center; gap:12px; }
     header.top img { width:38px; height:38px; border-radius:50%; }
     .muted { color:var(--muted); }
+    .tabs { display:flex; gap:6px; margin-bottom:22px; border-bottom:1px solid var(--line); }
+    .tab-btn { background:none; border:none; color:var(--muted); font:inherit; font-weight:600; padding:10px 16px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; }
+    .tab-btn.active { color:var(--moon); border-bottom-color:var(--heron); }
+    .tab-btn:hover { color:var(--moon); }
     .btn { font:inherit; font-weight:600; border:none; border-radius:10px; padding:.7em 1.1em; cursor:pointer; }
     .btn-primary { background:var(--moon); color:#0a1024; }
     .btn-outline { background:transparent; color:var(--moon); border:1px solid var(--line2); }
@@ -77,6 +81,12 @@
       <button class="btn btn-outline btn-sm" id="logoutBtn" type="button">Lock</button>
     </header>
 
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="artists" type="button">Artists &amp; Bands</button>
+      <button class="tab-btn" data-tab="shows" type="button">Shows</button>
+    </nav>
+
+    <div id="tab-artists">
     <!-- List view -->
     <section id="listView">
       <div class="bar" style="margin:0 0 16px">
@@ -154,8 +164,29 @@
         </div>
       </div>
     </section>
+    </div><!-- /tab-artists -->
+
+    <!-- Shows tab -->
+    <section id="tab-shows" class="hidden">
+      <div class="card">
+        <h2>Add a show</h2>
+        <div class="row2">
+          <div><label for="s-date">Date</label><input type="date" id="s-date" /></div>
+          <div><label for="s-time">Time</label><input id="s-time" placeholder="8:00 PM" /></div>
+        </div>
+        <div class="row2">
+          <div><label for="s-ticket">Ticket link (URL)</label><input id="s-ticket" placeholder="https://" /></div>
+          <div><label for="s-phone">Phone</label><input id="s-phone" placeholder="(630) 555-1234" /></div>
+        </div>
+        <label for="s-desc">What&rsquo;s the event? <span class="field-hint">artist, venue, city</span></label>
+        <textarea id="s-desc" rows="2" placeholder="Willie Smith &mdash; FitzGerald's, Berwyn IL"></textarea>
+        <div class="bar"><span class="status" id="s-status"></span><span class="spacer"></span><button class="btn btn-primary" id="s-add" type="button">Add show</button></div>
+      </div>
+      <h3>Upcoming shows</h3>
+      <div id="s-list"><p class="muted">Loading&hellip;</p></div>
+    </section>
   </div>
 
-  <script src="admin.js"></script>
+  <script src="admin.js?v=2"></script>
 </body>
 </html>

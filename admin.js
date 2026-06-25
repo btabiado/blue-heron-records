@@ -201,4 +201,51 @@
       $("t-title").value = ""; $("t-file").value = ""; $("trackStatus").textContent = "Added ✓"; renderTracks();
     }).catch(function () { $("trackStatus").textContent = "Upload failed."; });
   });
+
+  /* ---------- Tabs ---------- */
+  function setTab(name) {
+    var isArt = name === "artists";
+    $("tab-artists").classList.toggle("hidden", !isArt);
+    $("tab-shows").classList.toggle("hidden", isArt);
+    Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
+    if (isArt) { show(listView); hide(editView); loadList(); } else loadShows();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
+    b.addEventListener("click", function () { setTab(b.getAttribute("data-tab")); });
+  });
+
+  /* ---------- Shows / events ---------- */
+  function loadShows() {
+    var box = $("s-list"); box.innerHTML = '<p class="muted">Loading…</p>';
+    jget("shows?select=*&order=date.asc").then(function (rows) {
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      rows = (rows || []).filter(function (e) { return e.date && new Date(e.date + "T23:59:59") >= today; });
+      if (!rows.length) { box.innerHTML = '<p class="muted">No upcoming shows.</p>'; return; }
+      box.innerHTML = rows.map(function (e) {
+        var dt = new Date(e.date + "T00:00:00");
+        var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        var meta = [e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+      }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
+        b.addEventListener("click", function () {
+          var id = b.closest("[data-id]").getAttribute("data-id");
+          if (!window.confirm("Remove this show?")) return;
+          fetch(SB + "/rest/v1/shows?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadShows);
+        });
+      });
+    }).catch(function () { box.innerHTML = '<p class="muted">Couldn’t load shows.</p>'; });
+  }
+  $("s-add").addEventListener("click", function () {
+    var row = {
+      date: $("s-date").value, time: $("s-time").value.trim() || null,
+      ticket_url: $("s-ticket").value.trim() || null, phone: $("s-phone").value.trim() || null,
+      description: $("s-desc").value.trim() || null
+    };
+    if (!row.date || !row.description) { $("s-status").textContent = "Date and event are required."; return; }
+    $("s-status").textContent = "Adding…";
+    fetch(SB + "/rest/v1/shows", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-desc"].forEach(function (id) { $(id).value = ""; }); loadShows(); })
+      .catch(function () { $("s-status").textContent = "Add failed."; });
+  });
 })();
