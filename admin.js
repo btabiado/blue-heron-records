@@ -227,7 +227,7 @@
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email</button><button class="btn btn-outline btn-sm s-remind" data-ch="text" type="button">Text</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email</button><button class="btn btn-outline btn-sm s-remind" data-ch="text" type="button">Text</button><button class="btn btn-outline btn-sm s-remind" data-ch="both" type="button">Both</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
         b.addEventListener("click", function () {
@@ -259,17 +259,24 @@
         (show.ticket_url ? "Tickets: " + show.ticket_url : ""),
         "", "See you there!", "— Blue Heron Records"
       ].filter(Boolean).join("\n");
-      if (channel === "text") {
-        var phones = subs.map(function (s) { return (s.phone || "").replace(/[^0-9+]/g, ""); }).filter(function (p) { return p.length >= 10; });
+      var emails = subs.map(function (s) { return s.email; }).filter(Boolean);
+      var phones = subs.map(function (s) { return (s.phone || "").replace(/[^0-9+]/g, ""); }).filter(function (p) { return p.length >= 10; });
+      var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
+      function openEmail() { window.location.href = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+      function openText() { window.location.href = "sms:" + phones.join(",") + "?&body=" + encodeURIComponent(body); }
+      if (channel === "both") {
+        if (!emails.length && !phones.length) { toast("No contacts on the list yet"); return; }
+        toast("Opening email (" + emails.length + ") + Messages (" + phones.length + ")…");
+        if (emails.length) openEmail();
+        if (phones.length) setTimeout(openText, 1200);
+      } else if (channel === "text") {
         if (!phones.length) { toast("No phone numbers on the list yet"); return; }
         toast("Opening Messages — " + phones.length + " number" + (phones.length === 1 ? "" : "s"));
-        window.location.href = "sms:" + phones.join(",") + "?&body=" + encodeURIComponent(body);
+        openText();
       } else {
-        var emails = subs.map(function (s) { return s.email; }).filter(Boolean);
         if (!emails.length) { toast("No email subscribers yet"); return; }
-        var subject = "Blue Heron Records — " + (show.description || "Upcoming show") + " (" + when + ")";
         toast("Opening your email — " + emails.length + " BCC'd");
-        window.location.href = "mailto:?bcc=" + encodeURIComponent(emails.join(",")) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        openEmail();
       }
     }).catch(function () { toast("Couldn’t load the mailing list"); });
   }
