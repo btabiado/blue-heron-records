@@ -170,7 +170,12 @@
 
     <!-- Shows tab -->
     <section id="tab-shows" class="hidden">
-      <div class="card">
+      <div class="bar" style="margin:0 0 16px">
+        <h2 style="margin:0">Upcoming shows</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" id="s-newBtn" type="button">+ Add a show</button>
+      </div>
+      <div class="card hidden" id="s-form">
         <h2>Add a show</h2>
         <label for="s-artist">Artist / band</label>
         <select id="s-artist"><option value="">Choose from the roster&hellip;</option></select>
@@ -186,9 +191,8 @@
         <input id="s-loc" placeholder="FitzGerald&rsquo;s &mdash; Berwyn, IL" />
         <label for="s-desc">What&rsquo;s the event? <span class="field-hint">artist / act</span></label>
         <textarea id="s-desc" rows="2" placeholder="Willie Smith"></textarea>
-        <div class="bar"><span class="status" id="s-status"></span><span class="spacer"></span><button class="btn btn-primary" id="s-add" type="button">Add show</button></div>
+        <div class="bar"><button class="btn btn-outline btn-sm" id="s-cancel" type="button">Cancel</button><span class="status" id="s-status"></span><span class="spacer"></span><button class="btn btn-primary" id="s-add" type="button">Add show</button></div>
       </div>
-      <h3>Upcoming shows</h3>
       <div id="s-list"><p class="muted">Loading&hellip;</p></div>
     </section>
 
@@ -204,6 +208,6 @@
     </section>
   </div>
 
-  <script src="admin.js?v=4"></script>
+  <script src="admin.js?v=5"></script>
 </body>
 </html>

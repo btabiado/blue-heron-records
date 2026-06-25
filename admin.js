@@ -209,7 +209,7 @@
     $("tab-subs").classList.toggle("hidden", name !== "subs");
     Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
     if (name === "artists") { show(listView); hide(editView); loadList(); }
-    else if (name === "shows") { loadShows(); fillArtistDropdown(); }
+    else if (name === "shows") { var sf = $("s-form"); if (sf) sf.classList.add("hidden"); loadShows(); fillArtistDropdown(); }
     else if (name === "subs") { loadSubs(); }
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
@@ -249,9 +249,14 @@
     if (!row.date || !row.description) { $("s-status").textContent = "Date and event are required."; return; }
     $("s-status").textContent = "Adding…";
     fetch(SB + "/rest/v1/shows", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
-      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-loc", "s-desc", "s-artist"].forEach(function (id) { $(id).value = ""; }); loadShows(); })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-loc", "s-desc", "s-artist"].forEach(function (id) { $(id).value = ""; }); $("s-form").classList.add("hidden"); loadShows(); })
       .catch(function () { $("s-status").textContent = "Add failed."; });
   });
+  if ($("s-newBtn")) $("s-newBtn").addEventListener("click", function () {
+    $("s-form").classList.remove("hidden"); $("s-status").textContent = "";
+    var i = $("s-form").querySelector("select,input,textarea"); if (i) i.focus();
+  });
+  if ($("s-cancel")) $("s-cancel").addEventListener("click", function () { $("s-form").classList.add("hidden"); });
 
   /* ---------- Artist dropdown (links a show to a profile) ---------- */
   function fillArtistDropdown() {
