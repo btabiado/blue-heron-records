@@ -88,6 +88,7 @@
       <button class="tab-btn active" data-tab="artists" type="button" role="tab" aria-selected="true">Artists &amp; Bands</button>
       <button class="tab-btn" data-tab="shows" type="button" role="tab" aria-selected="false">Shows</button>
       <button class="tab-btn" data-tab="subs" type="button" role="tab" aria-selected="false">Mailing list</button>
+      <button class="tab-btn" data-tab="listen" type="button" role="tab" aria-selected="false">Listen</button>
     </nav>
 
     <div id="tab-artists">
@@ -211,8 +212,23 @@
       <p class="muted" id="subsCount"></p>
       <div id="subsList"></div>
     </section>
+
+    <!-- Listen / featured-song streaming links -->
+    <section id="tab-listen" class="hidden" role="tabpanel">
+      <div class="bar" style="margin:0 0 6px"><h2 style="margin:0">Home page — featured song links</h2></div>
+      <p class="muted" style="font-size:.9rem">Paste the streaming link for each service. Whatever you fill in shows up as a button under the featured song on the home page — leave a box empty and that button stays hidden.</p>
+      <div class="card">
+        <div class="row2">
+          <div><label for="ls-spotify">Spotify</label><input id="ls-spotify" placeholder="https://open.spotify.com/…" /></div>
+          <div><label for="ls-apple">Apple Music</label><input id="ls-apple" placeholder="https://music.apple.com/…" /></div>
+          <div><label for="ls-amazon">Amazon Music</label><input id="ls-amazon" placeholder="https://music.amazon.com/…" /></div>
+          <div><label for="ls-youtube">YouTube</label><input id="ls-youtube" placeholder="https://youtube.com/…" /></div>
+        </div>
+        <div class="bar"><button class="btn btn-primary" id="ls-save" type="button">Save links</button><span class="status" id="ls-status"></span></div>
+      </div>
+    </section>
   </div>
 
-  <script src="admin.js?v=12"></script>
+  <script src="admin.js?v=13"></script>
 </body>
 </html>

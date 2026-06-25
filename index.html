@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20260625d" />
+  <link rel="stylesheet" href="styles.css?v=20260625e" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 
   <script type="application/ld+json">
@@ -303,11 +303,12 @@
             <h3>&ldquo;When God Made A Woman&rdquo;</h3>
             <p>Blue Heron Records&rsquo; latest mixed &amp; mastered track &mdash; written and performed by Willie Smith, Chicago Southside&rsquo;s Romantic Cowboy. Press play.</p>
             <audio id="listenPlayer" class="listen-player" controls controlslist="nodownload noplaybackrate" preload="none" aria-label="When God Made A Woman — Willie Smith" src="https://ofolxqldojhifnqmmsws.supabase.co/storage/v1/object/public/music/willie-when-god-made-a-woman.m4a"></audio>
-            <div class="listen-links">
-              <a class="chip" href="#listen" aria-label="Spotify — coming soon">Spotify</a>
-              <a class="chip" href="#listen" aria-label="Apple Music — coming soon">Apple Music</a>
-              <a class="chip" href="#listen" aria-label="Amazon Music — coming soon">Amazon</a>
-              <a class="chip" href="#listen" aria-label="YouTube — coming soon">YouTube</a>
+            <div class="listen-links" id="listenLinks">
+              <a class="chip" id="lk-spotify" target="_blank" rel="noopener" hidden>Spotify</a>
+              <a class="chip" id="lk-apple" target="_blank" rel="noopener" hidden>Apple Music</a>
+              <a class="chip" id="lk-amazon" target="_blank" rel="noopener" hidden>Amazon</a>
+              <a class="chip" id="lk-youtube" target="_blank" rel="noopener" hidden>YouTube</a>
+              <span class="listen-soon muted" id="listenSoon">Coming soon to streaming services.</span>
             </div>
           </div>
         </div>
@@ -722,6 +723,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260624h"></script>
+  <script src="app.js?v=20260625a"></script>
 </body>
 </html>

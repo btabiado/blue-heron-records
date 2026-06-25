@@ -316,6 +316,7 @@ strong { color: var(--cream); font-weight: 600; }
 .listen-soon { display: flex; align-items: center; gap: .5em; width: 100%; margin: 14px 0 16px; padding: .85em 1.1em; border: 1px dashed var(--line-2); border-radius: var(--radius-sm); background: var(--bg-2); color: var(--muted); font-size: .92rem; }
 .listen-soon span { color: var(--heron-light); font-size: 1.1em; }
 .listen-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.listen-soon { font-size: .85rem; color: var(--muted); align-self: center; }
 .chip { display: inline-flex; align-items: center; justify-content: center; gap: .4em; min-height: 40px; font-family: "Inter", sans-serif; font-size: .82rem; font-weight: 600; color: var(--heron-light); background: rgba(111,147,176,.12); border: 1px solid rgba(111,147,176,.3); padding: .5em 1.1em; border-radius: 999px; }
 .chip:hover { background: rgba(111,147,176,.2); color: var(--moon); }
 

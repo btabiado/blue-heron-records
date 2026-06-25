@@ -7,13 +7,9 @@
   var BUSINESS_EMAIL = "joeleduc@blueheronrecords.com";
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- Respect reduced-motion for autoplay video (show poster instead) ---- */
-  if (reduceMotion) {
-    document.querySelectorAll("video[autoplay]").forEach(function (v) {
-      v.removeAttribute("autoplay");
-      try { v.pause(); } catch (e) {}
-    });
-  }
+  /* ---- The logo videos (hero + 'Get to know us') are the brand centerpiece,
+         so they play even under reduced-motion, per the owner's request.
+         They're muted, looping, and non-flashing. ---- */
 
   /* ---- Deter casual audio download (hide download button + block right-click) ---- */
   Array.prototype.forEach.call(document.querySelectorAll("audio"), function (a) {
@@ -444,6 +440,29 @@
         var bands = pub.filter(function (a) { return sortv(a) >= 100; });
         if (ag && arts.length) ag.innerHTML = arts.map(card).join("");
         if (bg && bands.length) bg.innerHTML = bands.map(card).join("");
+      })
+      .catch(function () {});
+  })();
+
+  /* ---- Listen: featured-song streaming links (from Supabase settings) ---- */
+  (function () {
+    var box = document.getElementById("listenLinks");
+    if (!box) return;
+    var U = "https://ofolxqldojhifnqmmsws.supabase.co";
+    var K = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
+    var MAP = { listen_spotify: "lk-spotify", listen_apple: "lk-apple", listen_amazon: "lk-amazon", listen_youtube: "lk-youtube" };
+    fetch(U + "/rest/v1/settings?select=key,value&key=in.(listen_spotify,listen_apple,listen_amazon,listen_youtube)", { headers: { apikey: K, Authorization: "Bearer " + K } })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) {
+        var shown = 0;
+        (rows || []).forEach(function (row) {
+          var id = MAP[row.key]; if (!id) return;
+          var el = document.getElementById(id); if (!el) return;
+          var u = (row.value || "").trim();
+          if (/^https?:\/\//i.test(u)) { el.href = u; el.removeAttribute("hidden"); el.setAttribute("aria-label", el.textContent + " — listen"); shown++; }
+        });
+        var soon = document.getElementById("listenSoon");
+        if (soon) soon.hidden = shown > 0;
       })
       .catch(function () {});
   })();

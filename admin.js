@@ -207,13 +207,38 @@
     $("tab-artists").classList.toggle("hidden", name !== "artists");
     $("tab-shows").classList.toggle("hidden", name !== "shows");
     $("tab-subs").classList.toggle("hidden", name !== "subs");
+    $("tab-listen").classList.toggle("hidden", name !== "listen");
     Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) { var on = b.getAttribute("data-tab") === name; b.classList.toggle("active", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     if (name === "artists") { show(listView); hide(editView); loadList(); }
     else if (name === "shows") { var sf = $("s-form"); if (sf) sf.classList.add("hidden"); loadShows(); fillArtistDropdown(); }
     else if (name === "subs") { loadSubs(); }
+    else if (name === "listen") { loadListen(); }
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab-btn"), function (b) {
     b.addEventListener("click", function () { setTab(b.getAttribute("data-tab")); });
+  });
+
+  /* ---------- Listen: featured-song streaming links ---------- */
+  var LS_KEYS = { "ls-spotify": "listen_spotify", "ls-apple": "listen_apple", "ls-amazon": "listen_amazon", "ls-youtube": "listen_youtube" };
+  function loadListen() {
+    if ($("ls-status")) $("ls-status").textContent = "";
+    jget("settings?select=key,value&key=in.(listen_spotify,listen_apple,listen_amazon,listen_youtube)").then(function (rows) {
+      var map = {};
+      (rows || []).forEach(function (r) { map[r.key] = r.value || ""; });
+      Object.keys(LS_KEYS).forEach(function (id) { if ($(id)) $(id).value = map[LS_KEYS[id]] || ""; });
+    }).catch(function () { if ($("ls-status")) $("ls-status").textContent = "Couldn’t load links."; });
+  }
+  if ($("ls-save")) $("ls-save").addEventListener("click", function () {
+    var rows = Object.keys(LS_KEYS).map(function (id) { return { key: LS_KEYS[id], value: ($(id).value || "").trim() }; });
+    $("ls-status").textContent = "Saving…";
+    fetch(SB + "/rest/v1/settings?on_conflict=key", {
+      method: "POST",
+      headers: H({ "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" }),
+      body: JSON.stringify(rows)
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
+      $("ls-status").textContent = "Saved ✓";
+    }).catch(function () { $("ls-status").textContent = "Save failed."; });
   });
 
   /* ---------- Shows / events ---------- */
