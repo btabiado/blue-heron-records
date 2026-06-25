@@ -152,8 +152,9 @@ strong { color: var(--cream); font-weight: 600; }
 .split-media img.studio-shot { aspect-ratio: 3 / 2; height: auto; }
 .split-media::after { content: ""; position: absolute; inset: auto auto -18px -18px; width: 55%; height: 55%; border-radius: var(--radius); background: linear-gradient(135deg, var(--heron-deep), var(--taupe)); z-index: -1; opacity: .55; }
 .split-media.no-deco::after { display: none; }
-.logo-round { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--line-2); max-width: 440px; margin: 0 auto; background: #0a1326; }
-.logo-round video { width: 100%; height: 100%; object-fit: contain; display: block; border: none; border-radius: 0; box-shadow: none; }
+.logo-round { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: var(--shadow-lg); max-width: 440px; margin: 0 auto; background: #0a1326; }
+/* Crop to the disc (534px @ 292,288 in the 640 frame) so it's a clean circle, no white. */
+.logo-round video, .logo-round img { position: absolute; width: 120%; height: 120%; left: -4.75%; top: -4%; object-fit: cover; display: block; border: none; border-radius: 0; box-shadow: none; }
 .split-text h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); }
 .split-text p { color: var(--soft); }
 .callout { margin-top: 1.4rem; padding: 18px 20px; border-left: 3px solid var(--heron); background: var(--bg-2); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--muted); }
