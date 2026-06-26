@@ -242,8 +242,10 @@
           <div><label for="b-name">Name</label><input id="b-name" placeholder="e.g. Bayou Blues Band" /></div>
           <div><label for="b-tag">Tag <span class="field-hint">optional badge</span></label><input id="b-tag" placeholder="e.g. Free at charity &amp; care events" /></div>
         </div>
-        <label for="b-desc">Description</label>
-        <input id="b-desc" placeholder="e.g. New Orleans &amp; Chicago blues." />
+        <div class="row2">
+          <div><label for="b-desc">Description</label><input id="b-desc" placeholder="e.g. New Orleans &amp; Chicago blues." /></div>
+          <div><label for="b-sort">Display order <span class="field-hint">lower shows first</span></label><input id="b-sort" type="number" inputmode="numeric" placeholder="100" /></div>
+        </div>
         <div class="bar"><button class="btn btn-primary" id="b-add" type="button">Add act</button><button class="btn btn-outline" id="b-cancel" type="button">Cancel</button><span class="status" id="b-status"></span></div>
       </div>
       <p class="muted" id="b-empty">Loading&hellip;</p>
@@ -251,6 +253,6 @@
     </section>
   </div>
 
-  <script src="admin.js?v=16"></script>
+  <script src="admin.js?v=17"></script>
 </body>
 </html>

@@ -225,7 +225,7 @@
   var editingBandId = null;
   function bandFormReset() {
     editingBandId = null;
-    ["b-name", "b-desc", "b-tag"].forEach(function (id) { if ($(id)) $(id).value = ""; });
+    ["b-name", "b-desc", "b-tag", "b-sort"].forEach(function (id) { if ($(id)) $(id).value = ""; });
     if ($("b-add")) $("b-add").textContent = "Add act";
     if ($("b-formTitle")) $("b-formTitle").textContent = "Add an act";
     if ($("b-status")) $("b-status").textContent = "";
@@ -237,6 +237,7 @@
     $("b-name").value = b.name || "";
     $("b-desc").value = b.description || "";
     $("b-tag").value = b.tag || "";
+    if ($("b-sort")) $("b-sort").value = (b.sort == null ? "" : b.sort);
     if ($("b-add")) $("b-add").textContent = "Save changes";
     if ($("b-formTitle")) $("b-formTitle").textContent = "Edit act";
     $("b-status").textContent = "";
@@ -251,7 +252,7 @@
       if (!bandRows.length) { $("b-empty").textContent = "No acts yet — add one."; box.innerHTML = ""; return; }
       $("b-empty").textContent = "";
       box.innerHTML = bandRows.map(function (b) {
-        var meta = [b.description, b.tag].filter(Boolean).map(esc).join(" · ");
+        var meta = ["Order " + (b.sort == null ? 100 : b.sort), b.description, b.tag].filter(Boolean).map(esc).join(" · ");
         return '<div class="artist-row" data-id="' + esc(b.id) + '"><div class="meta"><h3>' + esc(b.name || "Untitled") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm b-edit" type="button">Edit</button><button class="btn btn-danger btn-sm b-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".b-edit"), function (btn) {
@@ -275,12 +276,12 @@
   if ($("b-add")) $("b-add").addEventListener("click", function () {
     var name = $("b-name").value.trim();
     if (!name) { $("b-status").textContent = "Name is required."; return; }
-    var row = { name: name, description: $("b-desc").value.trim() || null, tag: $("b-tag").value.trim() || null };
+    var sortVal = parseInt(($("b-sort").value || "").trim(), 10);
+    var row = { name: name, description: $("b-desc").value.trim() || null, tag: $("b-tag").value.trim() || null, sort: isNaN(sortVal) ? 100 : sortVal };
     var editing = editingBandId;
     $("b-status").textContent = editing ? "Saving…" : "Adding…";
     var url = editing ? SB + "/rest/v1/bands?id=eq." + editing : SB + "/rest/v1/bands";
     var method = editing ? "PATCH" : "POST";
-    if (!editing) row.sort = 100;
     fetch(url, { method: method, headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
       .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("b-status").textContent = editing ? "Saved ✓" : "Added ✓"; $("b-form").classList.add("hidden"); bandFormReset(); loadBands(); })
       .catch(function () { $("b-status").textContent = editing ? "Save failed." : "Add failed."; });
