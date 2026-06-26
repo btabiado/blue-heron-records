@@ -310,29 +310,55 @@
   });
 
   /* ---------- Shows / events ---------- */
+  var showRows = [];
+  var editingShowId = null;
+  function showFormReset() {
+    editingShowId = null;
+    ["s-date", "s-time", "s-ticket", "s-phone", "s-loc", "s-desc", "s-artist"].forEach(function (id) { if ($(id)) $(id).value = ""; });
+    if ($("s-add")) $("s-add").textContent = "Add show";
+    if ($("s-formTitle")) $("s-formTitle").textContent = "Add a show";
+    if ($("s-status")) $("s-status").textContent = "";
+  }
+  function showEdit(id) {
+    var e = showRows.filter(function (x) { return String(x.id) === String(id); })[0];
+    if (!e) return;
+    editingShowId = e.id;
+    $("s-date").value = e.date || ""; $("s-time").value = e.time || ""; $("s-ticket").value = e.ticket_url || "";
+    $("s-phone").value = e.phone || ""; $("s-loc").value = e.location || ""; $("s-desc").value = e.description || "";
+    if ($("s-artist")) $("s-artist").value = e.artist_slug || "";
+    if ($("s-add")) $("s-add").textContent = "Save changes";
+    if ($("s-formTitle")) $("s-formTitle").textContent = "Edit show";
+    $("s-status").textContent = "";
+    $("s-form").classList.remove("hidden");
+    $("s-form").scrollIntoView({ block: "nearest" });
+    $("s-date").focus();
+  }
   function loadShows() {
     var box = $("s-list"); box.innerHTML = '<p class="muted">Loading…</p>';
     jget("shows?select=*&order=date.asc").then(function (rows) {
       var today = new Date(); today.setHours(0, 0, 0, 0);
-      rows = (rows || []).filter(function (e) { return e.date && new Date(e.date + "T23:59:59") >= today; });
-      if (!rows.length) { box.innerHTML = '<p class="muted">No upcoming shows.</p>'; return; }
-      box.innerHTML = rows.map(function (e) {
+      showRows = (rows || []).filter(function (e) { return e.date && new Date(e.date + "T23:59:59") >= today; });
+      if (!showRows.length) { box.innerHTML = '<p class="muted">No upcoming shows.</p>'; return; }
+      box.innerHTML = showRows.map(function (e) {
         var dt = new Date(e.date + "T00:00:00");
         var when = isNaN(dt) ? esc(e.date) : dt.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         var meta = [e.location, e.time, e.phone, e.ticket_url].filter(Boolean).map(esc).join(" · ");
-        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email the list</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
+        return '<div class="artist-row" data-id="' + esc(e.id) + '"><div class="meta"><h3>' + when + " · " + esc(e.description || "Show") + "</h3><p>" + meta + '</p></div><button class="btn btn-outline btn-sm s-remind" data-ch="email" type="button">Email the list</button><button class="btn btn-outline btn-sm s-edit" type="button">Edit</button><button class="btn btn-danger btn-sm s-del" type="button">Remove</button></div>';
       }).join("");
       Array.prototype.forEach.call(box.querySelectorAll(".s-del"), function (b) {
         b.addEventListener("click", function () {
           var id = b.closest("[data-id]").getAttribute("data-id");
           if (!window.confirm("Remove this show?")) return;
-          fetch(SB + "/rest/v1/shows?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(loadShows);
+          fetch(SB + "/rest/v1/shows?id=eq." + id, { method: "DELETE", headers: H({ Prefer: "return=minimal" }) }).then(function () { if (String(editingShowId) === String(id)) showFormReset(); loadShows(); });
         });
+      });
+      Array.prototype.forEach.call(box.querySelectorAll(".s-edit"), function (b) {
+        b.addEventListener("click", function () { showEdit(b.closest("[data-id]").getAttribute("data-id")); });
       });
       Array.prototype.forEach.call(box.querySelectorAll(".s-remind"), function (b) {
         b.addEventListener("click", function () {
           var id = b.closest("[data-id]").getAttribute("data-id");
-          var show = rows.filter(function (x) { return String(x.id) === String(id); })[0];
+          var show = showRows.filter(function (x) { return String(x.id) === String(id); })[0];
           if (show) sendReminder(show);
         });
       });
@@ -363,21 +389,29 @@
     var row = {
       date: $("s-date").value, time: $("s-time").value.trim() || null,
       ticket_url: $("s-ticket").value.trim() || null, phone: $("s-phone").value.trim() || null,
-      description: $("s-desc").value.trim() || null
+      description: $("s-desc").value.trim() || null,
+      location: $("s-loc").value.trim() || null,
+      artist_slug: $("s-artist").value || null
     };
-    var loc = $("s-loc").value.trim(); if (loc) row.location = loc;
-    var aslug = $("s-artist").value; if (aslug) row.artist_slug = aslug;
     if (!row.date || !row.description) { $("s-status").textContent = "Date and event are required."; return; }
-    $("s-status").textContent = "Adding…";
-    fetch(SB + "/rest/v1/shows", { method: "POST", headers: H({ "Content-Type": "application/json", Prefer: "return=minimal" }), body: JSON.stringify(row) })
-      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); $("s-status").textContent = "Added ✓"; ["s-date", "s-time", "s-ticket", "s-phone", "s-loc", "s-desc", "s-artist"].forEach(function (id) { $(id).value = ""; }); $("s-form").classList.add("hidden"); loadShows(); })
-      .catch(function () { $("s-status").textContent = "Add failed."; });
+    var editing = editingShowId;
+    $("s-status").textContent = editing ? "Saving…" : "Adding…";
+    var url = editing ? SB + "/rest/v1/shows?id=eq." + editing : SB + "/rest/v1/shows";
+    var method = editing ? "PATCH" : "POST";
+    fetch(url, { method: method, headers: H({ "Content-Type": "application/json", Prefer: "return=representation" }), body: JSON.stringify(row) })
+      .then(function (r) { if (!r.ok) return r.text().then(function (t) { throw new Error(t); }); return r.json(); })
+      .then(function (data) {
+        if (editing && (!data || !data.length)) { $("s-status").textContent = "Couldn’t save — the database needs the shows ‘update’ permission (run the one-line SQL)."; return; }
+        $("s-status").textContent = editing ? "Saved ✓" : "Added ✓"; $("s-form").classList.add("hidden"); showFormReset(); loadShows();
+      })
+      .catch(function () { $("s-status").textContent = editing ? "Save failed." : "Add failed."; });
   });
   if ($("s-newBtn")) $("s-newBtn").addEventListener("click", function () {
-    $("s-form").classList.remove("hidden"); $("s-status").textContent = "";
+    showFormReset();
+    $("s-form").classList.remove("hidden");
     var i = $("s-form").querySelector("select,input,textarea"); if (i) i.focus();
   });
-  if ($("s-cancel")) $("s-cancel").addEventListener("click", function () { $("s-form").classList.add("hidden"); });
+  if ($("s-cancel")) $("s-cancel").addEventListener("click", function () { $("s-form").classList.add("hidden"); showFormReset(); });
 
   /* ---------- Artist dropdown (links a show to a profile) ---------- */
   function fillArtistDropdown() {
