@@ -1,11 +1,12 @@
 /* Blue Heron Records — admin (artists + music). Static page, talks to Supabase via REST.
-   Gated by a simple client password (music2026), per the owner's choice. */
+   Sign-in is Supabase Auth (email + password). The publishable key stays public;
+   row writes must be limited to the authenticated role in Supabase RLS. */
 (function () {
   "use strict";
 
   var SB = "https://ofolxqldojhifnqmmsws.supabase.co";
   var KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
-  var PASS = "music2026";
+  var SESSION_KEY = "bhr_admin_session";
 
   var $ = function (id) { return document.getElementById(id); };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -17,8 +18,49 @@
   }
 
   /* ---------- Supabase REST helpers ---------- */
+  var session = null;
+  function persistSession(data) {
+    session = {
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+      expires_at: data.expires_at || (Math.floor(Date.now() / 1000) + (data.expires_in || 3600))
+    };
+    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) {}
+  }
+  function clearSession() {
+    session = null;
+    try { sessionStorage.removeItem(SESSION_KEY); sessionStorage.removeItem("bhr_admin"); } catch (e) {}
+  }
+  function readSession() {
+    try { session = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null"); } catch (e) { session = null; }
+    if (!session || !session.access_token) { session = null; return Promise.resolve(false); }
+    if (session.expires_at && session.expires_at * 1000 < Date.now() + 30000) return refreshSession();
+    return Promise.resolve(true);
+  }
+  function refreshSession() {
+    if (!session || !session.refresh_token) { clearSession(); return Promise.resolve(false); }
+    return fetch(SB + "/auth/v1/token?grant_type=refresh_token", {
+      method: "POST",
+      headers: { apikey: KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh_token: session.refresh_token })
+    }).then(function (r) {
+      if (!r.ok) { clearSession(); return false; }
+      return r.json().then(function (data) { persistSession(data); return true; });
+    }).catch(function () { clearSession(); return false; });
+  }
+  function signIn(email, password) {
+    return fetch(SB + "/auth/v1/token?grant_type=password", {
+      method: "POST",
+      headers: { apikey: KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: password })
+    }).then(function (r) {
+      if (!r.ok) throw new Error("signin");
+      return r.json();
+    }).then(persistSession);
+  }
   function H(extra) {
-    var h = { apikey: KEY, Authorization: "Bearer " + KEY };
+    if (!session || !session.access_token) throw new Error("signed out");
+    var h = { apikey: KEY, Authorization: "Bearer " + session.access_token };
     if (extra) for (var k in extra) h[k] = extra[k];
     return h;
   }
@@ -47,16 +89,24 @@
   }
   function slugify(s) { return String(s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 
-  /* ---------- Password gate ---------- */
+  /* ---------- Sign-in gate (Supabase Auth) ---------- */
   var gate = $("gate"), app = $("app");
   function unlock() { hide(gate); show(app); loadList(); }
-  if (sessionStorage.getItem("bhr_admin") === "1") unlock();
+  try { sessionStorage.removeItem("bhr_admin"); } catch (e) {}
+  readSession().then(function (ok) { if (ok) unlock(); });
   $("gateForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    if ($("gatePass").value === PASS) { sessionStorage.setItem("bhr_admin", "1"); unlock(); }
-    else { $("gateMsg").textContent = "Wrong password."; $("gatePass").value = ""; }
+    $("gateMsg").textContent = "Signing in…";
+    signIn($("gateEmail").value.trim(), $("gatePass").value).then(function () {
+      $("gatePass").value = "";
+      $("gateMsg").textContent = "";
+      unlock();
+    }).catch(function () {
+      $("gateMsg").textContent = "That email or password wasn’t accepted.";
+      $("gatePass").value = "";
+    });
   });
-  $("logoutBtn").addEventListener("click", function () { sessionStorage.removeItem("bhr_admin"); location.reload(); });
+  $("logoutBtn").addEventListener("click", function () { clearSession(); location.reload(); });
 
   /* ---------- List view ---------- */
   var listView = $("listView"), editView = $("editView");

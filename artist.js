@@ -100,13 +100,24 @@
 
   /* ── Render functions ──────────────────────────────────────── */
 
+  function houseBandPicture(alt, eager) {
+    var loading = eager ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"';
+    return '<picture>'
+      + '<source type="image/avif" srcset="images/bhr-house-band-400.avif 400w, images/bhr-house-band.avif 800w" sizes="260px" />'
+      + '<source type="image/webp" srcset="images/bhr-house-band-400.webp 400w, images/bhr-house-band.webp 800w" sizes="260px" />'
+      + '<img class="hero-photo" src="images/bhr-house-band.webp" alt="' + alt + '" width="800" height="800"' + loading + ' />'
+      + '</picture>';
+  }
+
   function renderHero(artist) {
     var hero = getEl('artist-hero');
     if (!hero) return;
 
     var photoHtml = '';
-    if (isSafePhotoSrc(artist.photo)) {
-      photoHtml = '<img class="hero-photo" src="' + esc(artist.photo) + '" alt="Photo of ' + esc(artist.name) + '" width="260" height="260" loading="eager" />';
+    if (isSafePhotoSrc(artist.photo) && String(artist.photo).indexOf('blue_heron_new_logo.png') !== -1) {
+      photoHtml = houseBandPicture('Photo of ' + esc(artist.name), true);
+    } else if (isSafePhotoSrc(artist.photo)) {
+      photoHtml = '<img class="hero-photo" src="' + esc(artist.photo) + '" alt="Photo of ' + esc(artist.name) + '" width="800" height="800" decoding="async" fetchpriority="high" />';
     } else {
       // Initial placeholder — first letter of name, or music note
       var initial = artist.name ? artist.name.charAt(0).toUpperCase() : '♫';
@@ -207,7 +218,7 @@
     var html = '<h2 class="section-heading">Gallery</h2><div class="gallery-grid">';
     safeImgs.forEach(function (url, i) {
       html +=
-        '<img class="gallery-img" src="' + esc(url) + '" alt="Gallery photo ' + (i + 1) + '" loading="lazy" />';
+        '<img class="gallery-img" src="' + esc(url) + '" alt="Gallery photo ' + (i + 1) + '" width="800" height="800" loading="lazy" decoding="async" />';
     });
     html += '</div>';
     section.innerHTML = html;
@@ -219,10 +230,25 @@
     document.body.setAttribute('data-theme', safe);
   }
 
-  function updatePageTitle(name) {
-    if (name) {
-      document.title = esc(name) + ' — Blue Heron Records';
+  function plain(str, max) {
+    var text = String(str || '').replace(/\s+/g, ' ').trim();
+    if (max && text.length > max) text = text.slice(0, max - 1).trim() + '…';
+    return text;
+  }
+
+  function updatePageMeta(artist) {
+    var name = artist && artist.name ? String(artist.name) : '';
+    if (name) document.title = name + ' — Blue Heron Records';
+    var desc = '';
+    if (artist && artist.tagline) desc = name + ' — ' + plain(artist.tagline, 80);
+    if (artist && artist.bio) {
+      var bit = plain(artist.bio, 140);
+      desc = desc ? (desc + '. ' + bit) : bit;
     }
+    if (!desc) desc = (name || 'Artist') + ' — Blue Heron Records, a record label in Oak Lawn, Illinois.';
+    desc = plain(desc, 160);
+    var meta = document.getElementById('page-desc');
+    if (meta) meta.setAttribute('content', desc);
   }
 
   /* ── Error display ─────────────────────────────────────────── */
@@ -232,7 +258,7 @@
     var errEl  = getEl('state-error');
     var contentEl = getEl('artist-content');
     if (loadEl)   hide(loadEl);
-    if (contentEl) hide(contentEl);
+    if (contentEl) contentEl.hidden = true;
     if (errEl) {
       var h = getEl('error-heading');
       var s = getEl('error-sub');
@@ -255,8 +281,7 @@
       return;
     }
 
-    // Show spinner
-    if (loadEl) show(loadEl);
+    if (loadEl) loadEl.setAttribute('aria-busy', 'true');
 
     // Fetch artist row
     supa('/rest/v1/artists?slug=eq.' + encodeURIComponent(slug) + '&select=*')
@@ -279,7 +304,7 @@
 
         // Apply theme before revealing content (avoids flash)
         applyTheme(artist.theme);
-        updatePageTitle(artist.name);
+        updatePageMeta(artist);
 
         // Render all sections
         renderHero(artist);
@@ -290,7 +315,7 @@
 
         // Hide spinner, show content
         if (loadEl) hide(loadEl);
-        if (contentEl) show(contentEl);
+        if (contentEl) contentEl.hidden = false;
       })
       .catch(function (err) {
         if (err && err.message === 'NOT_FOUND') {

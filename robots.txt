@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /admin/
 
 Sitemap: https://blueheronrecords.com/sitemap.xml

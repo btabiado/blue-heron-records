@@ -26,11 +26,11 @@ Push to `main`; GitHub Pages rebuilds. Custom domain (`blueheronrecords.com`) an
 already in place, with canonical/OG/sitemap URLs pointing at the domain and HTTPS enforced.
 
 ## Shows (add / remove from the site)
-Once a free **Supabase** database is connected (see **`SETUP-shows.md`**), the Shows section is self-serve:
-- **Submit a show** opens a small form (Date, Time, Description) → it appears on the site instantly, and
-  Joe (+ btab1130@gmail.com) gets an email via Web3Forms.
-- The discreet **blue-heron handle** in the bottom-left corner opens an add/remove panel — tap × to delete.
-- Removal is intentionally ungated (anyone with the heron can remove). Tighten Supabase policies if needed.
+Shows are stored in Supabase (see **`SETUP-admin.md`** for the authenticated-write policies).
+- **Submit a show** opens a small form (Date, Time, Description). Saving only works while the
+  `shows` insert policy allows it; otherwise the form texts the studio.
+- The discreet **blue-heron handle** in the bottom-left corner opens the studio admin, which signs
+  in with Supabase Auth. Deletes should be allowed only for that signed-in role.
 
 Until Supabase is connected, the form gracefully **texts Joe** the details, and the list falls back to the
 static `events.json` file below (edit it on GitHub to manage the calendar by hand; past events drop off):
@@ -51,10 +51,9 @@ static `events.json` file below (edit it on GitHub to manage the calendar by han
 ```
 
 ## Form backend + newsletter (two keys to plug in)
-- **Contact/Booking form → Web3Forms.** Get a free access key at https://web3forms.com (enter **btab1130@gmail.com**;
-  the key is emailed there). In `index.html`, replace `YOUR_WEB3FORMS_ACCESS_KEY` (hidden input in the contact form).
-  Submissions go to that inbox; a hidden `cc` also copies **joeleduc@blueheronrecords.com**. Until the key is set, the form
-  gracefully falls back to opening a pre-filled email.
+- **Contact/Booking form → Web3Forms.** The access key is already in the contact form. Submissions
+  go to the studio inbox, with a copy to **joeleduc@blueheronrecords.com**. If the key is removed, the form
+  falls back to opening a pre-filled email.
 - **Newsletter → Buttondown.** Create a free account at https://buttondown.com, then in `index.html` replace
   `BUTTONDOWN_USERNAME` in the newsletter form's `action` URL with Joe's Buttondown username.
 

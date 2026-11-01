@@ -24,18 +24,16 @@
   <meta name="twitter:image" content="https://blueheronrecords.com/images/og.jpg" />
 
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; base-uri 'none'; form-action 'self' mailto: tel:; frame-ancestors 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.supabase.co; media-src 'self' https://*.supabase.co; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://challenges.cloudflare.com https://blueheronrecords.com/cdn-cgi/challenge-platform/; connect-src 'self' https://api.web3forms.com https://*.supabase.co https://challenges.cloudflare.com; base-uri 'none'; form-action 'self' mailto: tel:" />
 
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="images/logo-hero.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/logo-poster.webp" type="image/webp" fetchpriority="high" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css?v=20260625h" />
+  <link rel="stylesheet" href="fonts/fonts.css?v=20261101" />
+  <link rel="stylesheet" href="styles.css?v=20261101" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 
   <script type="application/ld+json">
@@ -64,9 +62,9 @@
   <!-- ===== Header ===== -->
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="Blue Heron Records — home">
-        <img class="brand-mark" src="images/heron-mark.png" alt="" width="40" height="40" />
-        <span class="brand-text">Blue Heron<strong>Records</strong></span>
+      <a href="#top" class="brand">
+        <img class="brand-mark" src="images/heron-mark.webp" alt="" width="40" height="40" />
+        <span class="brand-text">Blue Heron <strong>Records</strong></span>
       </a>
       <nav class="nav" id="nav" aria-label="Primary">
         <a href="#artists">Artists</a>
@@ -93,11 +91,9 @@
     <section class="hero" id="hero">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-content">
-        <div class="hero-logo-vid reveal">
-          <video autoplay muted loop playsinline poster="images/logo-video-poster.jpg" aria-label="Blue Heron Records — a blue heron in flight over a vinyl record over a lake at sunset">
-            <source src="images/logo-video.mp4" type="video/mp4" />
-            <img src="images/logo-hero.png" alt="Blue Heron Records — a blue heron in flight over a vinyl record at sunset" width="500" height="500" />
-          </video>
+        <div class="hero-logo-vid">
+          <img src="images/logo-poster.webp" alt="Blue Heron Records — a blue heron in flight over a vinyl record at sunset" width="640" height="640" fetchpriority="high" decoding="async" />
+          <video class="logo-motion" muted loop playsinline preload="none" poster="images/logo-poster.webp" aria-hidden="true"></video>
         </div>
         <h1>Blue Heron Records</h1>
         <p class="eyebrow reveal">Oak Lawn, Illinois &middot; Est. 2023</p>
@@ -146,10 +142,8 @@
       <div class="container split-grid">
         <div class="split-media reveal no-deco">
           <div class="logo-round">
-            <video class="logo-video" autoplay muted loop playsinline poster="images/logo-video-poster.jpg" aria-label="Animated Blue Heron Records logo">
-              <source src="images/logo-video.mp4" type="video/mp4" />
-              <img src="images/logo.png" alt="Blue Heron Records logo — a heron in flight over a vinyl record" />
-            </video>
+            <img src="images/logo-poster.webp" alt="Blue Heron Records logo" width="640" height="640" loading="lazy" decoding="async" />
+            <video class="logo-video logo-motion" muted loop playsinline preload="none" aria-hidden="true"></video>
           </div>
         </div>
         <div class="split-text reveal">
@@ -234,11 +228,11 @@
             <span class="artist-body"><h3>Whiskey &amp; Harmony</h3><p class="artist-role">Band</p><p>A fun party band &mdash; country to pop, oldies to rock.</p><span class="artist-link">View page &rarr;</span></span>
           </a>
           <a class="artist-card reveal" href="artist.html?a=bhr-house-band">
-            <span class="artist-photo placeholder"><img src="images/heron-mark.png" alt="BHR House Band" loading="lazy" /></span>
+            <span class="artist-photo placeholder"><img src="images/heron-mark.webp" alt="BHR House Band" width="320" height="320" loading="lazy" decoding="async" /></span>
             <span class="artist-body"><h3>BHR House Band</h3><p class="artist-role">Band</p><p>The Blue Heron house sound.</p><span class="artist-link">View page &rarr;</span></span>
           </a>
           <a class="artist-card reveal" href="artist.html?a=brant-the-bluesman-buckley">
-            <span class="artist-photo placeholder"><img src="images/heron-mark.png" alt="Brant &ldquo;The Bluesman&rdquo; Buckley" loading="lazy" /></span>
+            <span class="artist-photo placeholder"><img src="images/heron-mark.webp" alt="Brant &ldquo;The Bluesman&rdquo; Buckley" width="320" height="320" loading="lazy" decoding="async" /></span>
             <span class="artist-body"><h3>Brant &ldquo;The Bluesman&rdquo; Buckley</h3><p class="artist-role">Band</p><p>Blues.</p><span class="artist-link">View page &rarr;</span></span>
           </a>
         </div>
@@ -254,14 +248,14 @@
         </header>
         <p class="houseband-intro reveal">A multi-talented, multi-personality family of musicians who specialize in fun, engaging performances for your restaurant, bar, or corporate event. Pick the vibe &mdash; we&rsquo;ll bring the party.</p>
         <div class="band-grid" id="housebandGrid">
-          <article class="band reveal"><h4>Holiday Carolers</h4><p>Quartet + Friends &ldquo;Crawling Choir.&rdquo;</p><span class="band-free">Free at charity &amp; care events</span></article>
-          <article class="band reveal"><h4>Holiday Orchestra</h4><p>A happy holiday party.</p></article>
-          <article class="band reveal"><h4>Bayou Blues Band</h4><p>New Orleans &amp; Chicago blues.</p></article>
-          <article class="band reveal"><h4>Jammin&rsquo; Island Band</h4><p>All-season warm summer vibes.</p></article>
-          <article class="band reveal"><h4>Gospel Revival Band</h4><p>A soulful gospel brunch.</p></article>
-          <article class="band reveal"><h4>Girls Night Out Band</h4><p>Women in music, front and center.</p></article>
-          <article class="band reveal"><h4>Old School Band</h4><p>A 70s rock party.</p></article>
-          <article class="band reveal"><h4>Big Hair Band</h4><p>An 80s dance party.</p></article>
+          <article class="band reveal"><h3>Holiday Carolers</h3><p>Quartet + Friends &ldquo;Crawling Choir.&rdquo;</p><span class="band-free">Free at charity &amp; care events</span></article>
+          <article class="band reveal"><h3>Holiday Orchestra</h3><p>A happy holiday party.</p></article>
+          <article class="band reveal"><h3>Bayou Blues Band</h3><p>New Orleans &amp; Chicago blues.</p></article>
+          <article class="band reveal"><h3>Jammin&rsquo; Island Band</h3><p>All-season warm summer vibes.</p></article>
+          <article class="band reveal"><h3>Gospel Revival Band</h3><p>A soulful gospel brunch.</p></article>
+          <article class="band reveal"><h3>Girls Night Out Band</h3><p>Women in music, front and center.</p></article>
+          <article class="band reveal"><h3>Old School Band</h3><p>A 70s rock party.</p></article>
+          <article class="band reveal"><h3>Big Hair Band</h3><p>An 80s dance party.</p></article>
         </div>
         <div class="houseband-actions reveal">
           <a class="btn btn-primary btn-lg" href="artist.html?a=bhr-house-band">See the house band</a>
@@ -298,7 +292,7 @@
           <p class="section-lead">Our first original songs &mdash; recorded by Blue Heron Records &mdash; are finding their way into the world.</p>
         </header>
         <div class="listen-card reveal">
-          <div class="listen-art listen-record" aria-hidden="true"><img src="images/logo-hero.png" alt="" loading="lazy" /></div>
+          <div class="listen-art listen-record" aria-hidden="true"><img src="images/logo-listen.webp" alt="" width="480" height="480" loading="lazy" decoding="async" /></div>
           <div class="listen-body">
             <p class="listen-label">Featured &middot; Willie Smith</p>
             <h3>&ldquo;When God Made A Woman&rdquo;</h3>
@@ -480,11 +474,11 @@
             <h4>Whiskey &amp; Harmony</h4><p>Sarah &amp; Craig Hauge</p>
           </article>
           <article class="freelancer reveal">
-            <div class="freelancer-photo placeholder" aria-hidden="true"><img src="images/heron-mark.png" alt="" loading="lazy" /></div>
+            <div class="freelancer-photo placeholder" aria-hidden="true"><img src="images/heron-mark.webp" alt="" width="320" height="320" loading="lazy" decoding="async" /></div>
             <h4>Ben Kremer</h4><p>Picture-Minded Studio &middot; Production &amp; Engineering</p>
           </article>
           <article class="freelancer reveal">
-            <div class="freelancer-photo placeholder" aria-hidden="true"><img src="images/heron-mark.png" alt="" loading="lazy" /></div>
+            <div class="freelancer-photo placeholder" aria-hidden="true"><img src="images/heron-mark.webp" alt="" width="320" height="320" loading="lazy" decoding="async" /></div>
             <h4>Braeden Janes</h4><p>Picture-Minded Studio &middot; Engineering &amp; Post-Production</p>
           </article>
         </div>
@@ -621,8 +615,6 @@
             </select>
           </div>
           <div class="field"><label for="message">Tell us a bit more <span class="req" aria-hidden="true">*</span></label><textarea id="message" name="message" rows="4" required></textarea></div>
-          <!-- Web3Forms: get a free key at https://web3forms.com using btab1130@gmail.com, then paste it below.
-               Submissions arrive in that inbox; the cc sends a copy to Joe too. Falls back to email until the key is set. -->
           <input type="hidden" name="access_key" value="27123b13-8671-41c1-bab4-2f08aee37de1" />
           <input type="hidden" name="cc" value="joeleduc@blueheronrecords.com" />
           <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px" />
@@ -670,7 +662,7 @@
     </div>
     <!-- Discreet on-theme handle: the little blue heron, bottom-left -> add/remove panel -->
     <button type="button" class="edit-toggle" id="editToggle" aria-label="Studio admin" title="Studio admin">
-      <img src="images/favicon-32.png" alt="" width="26" height="26" />
+      <img src="images/heron-mark.webp" alt="" width="32" height="32" />
     </button>
   </main>
 
@@ -684,7 +676,8 @@
       <form class="newsletter-form" id="newsletterForm">
         <input type="text" id="nlName" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
         <input type="email" id="nlEmail" name="email" required placeholder="you@email.com" autocomplete="email" aria-label="Your email address" />
-        <input type="tel" id="nlPhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Your phone number (optional)" />
+        <input type="tel" id="nlPhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" aria-label="Your phone number, optional" aria-describedby="nlPhoneConsent" />
+        <p class="nl-consent" id="nlPhoneConsent">Optional. Adding a phone number is consent for Blue Heron Records to text you about new music and show dates. Message frequency varies. Reply STOP to opt out. Message and data rates may apply.</p>
         <button type="submit" class="btn btn-primary">Subscribe</button>
       </form>
       <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
@@ -696,14 +689,14 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <span class="brand">
-          <img class="brand-mark" src="images/heron-mark.png" alt="" width="40" height="40" />
-          <span class="brand-text">Blue Heron<strong>Records</strong></span>
+          <img class="brand-mark" src="images/heron-mark.webp" alt="" width="40" height="40" />
+          <span class="brand-text">Blue Heron <strong>Records</strong></span>
         </span>
         <p>A home-grown record label promoting local recording artists &mdash; recording, post-production, live sound, and promotion &mdash; from Oak Lawn, Illinois.</p>
         <p class="footer-sig">Joe LeDuc &middot; Producer | Recording | Promotion</p>
       </div>
       <div class="footer-col">
-        <h4>Explore</h4>
+        <p class="footer-label">Explore</p>
         <a href="#artists">Artists</a>
         <a href="#houseband">House Band</a>
         <a href="#shows">Shows</a>
@@ -711,13 +704,13 @@
         <a href="#studio">Studio</a>
       </div>
       <div class="footer-col">
-        <h4>Partners</h4>
+        <p class="footer-label">Partners</p>
         <a href="https://www.picturemindedstudio.com" target="_blank" rel="noopener">Picture-Minded Studio</a>
         <a href="https://locations.schoolofrock.com/lemont" target="_blank" rel="noopener">School of Rock Lemont</a>
         <span>Player&rsquo;s Guitar &middot; Worth, IL</span>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <p class="footer-label">Contact</p>
         <a href="sms:+16309260446?&body=Hi%20Blue%20Heron%20Records%2C%20">Text us &middot; (630) 926-0446</a>
         <a href="tel:+16309260446">Call (630) 926-0446</a>
         <a href="mailto:joeleduc@blueheronrecords.com">joeleduc@blueheronrecords.com</a>
@@ -738,6 +731,6 @@
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
   </div>
 
-  <script src="app.js?v=20260625c"></script>
+  <script src="app.js?v=20261101"></script>
 </body>
 </html>
