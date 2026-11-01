@@ -7,9 +7,45 @@
   var BUSINESS_EMAIL = "joeleduc@blueheronrecords.com";
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- The logo videos (hero + 'Get to know us') are the brand centerpiece,
-         so they play even under reduced-motion, per the owner's request.
-         They're muted, looping, and non-flashing. ---- */
+  /* Logo motion. The poster image is in the HTML so it can paint immediately
+     (it is the LCP element). The compressed loop is attached only on wider
+     screens, after first paint, so phones never download the video.
+     Desktop still plays it under reduced-motion — that was requested. */
+  (function () {
+    var wide = window.matchMedia && window.matchMedia("(min-width: 721px)").matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (!wide || saveData) return;
+    function arm(video) {
+      if (!video || video.getAttribute("data-armed")) return;
+      video.setAttribute("data-armed", "1");
+      var source = document.createElement("source");
+      source.src = "images/logo-video.mp4";
+      source.type = "video/mp4";
+      video.appendChild(source);
+      var mark = function () { video.classList.add("is-playing"); };
+      video.addEventListener("playing", mark);
+      video.load();
+      var play = video.play();
+      if (play && play.then) play.then(mark).catch(function () {});
+    }
+    var startHero = function () { arm(document.querySelector(".hero-logo-vid video")); };
+    if (window.requestAnimationFrame) window.requestAnimationFrame(function () { setTimeout(startHero, 50); });
+    else startHero();
+    var second = document.querySelector(".logo-round video");
+    if (!second) return;
+    if ("IntersectionObserver" in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          arm(second);
+          vio.disconnect();
+        });
+      }, { rootMargin: "200px" });
+      vio.observe(second.parentNode || second);
+    } else {
+      window.addEventListener("load", function () { arm(second); });
+    }
+  })();
 
   /* ---- Deter casual audio download (hide download button + block right-click) ---- */
   Array.prototype.forEach.call(document.querySelectorAll("audio"), function (a) {
@@ -147,7 +183,8 @@
 
   /* ---- Shows: add (Supabase) -> on the site + notify Joe; the corner heron opens an add/remove panel ---- */
   (function () {
-    /* === CONFIG: paste your Supabase values here (see SETUP-shows.md). Blank = fall back to events.json + text Joe. === */
+    /* Supabase shows. Blank URL/key falls back to events.json and a text to Joe.
+       Writes depend on RLS — see SETUP-admin.md. Do not ship a shared password. */
     var SUPABASE_URL = "https://ofolxqldojhifnqmmsws.supabase.co";
     var SUPABASE_KEY = "sb_publishable_zRFhmQ8qwrJygM4P9WT8sA_dBxP14c0";
     var WEB3_KEY = "27123b13-8671-41c1-bab4-2f08aee37de1"; // notify on new submissions
@@ -184,7 +221,7 @@
         var meta = [e.location, e.venue, e.city, e.time, e.phone].filter(Boolean).map(esc).join(" &middot; ");
         var prof = e.artist_slug ? '<a class="show-ticket show-artist" href="artist.html?a=' + encodeURIComponent(e.artist_slug) + '">View artist &rarr;</a>' : "";
         return '<div class="show-row"><div class="show-date">' + day + '<span>' + mo + '</span></div>'
-          + '<div class="show-info"><h4>' + esc(e.description || e.title || "Live show") + "</h4>"
+          + '<div class="show-info"><h3>' + esc(e.description || e.title || "Live show") + "</h3>"
           + (meta ? "<p>" + meta + "</p>" : "") + "</div>" + prof + ticket + "</div>";
       }).join("");
       listEl.hidden = false;
@@ -452,8 +489,18 @@
     function card(a) {
       var slug = encodeURIComponent(a.slug || "");
       var ok = a.photo && (/^https?:\/\//i.test(a.photo) || !/:/.test(a.photo));
-      var photo = ok ? '<span class="artist-photo"><img src="' + e2(a.photo) + '" alt="' + e2(a.name) + '" loading="lazy" /></span>'
-                     : '<span class="artist-photo placeholder"><img src="images/heron-mark.png" alt="' + e2(a.name) + '" loading="lazy" /></span>';
+      var photo;
+      if (ok && String(a.photo).indexOf("blue_heron_new_logo.png") !== -1) {
+        photo = '<span class="artist-photo"><picture>'
+          + '<source type="image/avif" srcset="images/bhr-house-band-400.avif 400w, images/bhr-house-band.avif 800w" sizes="(max-width: 720px) 92vw, 280px" />'
+          + '<source type="image/webp" srcset="images/bhr-house-band-400.webp 400w, images/bhr-house-band.webp 800w" sizes="(max-width: 720px) 92vw, 280px" />'
+          + '<img src="images/bhr-house-band.webp" alt="' + e2(a.name) + '" width="800" height="800" loading="lazy" decoding="async" />'
+          + '</picture></span>';
+      } else if (ok) {
+        photo = '<span class="artist-photo"><img src="' + e2(a.photo) + '" alt="' + e2(a.name) + '" width="800" height="600" loading="lazy" decoding="async" /></span>';
+      } else {
+        photo = '<span class="artist-photo placeholder"><img src="images/heron-mark.webp" alt="' + e2(a.name) + '" width="320" height="320" loading="lazy" decoding="async" /></span>';
+      }
       var role = a.role ? '<p class="artist-role">' + e2(a.role) + "</p>" : "";
       var tag = a.tagline ? "<p>" + e2(a.tagline) + "</p>" : "";
       return '<a class="artist-card" href="artist.html?a=' + slug + '">' + photo +
@@ -508,7 +555,7 @@
         if (!rows || !rows.length) return; // keep the hardcoded fallback cards
         grid.innerHTML = rows.map(function (b) {
           var tag = b.tag ? '<span class="band-free">' + esc(b.tag) + "</span>" : "";
-          return '<article class="band"><h4>' + esc(b.name || "") + "</h4><p>" + esc(b.description || "") + "</p>" + tag + "</article>";
+          return '<article class="band"><h3>' + esc(b.name || "") + "</h3><p>" + esc(b.description || "") + "</p>" + tag + "</article>";
         }).join("");
       })
       .catch(function () {});
